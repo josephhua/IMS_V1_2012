@@ -1,0 +1,5 @@
+SELECT at.attributeType, cc.Category_id + ' - ' + cc.categoryName
+FROM dbo.AttributeType at
+INNER JOIN dbo.CategoryAttributes ca ON at.AttributeType_Id = ca.AttributeType_Id
+INNER JOIN dbo.CategoryClass cc ON ca.CategoryClass_Id = cc.CategoryClass_Id
+WHERE cc.Category_Id = '01'

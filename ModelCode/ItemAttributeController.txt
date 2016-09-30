@@ -1,0 +1,205 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace IMS_V1.Controllers
+{
+    public class ItemAttributesController : Controller
+    {
+        private IMS_V1Entities db = new IMS_V1Entities();
+
+        //
+        // GET: /ItemAttributes/
+
+        public ActionResult Index(int id)
+        {
+
+            //var itemattributes = from ia in db.ItemAttributes
+            //                         join al in db.Attribute_Lookup on ia.AttributeLookup_Id equals al.AttributeType_Id
+            //                         join at in db.AttributeTypes on al.AttributeType_Id equals at.AttributeType_Id
+            //                         join i in db.Items on ia.Item_Id equals i.Item_id
+            //                         where ia.Item_Id == id
+            //                         select new ItemAttribute
+            //                         {
+            //                             itemDescription = i.Item_Description,
+            //                             ActualAttributeValue = ia.ActualAttributeValue,
+            //                             WebsiteAttributeValue = al.WebsiteAttributeValue,
+            //                             AplusAttributeValue = al.APlusAttributeValue,
+            //                             DefaultActualValue = al.DefaultActualValue,
+            //                             AttributeTypeName = at.AttributeType1,
+            //                             AttributeTypeID = at.AttributeType_Id
+            //                         };
+                
+                
+//            var ia = db.ItemAttributes.Include(i => i.Attribute_Lookup.Select(at => at.AttributeType_Id))
+//                                .Include(i => i.Item).Where(i => i.Item_Id == id);
+
+               var itemattribute = db.ItemAttributes.Include(ia => ia.Attribute_Lookup).Where(at => at.Attribute_Lookup.AttributeType_Id == at.
+            
+            
+            
+            
+            
+            var categoryClassid = db.Items.Where(i => i.Item_id == id).Select(i => i.CategoryClass_Id);
+            var RA = from at in db.AttributeTypes
+                                     join ca in db.CategoryAttributes on at.AttributeType_Id equals ca.AttributeType_Id
+                                     join cc in db.CategoryClasses on ca.CategoryClass_Id equals cc.CategoryClass_Id
+                                     where ca.Required == true && ca.CategoryClass_Id == int.Parse(categoryClassid.ToString())
+                                     select new {
+                                         attributetypeid = at.AttributeType_Id,
+                                         attributeTypename = at.AttributeType1
+                                     };
+            var RequiredAttributes = RA.ToList();
+            return View(itemattributes.ToList());
+
+
+//SELECT at.AttributeType_Id,at.attributeType, cc.Category_id + ' - ' + cc.categoryName
+//FROM dbo.AttributeType at
+//INNER JOIN dbo.CategoryAttributes ca ON at.AttributeType_Id = ca.AttributeType_Id
+//INNER JOIN dbo.CategoryClass cc ON ca.CategoryClass_Id = cc.CategoryClass_Id
+//WHERE cc.Category_Id = '01'
+//AND ca.Required = 1            
+            
+            //    var items = from r in
+        //                    db.Items
+        //                where r.Item_id == id
+        //                select r;
+        //    return View();
+        //}
+
+        //    ViewBag.VendorName = new SelectList(db.zManufacturersLogoes, "ManufacturerLogo_Id", "WebVendorName", item.ManufacturerLogo_Id);
+        //    ViewBag.ABC_Lookup = new SelectList(db.ABC_Lookup, "ABC_Id", "ABC_Description", item.ABC_Id);
+        //    var CategoryClass = db.CategoryClasses.Select(c => new
+        //    {
+        //        CategoryClass_Id = c.CategoryClass_Id,
+        //        Description = c.Category_Id + " - " + c.CategoryName
+        //    })
+        //                                            .ToList();
+        //    ViewBag.CategoryClass = new SelectList(CategoryClass, "CategoryClass_Id", "Description", item.CategoryClass_Id);
+        //    var SubClass = db.SubClasses.Select(s => new
+        //    {
+        //        SubClassCode_Id = s.SubClassCode_Id,
+        //        Description = s.SubClass_Id + " - " + s.SubClassName
+        //    })
+        //                                            .ToList();
+        //    ViewBag.SubClass = new SelectList(SubClass, "SubClassCode_Id", "Description", item.SubClassCode_Id);
+        //    var FineLineClass = db.FineLineClasses.Select(f => new
+        //    {
+        //        FineLineCode_Id = f.FineLineCode_Id,
+        //        Description = f.FineLine_Id + " - " + f.FinelineName
+        //    })
+        //                                            .ToList();
+        //    ViewBag.FineLineClass = new SelectList(FineLineClass, "FineLineCode_Id", "Description", item.FineLineCode_Id);
+
+       
+        }
+
+        //
+        // GET: /ItemAttributes/Details/5
+
+        public ActionResult Details(int id = 0)
+        {
+            ItemAttribute itemattribute = db.ItemAttributes.Find(id);
+            if (itemattribute == null)
+            {
+                return HttpNotFound();
+            }
+            return View(itemattribute);
+        }
+
+        //
+        // GET: /ItemAttributes/Create
+
+        public ActionResult Create()
+        {
+            ViewBag.AttributeLookup_Id = new SelectList(db.Attribute_Lookup, "AttributeLookup_Id", "WebsiteAttributeValue");
+            ViewBag.Item_Id = new SelectList(db.Items, "Item_id", "Itm_Num");
+            return View();
+        }
+
+        //
+        // POST: /ItemAttributes/Create
+
+        [HttpPost]
+        public ActionResult Create(ItemAttribute itemattribute)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ItemAttributes.Add(itemattribute);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.AttributeLookup_Id = new SelectList(db.Attribute_Lookup, "AttributeLookup_Id", "WebsiteAttributeValue", itemattribute.AttributeLookup_Id);
+            ViewBag.Item_Id = new SelectList(db.Items, "Item_id", "Itm_Num", itemattribute.Item_Id);
+            return View(itemattribute);
+        }
+
+        //
+        // GET: /ItemAttributes/Edit/5
+
+        public ActionResult Edit(int id = 0)
+        {
+            ItemAttribute itemattribute = db.ItemAttributes.Find(id);
+            if (itemattribute == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.AttributeLookup_Id = new SelectList(db.Attribute_Lookup, "AttributeLookup_Id", "WebsiteAttributeValue", itemattribute.AttributeLookup_Id);
+            ViewBag.Item_Id = new SelectList(db.Items, "Item_id", "Itm_Num", itemattribute.Item_Id);
+            return View(itemattribute);
+        }
+
+        //
+        // POST: /ItemAttributes/Edit/5
+
+        [HttpPost]
+        public ActionResult Edit(ItemAttribute itemattribute)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(itemattribute).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.AttributeLookup_Id = new SelectList(db.Attribute_Lookup, "AttributeLookup_Id", "WebsiteAttributeValue", itemattribute.AttributeLookup_Id);
+            ViewBag.Item_Id = new SelectList(db.Items, "Item_id", "Itm_Num", itemattribute.Item_Id);
+            return View(itemattribute);
+        }
+
+        //
+        // GET: /ItemAttributes/Delete/5
+
+        public ActionResult Delete(int id = 0)
+        {
+            ItemAttribute itemattribute = db.ItemAttributes.Find(id);
+            if (itemattribute == null)
+            {
+                return HttpNotFound();
+            }
+            return View(itemattribute);
+        }
+
+        //
+        // POST: /ItemAttributes/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            ItemAttribute itemattribute = db.ItemAttributes.Find(id);
+            db.ItemAttributes.Remove(itemattribute);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
+    }
+}

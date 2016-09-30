@@ -1,0 +1,78 @@
+﻿@model IMS_V1.Freight_Lookup
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Freight_Lookup</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Freight_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Freight_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Freight_APlusClass)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Freight_APlusClass)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Freight_DotClass)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Freight_DotClass)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Freight_ItemClass)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Freight_ItemClass)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Freight_Commodity)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Freight_Commodity)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Freight_NMFCItemNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Freight_NMFCItemNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Freight_Hazard)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Freight_Hazard)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

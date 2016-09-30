@@ -1,0 +1,126 @@
+﻿@model IMS_V1.zManufacturersLogo
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <br />
+    <br />
+    <table>
+        <tr>
+            <td colspan="2" style="text-align:center;">
+                <h2>New Vendor</h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    Vendor Number:
+                </div>
+            </td>
+            <td class="textbox">
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.VendorNumber)
+                    @Html.ValidationMessageFor(model => model.VendorNumber)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    APlus Vendor Name:
+                </div>
+            </td>
+            <td class="textbox">
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.APlusVendorName)
+                    @Html.ValidationMessageFor(model => model.APlusVendorName)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.HiddenFor(model => model.ManufacturerLogo_Id)
+                    Logo Name:
+                </div>
+            </td>
+            <td class="textbox">
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.LogoName)
+                    @Html.ValidationMessageFor(model => model.LogoName)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    Web Vendor Name:
+                </div>
+            </td>
+            <td class="textbox">
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.WebVendorName)
+                    @Html.ValidationMessageFor(model => model.WebVendorName)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    Abbrev:
+                </div>
+            </td>
+            <td class="textbox">
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Abbrev)
+                    @Html.ValidationMessageFor(model => model.Abbrev)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    URL:
+                </div>
+            </td>
+            <td class="textbox">
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.URL)
+                    @Html.ValidationMessageFor(model => model.URL)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Enabled)
+                </div>
+            </td>
+            <td>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Enabled)
+                    @Html.ValidationMessageFor(model => model.Enabled)
+                </div>  
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;">
+                <input type="submit" value="Create" />
+            </td>
+        </tr>
+    </table>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

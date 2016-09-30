@@ -1,0 +1,29 @@
+﻿@model IMS_V1.UserType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>UserType</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserType_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserType_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserTypeDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserTypeDescription)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

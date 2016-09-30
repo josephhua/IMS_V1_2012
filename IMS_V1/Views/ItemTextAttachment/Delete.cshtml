@@ -1,0 +1,52 @@
+﻿@model IMS_V1.ItemTextAttachment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+
+    <input type="hidden" value="@ViewBag.ItemTextAttachment_Id" id="hdnItemTextAttachment_Id" name="hdnItemTextAttachment_Id" />
+    <input type="hidden" value="@ViewBag.Item_id" id="hdnItem_id" name="hdnItem_id" />
+    <input type="hidden" value="@ViewBag.Content_Key" id="hdnContent_Key" name="hdnContent_Key" />
+
+    <table>
+        <tr>
+            <td colspan="2" style="text-align:left">
+                <b>Item Number:</b> @ViewBag.Itm_Num
+            </td>
+        </tr>       
+        <tr>
+            <td colspan="2" style="text-align:left">
+                <b>Item Description:</b> @ViewBag.Item_Description
+            </td>
+        </tr>       
+        <tr>
+            <td colspan="2">
+                <textarea style="width:800px;height:500px;">
+                    @ViewBag.LongDescription
+                </textarea>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left; vertical-align:bottom; font-size:1.5em">
+                Are you sure you want to delete this?&nbsp;&nbsp;&nbsp;
+            </td>
+            <td style="text-align:left; vertical-align:bottom">
+                @using (Html.BeginForm()) {<input type="submit" value="Delete" /> }
+        
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;">
+                @Html.ActionLink("Back to List", "Index", new{ itemid = @ViewBag.Item_id })
+            </td>
+        </tr>
+
+    </table>
+
+
+
+
+

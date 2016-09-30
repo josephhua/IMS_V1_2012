@@ -1,0 +1,67 @@
+﻿@model IMS_V1.WebCode
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>WebCode</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CatWebCode_Id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CatWebCode_Id)
+            @Html.ValidationMessageFor(model => model.CatWebCode_Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WebCode1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WebCode1)
+            @Html.ValidationMessageFor(model => model.WebCode1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WebCodeDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WebCodeDescription)
+            @Html.ValidationMessageFor(model => model.WebCodeDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedBy)
+            @Html.ValidationMessageFor(model => model.ModifiedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedDate)
+            @Html.ValidationMessageFor(model => model.ModifiedDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

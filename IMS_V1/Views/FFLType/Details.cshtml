@@ -1,0 +1,36 @@
+﻿@model IMS_V1.FFLType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>FFLType</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FFLType_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FFLType_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FFLType_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FFLType_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FFLType_Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FFLType_Description)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

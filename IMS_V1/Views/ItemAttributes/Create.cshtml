@@ -1,0 +1,91 @@
+﻿@model IMS_V1.ItemAttribute
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ItemAttribute</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemAttribute_Id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemAttribute_Id)
+            @Html.ValidationMessageFor(model => model.ItemAttribute_Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Item_Id, "Item")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Item_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Item_Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AttributeLookup_Id, "Attribute_Lookup")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AttributeLookup_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.AttributeLookup_Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ActualAttributeValue)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ActualAttributeValue)
+            @Html.ValidationMessageFor(model => model.ActualAttributeValue)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AddedBy)
+            @Html.ValidationMessageFor(model => model.AddedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AddedDate)
+            @Html.ValidationMessageFor(model => model.AddedDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedBy)
+            @Html.ValidationMessageFor(model => model.ModifiedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedDate)
+            @Html.ValidationMessageFor(model => model.ModifiedDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

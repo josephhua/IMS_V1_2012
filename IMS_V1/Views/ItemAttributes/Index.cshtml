@@ -1,0 +1,62 @@
+﻿@model IEnumerable<IMS_V1.ItemAttribute>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Item.Itm_Num)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Item.Itm_Num)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Attribute_Lookup.WebsiteAttributeValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActualAttributeValue)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.att
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attribute_Lookup.WebsiteAttributeValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActualAttributeValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

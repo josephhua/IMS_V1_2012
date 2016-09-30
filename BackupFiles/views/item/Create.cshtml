@@ -1,0 +1,938 @@
+﻿@model IMS_V1.Item
+
+
+@{
+    ViewBag.Title = "Add New Item";
+}
+
+
+
+ <script type="text/javascript">
+     $(document).ready(function () {
+         $("#ddlCategory").change(function () {
+             var categoryclassId = $(this).val();
+             $.getJSON("../Item/LoadSubClassesByCategoryId", { categoryclassid: categoryclassId },
+             function (SubClassData) {
+                 var select = $("#ddlSubClasses");
+                 select.empty();
+                 select.append($('<option/>', {
+                     value: 0,
+                     text: "Select a SubClass"
+                 }));
+                 $.each(SubClassData, function (index, itemData) {
+                     select.append($('<option/>', {
+                         value: itemData.Value,
+                         text: itemData.Text
+                     }));
+                 });
+             });
+             if (categoryclassId == "1" || categoryclassId == "2" || categoryclassId == "3" || categoryclassId == "9") {
+                 $("#D1").hide();
+                 $("#D2").hide();
+             } else
+             {
+                 $("#D1").show();
+                 $("#D2").show();
+             };
+             if (categoryclassId == "1" || categoryclassId == "2" || categoryclassId == "28") {
+                 $("#FFLInfo").show();
+                 $("#FFLInfoNotNeeded").hide();
+             } else {
+                 $("#FFLInfo").hide();
+                 $("#FFLInfoNotNeeded").show();
+             };
+         });
+         $("#ddlSubClasses").change(function () {
+             var subclassId = $(this).val();
+             var categoryId = $("#ddlCategory").val();
+             $.getJSON("../Item/LoadFineLineClassesByCateogryIdSubClassId", { categoryclassid: categoryId, subclasscodeid: subclassId },
+                    function (FineLineData) {
+                        var select = $("#ddlFineLine");
+                        select.empty();
+                        select.append($('<option/>', {
+                            value: 0,
+                            text: "Select a FineLine"
+                        }));
+                        $.each(FineLineData, function (index, itemData) {
+                            select.append($('<option/>', {
+                                value: itemData.Value,
+                                text: itemData.Text
+                            }));
+                        });
+                    });
+         });
+
+         $("#ddlVendor").change(function () {
+             var VendorId = $(this).val();
+             $.getJSON("../Item/LoadVendorInfo", { vtid: VendorId },
+                    function (VendorData) {
+                        $("#VendorNumber").val(VendorData.VendorNumber);
+                        $("#VendorAbbrev").val(VendorData.Abbrev);
+                        //$("#BuyerName").val(VendorData.BuyerName);
+                        $("#Item_Description").val(VendorData.Abbrev);
+                    });
+         });
+
+         $("#MFG_Number").blur(function () {
+             MFGNumber = $("#MFG_Number").val();
+             VendorNumber = $("#VendorNumber").val();
+             $.getJSON("../Item/CheckForMFG_NumberCreate", { mfgnumber: MFGNumber, vendornumber: VendorNumber},
+             function (CheckForMFG_Number) {
+                               if (typeof CheckForMFG_Number.Itm_Num !== "undefined") {
+                                   var itmnum = CheckForMFG_Number.Itm_Num;
+                                   if (typeof CheckForMFG_Number.FirstName !== "undefined") {
+                                       var username = CheckForMFG_Number.FirstName + " " + CheckForMFG_Number.LastName;
+                                   } else {
+                                       var username = "";
+                                   }
+                                   if (typeof CheckForMFG_Number.Item_Description !== "undefined") {
+                                       var Description = CheckForMFG_Number.Item_Description;
+                                   } else {
+                                       if (typeof CheckForMFG_Number.Item_Desc1 !== "undefined") {
+                                           var Description = CheckForMFG_Number.Item_Desc1 + " " + CheckForMFG_Number.Item_Desc2;
+                                       }
+                                       else {
+                                           var Description = "";
+                                       }
+                                   }
+                                   alert("The MFG_Number entered is a duplicate to an Item.  \nBuyer:" + username
+                                       + "\nItem Number:" + itmnum + "\nItem Description:" + Description);
+                                   $("#MFG_Number").focus();
+                                   return false;
+                               }
+                           });
+         });
+
+             var UPC;
+             $("#EDIUPC").keydown(function () {
+                 UPC = $("#EDIUPC").val();
+                 $('#UPC').val(UPC);
+             });
+             $("#EDIUPC").blur(function () {
+                 EDIUPC = $("#EDIUPC").val();
+                                                      //Variable in           Variable in
+                                                    //controller Function   JQuery
+                 $.getJSON("../Item/CheckForEDIUPCCreate",{ediupc:EDIUPC},
+                     function (CheckForEDIUPC){
+                         if (typeof CheckForEDIUPC.Itm_Num !== "undefined") {
+                             var itmnum = CheckForEDIUPC.Itm_Num;
+                             if (typeof CheckForEDIUPC.FirstName !== "undefined") {
+                                 var username = CheckForEDIUPC.FirstName + " " + CheckForEDIUPC.LastName;
+                             } else {
+                                 var username = "";
+                             }
+                             if (typeof CheckForEDIUPC.Item_Description !== "undefined") {
+                                 var Description = CheckForEDIUPC.Item_Description;
+                             } else {
+                                 if (typeof CheckForEDIUPC.Item_Desc1 !== "undefined") {
+                                     var Description = CheckForEDIUPC.Item_Desc1 + " " + CheckForEDIUPC.Item_Desc2;
+                                 }
+                                 else {
+                                     var Description = "";
+                                 }
+                             }
+                             alert("The EDI UPC entered is a duplicate to an Item.  \nBuyer:" + username
+                                 + "\nItem Number:" + itmnum + "\nItem Description:" + Description);
+                             $("#EDIUPC").focus();
+                             return false;
+                         }
+                     });
+                 $("#UPC").val($("#EDIUPC").val());
+             });
+     
+            $("#MSRP").blur(function () {
+                 $("#txtMsrp").val("");
+             });
+
+             $("#Level1").blur(function () {
+                 $("#Level2").val($("#Level1").val());
+                 $("#Level3").val($("#Level1").val());
+                 $("#JSCLevel5").val($("#Level1").val());
+                 $("#txtLevel1").val("");
+             });
+             $("#Level2").blur(function () {
+                 $("#txtLevel2").val("");
+             });
+             $("#Level3").blur(function () {
+                 $("#txtLevel3").val("");
+             });
+             $("#JSCLevel5").blur(function () {
+                 $("#txtLevel5").val("");
+             });
+             $("#txtMsrp").blur(function () {
+                 VICost = $("#VICost").val();
+                 if ($("#txtMsrp").val() != "" ) {
+                     if (parseFloat($("#txtMsrp").val()) < 1 || parseFloat($("#txtMsrp").val()) > 99) {
+                         alert("Please enter a number between 1 and 99.");
+                         $("#txtMsrp").focus();
+                         return false;
+                     }
+                     MsrpPercent = $("#txtMsrp").val();
+                     $.getJSON("../Item/CalculatePercentage", { percent: MsrpPercent, vicost: VICost },
+                                   function (CalculatePercentage) {
+                                       $("#MSRP").val(CalculatePercentage.Cost);
+                                   });
+                 }
+             });
+             $("#txtLevel1").blur(function () {
+                 VICost = $("#VICost").val();
+                 if ($("#txtLevel1").val() != "") {
+                     if (parseFloat($("#txtLevel1").val()) < 1 || parseFloat($("#txtLevel1").val()) > 99) {
+                         alert("Please enter a number between 1 and 99.");
+                         $("#txtLevel1").focus();
+                         return false;
+                     }
+                     Level1 = $("#txtLevel1").val();
+                     $.getJSON("../Item/CalculatePercentage", { percent: Level1, vicost: VICost },
+                                   function (CalculatePercentage) {
+                                       $("#Level1").val(CalculatePercentage.Cost);
+                                   });
+                 }
+             });
+             $("#txtLevel2").blur(function () {
+                 VICost = $("#VICost").val();
+                 if ($("#txtLevel2").val() != "") {
+                     if (parseFloat($("#txtLevel2").val()) < 1 || parseFloat($("#txtLevel2").val()) > 99) {
+                         alert("Please enter a number between 1 and 99.");
+                         $("#txtLevel2").focus();
+                         return false;
+                     }
+                     Level2 = $("#txtLevel2").val();
+                     $.getJSON("../Item/CalculatePercentage", { percent: Level2, vicost: VICost },
+                                   function (CalculatePercentage) {
+                                       $("#Level2").val(CalculatePercentage.Cost);
+                                   });
+                 }
+             });
+             $("#txtLevel3").blur(function () {
+                 VICost = $("#VICost").val();
+                 if ($("#txtLevel3").val() != "") {
+                     if (parseFloat($("#txtLevel3").val()) < 1 || parseFloat($("#txtLevel3").val()) > 99) {
+                         alert("Please enter a number between 1 and 99.");
+                         $("#txtLevel3").focus();
+                         return false;
+                     }
+                     Level3 = $("#txtLevel3").val();
+                     $.getJSON("../Item/CalculatePercentage", { percent: Level3, vicost: VICost },
+                                   function (CalculatePercentage) {
+                                       $("#Level3").val(CalculatePercentage.Cost);
+                                   });
+                 }
+             });
+             $("#txtLevel5").blur(function () {
+                 VICost = $("#VICost").val();
+                 if ($("#txtLevel5").val() != "") {
+                     if (parseFloat($("#txtLevel5").val()) < 1 || parseFloat($("#txtLevel5").val()) > 99) {
+                         alert("Please enter a number between 1 and 99.");
+                         $("#txtLevel5").focus();
+                         return false;
+                     }
+                     Level5 = $("#txtLevel5").val();
+                     $.getJSON("../Item/CalculatePercentage", { percent: Level5, vicost: VICost },
+                                   function (CalculatePercentage) {
+                                       $("#JSCLevel5").val(CalculatePercentage.Cost);
+                                   });
+                 }
+             });
+
+             $("#VICost").blur(function () {
+                 if ($("#VICost").val() == "") {
+                     $("#MSRP").val("");
+                     $("#txtMsrp").val("");
+                     $("#Level1").val("");
+                     $("#txtLevel1").val("");
+                     $("#Level2").val("");
+                     $("#txtLevel2").val("");
+                     $("#Level3").val("");
+                     $("#txtLevel3").val("");
+                     $("#JSCLevel5").val("");
+                     $("#txtLevel5").val("");
+                 } else {
+                     VICost = $("#VICost").val();
+                     if ($("#txtMsrp").val() != "") {
+                         MsrpPercent = $("#txtMsrp").val();
+                         $.getJSON("../Item/CalculatePercentage", { percent: MsrpPercent, vicost: VICost },
+                                       function (CalculatePercentage) {
+                                           $("#MSRP").val(CalculatePercentage.Cost);
+                                       });
+                     }
+                     if ($("#txtLevel1").val() != "") {
+                         Level1 = $("#txtLevl1").val();
+                         $.getJSON("../Item/CalculatePercentage", { percent: Level1, vicost: VICost },
+                                       function (CalculatePercentage) {
+                                           $("#Level1").val(CalculatePercentage.Cost);
+                                       });
+                         //var vic = parseFloat($("#VICost").val());
+                         //var level1p = parseFloat("." + $("#txtLevel1").val())
+                         //$("#Level1").val((vic * level1p + vic).toFixed(2));
+
+                     }
+                     if ($("#txtLevel2").val() != "") {
+                         Level2 = $("#txtLevel2").val();
+                         $.getJSON("../Item/CalculatePercentage", { percent: Level2, vicost: VICost },
+                                       function (CalculatePercentage) {
+                                           $("#Level2").val(CalculatePercentage.Cost);
+                                       });
+                         //var vic = parseFloat($("#VICost").val());
+                         //var level2p = parseFloat("." + $("#txtLevel2").val())
+                         //$("#Level2").val((vic * level2p + vic).toFixed(2));
+
+                     }
+                     if ($("#txtLevel3").val() != "") {
+                         Level3 = $("#txtLevel3").val();
+                         $.getJSON("../Item/CalculatePercentage", { percent: Level3, vicost: VICost },
+                                       function (CalculatePercentage) {
+                                           $("#Level3").val(CalculatePercentage.Cost);
+                                       });
+                         //var vic = parseFloat($("#VICost").val());
+                         //var level3p = parseFloat("." + $("#txtLevel3").val())
+                         //$("#Level3").val((vic * level3p + vic).toFixed(2));
+
+                     }
+                     if ($("#txtLevel5").val() != "") {
+                         Level5 = $("#txtLevel5").val();
+                         $.getJSON("../Item/CalculatePercentage", { percent: Level5, vicost: VICost },
+                                       function (CalculatePercentage) {
+                                           $("#JSCLevel5").val(CalculatePercentage.Cost);
+                                       });
+                         //var vic = parseFloat($("#VICost").val());
+                         //var level5p = parseFloat("." + $("#txtLevel5").val())
+                         //$("#JSCLevel5").val((vic * level5p + vic).toFixed(2));
+
+                     }
+                 }
+             });
+
+     });
+     //function UpdateMsrp() {
+     //    alert("herein");
+     //    var vicost = document.getElementById("VICost").value;
+     //    if (isNaN(vicost) == false) {
+     //        var msrppercent = document.getElementById("txtMsrp").value.replace(".", "");
+     //        if (isNaN(msrppercent) == true || (parseFloat(msrppercent) < 1 || parseFloat(msrppercent) > 999)) {
+     //            alert("Please enter a number between 1 and 999.");
+     //            document.getElementById("txtMsrp").focus();
+     //            return;
+     //        } else {
+     //            if (msrppercent.replace(/\s/g, "") != "") {
+     //                if (msrppercent.length == 1) {
+     //                    var msrpp = ".0" + msrppercent;
+     //                    var newmsrp = (parseFloat(msrpp) * parseFloat(vicost)) + parseFloat(vicost);
+     //                    document.getElementById("MSRP").value = newmsrp.toFixed(2);
+     //                }
+     //                else {
+     //                    if (msrppercent.length == 2) {
+     //                        var msrpp = "." + msrppercent;
+     //                        var newmsrp = (parseFloat(msrpp) * parseFloat(vicost)) + parseFloat(vicost);
+     //                        document.getElementById("MSRP").value = newmsrp.toFixed(2);
+     //                    } else
+     //                    {
+     //                        if (msrppercent.length == 3) {
+     //                            var msrpp = msrppercent.substr(1,1)+"." + msrppercent.substr(2,2);
+     //                            var newmsrp = (parseFloat(msrpp) * parseFloat(vicost)) + parseFloat(vicost);
+     //                            document.getElementById("MSRP").value = newmsrp.toFixed(2);
+     //                        }
+     //                    }
+     //                }
+     //            }
+     //        }
+     //    }
+     //}
+     //function UpdateLevel1() {
+     //    var vicost = document.getElementById("VICost").value;
+     //    if (isNaN(vicost) == false) {
+     //        var level1percent = document.getElementById("txtLevel1").value.replace(".", "");
+     //        if (isNaN(level1percent) == true || (parseFloat(level1percent) < 1 || parseFloat(level1percent) > 999)) {
+     //            alert("Please enter a number between 1 and 999.");
+     //            document.getElementById("txtLevel1").focus();
+     //            return;
+     //        } else {
+     //            if (level1percent.replace(/\s/g, "") != "") {
+     //                if (level1percent.length == 1) {
+     //                    var level1p = ".0" + level1percent;
+     //                    var newlevel1 = (parseFloat(level1p) * parseFloat(vicost)) + parseFloat(vicost);
+     //                    document.getElementById("Level1").value = newlevel1.toFixed(2);
+     //                }
+     //                else {
+     //                    var level1p = "." + level1percent;
+     //                    var newlevel1 = (parseFloat(level1p) * parseFloat(vicost)) + parseFloat(vicost);
+     //                    document.getElementById("Level1").value = newlevel1.toFixed(2);
+     //                }
+     //            }
+     //        }
+     //    }
+     //}
+     //function UpdateLevel2() {
+     //    var vicost = document.getElementById("VICost").value;
+     //    if (isNaN(vicost) == false) {
+     //        var level2percent = document.getElementById("txtLevel2").value.replace(".", "");
+     //        if (isNaN(level2percent) == true || (parseFloat(level2percent) < 1 || parseFloat(level2percent) > 999)) {
+     //            alert("Please enter a number between 1 and 999.");
+     //            document.getElementById("txtLevel2").focus();
+     //            return;
+     //        } else {
+     //            if (level2percent.replace(/\s/g, "") != "") {
+     //                if (level2percent.length == 1) {
+     //                    var level2p = ".0" + level2percent;
+     //                    var newlevel2 = (parseFloat(level2p) * parseFloat(vicost)) + parseFloat(vicost);
+     //                    document.getElementById("Level2").value = newlevel2.toFixed(2);
+     //                }
+     //                else {
+     //                    var level2p = "." + level2percent;
+     //                    var newlevel2 = (parseFloat(level2p) * parseFloat(vicost)) + parseFloat(vicost);
+     //                    document.getElementById("Level2").value = newlevel2.toFixed(2);
+     //                }
+     //            }
+     //        }
+     //    }
+
+     //}
+     //function UpdateLevel3() {
+     //    var vicost = document.getElementById("VICost").value;
+     //    if (isNaN(vicost) == false) {
+     //        var level3percent = document.getElementById("txtLevel3").value.replace(".", "");
+     //        if (isNaN(level3percent) == true || (parseFloat(level3percent) < 1 || parseFloat(level3percent) > 999)) {
+     //            alert("Please enter a number between 1 and 999.");
+     //            document.getElementById("txtLevel3").focus();
+     //            return;
+     //        } else {
+     //            if (level3percent.replace(/\s/g, "") != "") {
+     //                if (level3percent.length == 1) {
+     //                    var level3p = ".0" + level3percent;
+     //                    var newlevel3 = (parseFloat(level3p) * parseFloat(vicost)) + parseFloat(vicost);
+     //                    document.getElementById("Level3").value = newlevel3.toFixed(2);
+     //                }
+     //                else {
+     //                    var level3p = "." + level3percent;
+     //                    var newlevel3 = (parseFloat(level3p) * parseFloat(vicost)) + parseFloat(vicost);
+     //                    document.getElementById("Level3").value = newlevel3.toFixed(2);
+     //                }
+     //            }
+     //        }
+     //    }
+     //}
+     //function UpdateLevel5() {
+     //    var vicost = document.getElementById("VICost").value;
+     //    if (isNaN(vicost) == false) {
+     //        var level5percent = document.getElementById("txtLevel5").value.replace(".", "");
+     //        if (isNaN(level5percent) == true || (parseFloat(level5percent) < 1 || parseFloat(level5percent) > 999)) {
+     //            alert("Please enter a number between 1 and 999.");
+     //            document.getElementById("txtLevel5").focus();
+     //            return;
+     //        } else {
+     //            if (level5percent.replace(/\s/g, "") != "") {
+     //                if (level5percent.length == 1) {
+     //                    var level5p = ".0" + level5percent;
+     //                    var newlevel5 = (parseFloat(level5p) * parseFloat(vicost)) + parseFloat(vicost);
+     //                    document.getElementById("JSCLevel5").value = newlevel5.toFixed(2);
+     //                }
+     //                else {
+     //                    var level5p = "." + level5percent;
+     //                    var newlevel5 = (parseFloat(level5p) * parseFloat(vicost)) + parseFloat(vicost);
+     //                    document.getElementById("JSCLevel5").value = newlevel5.toFixed(2);
+     //                }
+     //            }
+     //        }
+     //    }
+     //}
+     $(document).keypress(function (event) {
+         if (event.keyCode == "13") {
+             event.preventDefault()
+             return false;
+         }
+     });
+    </script>
+
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <table>
+        <tr>
+            <td colspan="4">
+                <h2>Add New Item</h2>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align:left;">
+                <div style="color:red";>* REQUIRED</div>
+            </td>
+        </tr>
+       <tr>
+            <td>
+                <div class="lblblue">
+                    @Html.HiddenFor(model => model.Item_id)
+                </div>
+                 @Html.LabelFor(model => model.Itm_Num):
+            </td>
+            <td class="textbox">
+                 "Will be assigned based on Category selected."
+            </td>
+            <td colspan="2">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="lblred">*</span>Vendor:
+            </td>
+            <td class="textbox">
+                @Html.DropDownList("ManufacturerLogo_Id", (IEnumerable<SelectListItem>)ViewBag.VendorName, "- - - S E L E C T - - -", new { id = "ddlVendor", style = "width:350px;" })  
+            </td>
+            <td colspan="2">
+
+            </td>
+        </tr>       
+        <tr>
+            <td>
+                  Vendor Number:
+            </td>
+            <td class="textbox">
+                 @Html.TextBox("VendorNumber", "", new { @readonly = "readonly", style = "width:120px;" })
+            </td>
+            <td colspan="2">
+
+            </td>
+        </tr>       
+        <tr>
+            <td>
+                  Vendor Abbreviation:
+            </td>
+            <td class="textbox">
+                 @Html.TextBox("VendorAbbrev", "", new { @readonly = "readonly", style = "width:50px" })
+            </td>
+            <td colspan="2">
+
+            </td>
+        </tr>       
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Buyer):
+            </td>
+            <td class="textbox">
+               @Html.EditorFor(model => model.Buyer)
+                @Html.ValidationMessageFor(model => model.Buyer)
+            </td>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.CategoryClass_Id): 
+            </td>
+            <td class="textbox">
+                @Html.DropDownList("CategoryClass_Id", (IEnumerable<SelectListItem>)ViewBag.CategoryClass, "- - - S E L E C T - - -", new { id = "ddlCategory", style = "width:350px;" })  
+            </td>
+            <td colspan="2">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.SubClassCode_Id): 
+            </td>
+            <td class="textbox">
+                @Html.DropDownList("SubClassCode_Id", (IEnumerable<SelectListItem>)ViewBag.SubClass, "- - - S E L E C T - - -", new { id = "ddlSubClasses", style = "width:350px;" })              
+            </td>
+            <td colspan="2">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+               <span class="lblred">*</span> @Html.LabelFor(model => model.FineLineCode_Id): 
+            </td>
+            <td class="textbox">
+                @Html.DropDownList("FineLineCode_Id", (IEnumerable<SelectListItem>)ViewBag.FineLineClass, "- - - S E L E C T - - -", new { id = "ddlFineLine", style = "width:350px;" })              
+            </td>
+            <td colspan="2">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="D1">
+                @Html.LabelFor(model => model.Item_Description):
+                </div>
+            </td>
+            <td class="textbox" colspan="3">
+                <div id="D2">
+                @Html.TextBoxFor(model => model.Item_Description, new { style = "width:600px;" })<br />
+                @Html.ValidationMessageFor(model => model.Item_Description)                
+                </div>
+            </td>
+        </tr>       
+@if (ViewBag.UserType != 6){
+       <tr>
+            <td style="text-align:right;vertical-align:top;"><b>FFL Information</b>:</td>
+            <td colspan="3" style="text-align:left;">
+                <div id="FFLInfo">
+                <table style="border:1px solid black;">
+                    <tr>
+                        <td>
+                            Type:
+                        </td>
+                        <td style="text-align:left">
+                            @Html.DropDownList("FFLType_Id", (IEnumerable<SelectListItem>)ViewBag.FFLType, "- - - S E L E C T - - -", new { id = "ddlFFLType", style = "width:250px;" })  
+                        </td>
+                        <td>
+                            Gauge:
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.FFLGauge)<br />
+                            @Html.ValidationMessageFor(model => model.FFLGauge)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Caliber:
+                        </td>
+                        <td class="textbox">
+                            @Html.EditorFor(model => model.FFLCaliber)<br />
+                            @Html.ValidationMessageFor(model => model.FFLCaliber)                
+                        </td>
+                        <td>
+                            Model:
+                        </td>
+                        <td class="textbox">
+                            @Html.EditorFor(model => model.FFLModel)<br />
+                            @Html.ValidationMessageFor(model => model.FFLModel)                
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mfg. Name:
+                        </td>
+                        <td class="textbox">
+                            @Html.EditorFor(model => model.FFLMFGName)<br />
+                            @Html.ValidationMessageFor(model => model.FFLMFGName)                
+                        </td>
+                        <td>
+                            Mfg. Import Name:
+                        </td>
+                        <td class="textbox">
+                            @Html.EditorFor(model => model.FFLMFGImportName)<br />
+                            @Html.ValidationMessageFor(model => model.FFLMFGImportName)                
+                        </td>
+                    </tr>
+                </table>
+                </div>
+                <div id="FFLInfoNotNeeded">
+                    No FFL information needed.
+                </div>
+            </td>
+        </tr>
+}
+        <tr>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.MFG_Number):
+            </td>
+            <td class="textbox">
+                @Html.EditorFor(model => model.MFG_Number)<br />
+                @Html.ValidationMessageFor(model => model.MFG_Number)
+            </td>
+            <td colspan="2">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.UM_Id):
+            </td>
+            <td class="textbox">
+                @Html.DropDownList("UM_Id", (IEnumerable<SelectListItem>)ViewBag.UM_Lookup, "- - - S E L E C T - - -", new { id = "ddlUM", style = "width:350px;" })  
+            </td>
+            <td>
+                @Html.LabelFor(model => model.EDIUPC):<br /><br />
+                @Html.LabelFor(model => model.UPC):
+            </td>
+            <td class="textbox">
+                @Html.EditorFor(model => model.EDIUPC)<br />
+                @Html.ValidationMessageFor(model => model.EDIUPC)<br />
+                @Html.EditorFor(model => model.UPC)<br />
+                @Html.ValidationMessageFor(model => model.UPC)
+            </td>
+        </tr>
+@if (ViewBag.UserType != 6){
+        <tr>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.VICost):
+            </td>
+            <td class="textbox">
+                @Html.EditorFor(model => model.VICost)<br />
+                @Html.ValidationMessageFor(model => model.VICost)
+            </td>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.WholeSaleMTP):            
+            </td>
+            <td class="textbox">
+                @Html.DropDownList("WholeSaleMTP", (IEnumerable<SelectListItem>)ViewBag.WholeSale_MTP, "- - - S E L E C T - - -")  
+                @Html.ValidationMessage("WholeSaleMTP")
+            </td>
+
+        </tr>
+}
+        <tr>
+            <td style="text-align:right;vertical-align:top;"><b>Pricing</b>:</td>
+            <td colspan="3">
+                <table style="border:1px solid black;">
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <span class="lblred">*</span>@Html.LabelFor(model => model.MSRP):
+                                    </td>
+                                    <td class="textbox">
+                                        @Html.EditorFor(model => model.MSRP, new { size = 100 })
+                                        <input type="text" id="txtMsrp" style="width:30px;" name="txtMsrp" value=""/>%<br />
+<!--                                        <input type="text" id="txtMsrp" style="width:30px;" name="txtMsrp" value="" onblur="UpdateMsrp();"/>%<br />-->
+                                        @Html.ValidationMessageFor(model => model.MSRP)
+                                        </td>
+                                </tr>
+@if (ViewBag.UserType != 6){
+                                <tr>
+                                    <td>
+                                        <span class="lblred">*</span>@Html.LabelFor(model => model.Level1):
+                                    </td>
+                                    <td class="textbox">
+                                        @Html.EditorFor(model => model.Level1, new { size = 100 })
+                                        <input type="text" id="txtLevel1" style="width:30px;" name="txtLevel1" value=""/>%<br />
+<!--                                        <input type="text" id="txtLevel1" style="width:30px;" name="txtLevel1" value="" onblur="UpdateLevel1();"/>%<br />-->
+                                        @Html.ValidationMessageFor(model => model.Level1)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="lblred">*</span>@Html.LabelFor(model => model.Level2):
+                                    </td>
+                                    <td class="textbox">
+                                        @Html.EditorFor(model => model.Level2, new { size = 100 })
+                                        <input type="text" id="txtLevel2" style="width:30px;" name="txtLevel2" value=""/>%<br />
+<!--                                        <input type="text" id="txtLevel2" style="width:30px;" name="txtLevel2" value="" onblur="UpdateLevel2();"/>%<br />-->
+                                        @Html.ValidationMessageFor(model => model.Level2)
+                                    </td>
+                                    <td colspan="2">
+
+                                    </td>
+                                </tr>
+}    
+                            </table>
+                        </td>
+                        <td>
+                            <table>
+@if (ViewBag.UserType != 6){
+                                <tr>
+                                    <td>
+                                       <span class="lblred">*</span>@Html.LabelFor(model => model.Level3):
+                                    </td>
+                                    <td class="textbox">
+                                        @Html.EditorFor(model => model.Level3)
+                                        <input type="text" id="txtLevel3" style="width:30px;" name="txtLevel3" value=""/>%<br />
+<!--                                        <input type="text" id="txtLevel3" style="width:30px;" name="txtLevel3" value="" onblur="UpdateLevel3();"/>%<br />-->
+                                        @Html.ValidationMessageFor(model => model.Level3)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="lblred">*</span>@Html.LabelFor(model => model.JSCLevel5):
+                                    </td>
+                                    <td class="textbox">
+                                        @Html.EditorFor(model => model.JSCLevel5)
+                                        <input type="text" id="txtLevel5" style="width:30px;" name="txtLevel5" value=""/>%<br />
+<!--                                        <input type="text" id="txtLevel5" style="width:30px;" name="txtLevel5" value="" onblur="UpdateLevel5();"/>%<br />-->
+                                        @Html.ValidationMessageFor(model => model.JSCLevel5)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       @Html.LabelFor(model => model.MinAdvertisePrice):
+                                    </td>
+                                    <td class="textbox">
+                                        @Html.EditorFor(model => model.MinAdvertisePrice)<br />
+                                        @Html.ValidationMessageFor(model => model.MinAdvertisePrice)
+                                    </td>
+                                </tr>
+}
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+@if (ViewBag.UserType != 6){
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Qty_Break):
+            <td class="textbox">
+                @Html.EditorFor(model => model.Qty_Break)<br />
+                @Html.ValidationMessageFor(model => model.Qty_Break)
+            </td>
+            <td colspan="2">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Qty_BreakPrice):
+            </td>
+            <td class="textbox">
+                @Html.EditorFor(model => model.Qty_BreakPrice)<br />
+                @Html.ValidationMessageFor(model => model.Qty_BreakPrice)
+            </td>
+            <td colspan="2">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="lblred">*</span>Web Code:
+            </td>
+            <td class="textbox">
+                @Html.DropDownList("CatWebCode_Id", (IEnumerable<SelectListItem>)ViewBag.CatWebCode_Id, "- - - S E L E C T - - -", new { id = "ddlWebcode", style = "width:350px;" })  
+            </td>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.Freight_Id):
+            </td>
+            <td class="textbox">
+                @Html.DropDownList("Freight_Id", (IEnumerable<SelectListItem>)ViewBag.Freight_Lookup, "- - - S E L E C T - - -", new { id = "ddlFreight", style = "width:350px;" })  
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.Plan_YN):
+            </td>
+            <td class="textbox">
+                @Html.DropDownList("Plan_YN", (IEnumerable<SelectListItem>)ViewBag.Plan, "- - - S E L E C T - - -")  
+            </td>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.ABC_Id):
+             </td>
+            <td class="textbox">
+                @Html.DropDownList("ABC_Id", (IEnumerable<SelectListItem>)ViewBag.ABC_Lookup, "- - - S E L E C T - - -")  
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.STD):
+            </td>
+            <td class="textbox">
+                @Html.EditorFor(model => model.STD)<br />
+                @Html.ValidationMessageFor(model => model.STD)
+            </td>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.MIN):
+            </td>
+            <td class="textbox">
+                @Html.EditorFor(model => model.MIN)<br />
+                @Html.ValidationMessageFor(model => model.MIN)
+            </td>
+        </tr>
+        <tr>
+            <td> Warehouses:
+            </td>
+            <td colspan="3" class="textbox">
+               @if (ViewBag.WareHousesList != null)
+               {
+                   foreach (var wh in ViewBag.WareHousesList)
+                   {
+
+                        <input id="available-item-@wh.Value" 
+                               name="WareHousesList" 
+                               type="checkbox" 
+                               value="@wh.Value"
+                               data-text="@wh.Text"
+                               @(wh.Selected == true ? "checked=checked" : "")>
+                        <span style="color:black">@wh.Text</span>
+            
+                   }
+               }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Haz):
+            </td>
+            <td class="textbox">
+                @Html.DropDownList("Haz", (IEnumerable<SelectListItem>)ViewBag.Hazardous, "- - - S E L E C T - - -")  
+            </td>
+
+            <td colspan="2">
+
+            </td>
+
+
+        </tr>
+}    
+        <tr>
+            <td class="textbox" style="text-align:center;" colspan="4">
+                @Html.LabelFor(model => model.Exclusive): 
+                <input type="checkbox" name="chkExclusive" id="chkExclusive"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.LabelFor(model => model.Allocated): 
+                <input type="checkbox" name="chkAllocated" id="chkAllocated"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.LabelFor(model => model.DropShip): 
+                <input type="checkbox" name="chkDropShip" id="chkDropShip"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.LabelFor(model => model.PreventFromWeb): 
+                <input type="checkbox" name="chkPreventFromWeb" id="chkPreventFromWeb"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.LabelFor(model => model.SpecialOrder): 
+                <input type="checkbox" name="chkSpecialOrder" id="chkSpecialOrder"  />
+            </td>
+        </tr>
+@*using (Html.BeginForm("SaveFastTrack", "Item", FormMethod.Post))
+{*@
+
+       @if (int.Parse(Session.Contents["UserTypeID"].ToString()) != 6){
+        <tr style="text-align:center;">
+            <td colspan="4" style="text-align:center" class="textbox">
+                @Html.LabelFor(model => model.FastTrack):
+   <!--             <input type="submit" value="Fast Track" />-->
+                <input type="checkbox" name="chkFastTrack" id="chkFastTrack" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+        </tr>
+       }
+       else
+       {
+        <tr style="text-align:center;">
+            <td colspan="4" style="text-align:center" class="textbox">
+                    @Html.HiddenFor(model => model.FastTrack)
+            </td>
+        </tr>
+       }
+           
+@*}*@
+        <tr>
+            <td colspan="4" style="text-align:center">
+                <input type="submit" value="Create" />
+            </td>
+        </tr>
+    </table>
+    
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@if (!ViewData.ModelState.IsValid){
+    <script type="text/javascript">
+        $(document).ready(function () {
+            alert("i'm here finally");
+            var VendorId = $("#ddlVendor").val();
+            alert(VendorId);
+            $.getJSON("../Item/LoadVendorInfo", { vtid: VendorId },
+            function (VendorData) {
+                $("#VendorNumber").val(VendorData.VendorNumber);
+                $("#VendorAbbrev").val(VendorData.Abbrev);
+                //$("#BuyerName").val(VendorData.BuyerName);
+                $("#Item_Description").val(VendorData.Abbrev);
+            });
+        });
+    </script>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

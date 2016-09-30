@@ -1,0 +1,78 @@
+﻿@model IMS_V1.ItemTextAttachment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ItemTextAttachment</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemTextAttachment_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemTextAttachment_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Item.Itm_Num)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Item.Itm_Num)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Content_Key)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Content_Key)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AddedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AddedBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AddedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AddedDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DeletedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DeletedBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DeletedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DeletedDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

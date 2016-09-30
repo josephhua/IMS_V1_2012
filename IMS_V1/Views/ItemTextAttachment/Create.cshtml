@@ -1,0 +1,46 @@
+﻿@model IMS_V1.ItemTextAttachment
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <input type="hidden" value="@ViewBag.Item_id" id="hdnItem_id" name="hdnItem_id" />
+    <table>
+        <tr>
+            <td colspan="2" style="text-align:left">
+                <b>Item Number:</b> @ViewBag.Itm_Num
+            </td>
+        </tr>       
+        <tr>
+            <td colspan="2" style="text-align:left">
+                <b>Item Description:</b> @ViewBag.Item_Description
+            </td>
+        </tr>       
+        <tr>
+            <td colspan="2">
+                <textarea style="width:800px;height:500px;" id="txaLongDescription" name="txaLongDescription">
+                    
+                </textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;">
+                <input type="submit" value="Save" />
+            </td>
+        </tr>
+
+    </table>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new{ itemid = @ViewBag.Item_id })
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

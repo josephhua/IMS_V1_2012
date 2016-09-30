@@ -1,0 +1,105 @@
+﻿@model IEnumerable<IMS_V1.ItemTextAttachment>
+
+
+@{
+    ViewBag.Title = "Text Attachment List";
+}
+
+<table style="width:800px">
+    <tr>
+        <td colspan="2" style="text-align:center">
+            <h2>Text Attachment List</h2>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:left">
+            <b>Item Number:</b> @ViewBag.Itm_num
+            <br />
+       <b>Item Description:</b> @ViewBag.ItemDescription 
+        </td>
+    </tr>
+</table>
+
+
+<p>
+        @Html.ActionLink("Add New Text Attachment", "Create", new { itemid = ViewBag.Item_Id,itmnum = ViewBag.Itm_num, itemdescription = ViewBag.ItemDescription})
+
+
+</p>
+
+<table style="width:1000px">
+    <tr>
+        <td colspan="2">
+            @Html.ActionLink("Back to Item","Edit","Item",new {id=ViewBag.Item_Id},null)
+            @Html.ActionLink("Attributes","Index","ItemAttribute",new {id=ViewBag.Item_id},null)
+
+        </td>
+    </tr>
+    <tr>
+        <th>
+           Text
+        </th>
+        <th></th>
+    </tr>
+
+@{var bkc = "whitesmoke";}
+    @if (ViewBag.LongDescriptions != null)
+    {
+        foreach (var ld in ViewBag.LongDescriptions)
+        {
+
+            
+            if (bkc == "whitesmoke")
+            {
+                bkc = "white";
+            }
+            else
+            {
+                bkc = "whitesmoke";
+            }       
+    <tr style="background-color:@bkc;">
+        <td class="display1" style="column-width:600px;">
+            @ld.LongDescription
+        </td>
+        <td style="font-size:.70em">
+            @Html.ActionLink("Edit", "Edit", new {id = ld.ItemTextAttachment_Id }) |
+            @Html.ActionLink("Delete", "Delete", new {id = ld.ItemTextAttachment_Id})
+        </td>
+    </tr>
+        }
+    }
+   
+
+
+
+    <tr>
+        <td colspan="100" style="text-align:center">
+             @Html.ActionLink("Back to List", "Index","Item")
+        </td>
+    </tr>
+   
+
+</table>
+
+
+
+@*foreach (var item in Model) {
+    if (bkc == "whitesmoke")
+    {
+        bkc = "white";
+    }
+    else
+    {
+        bkc = "whitesmoke";
+    }       
+    <tr style="background-color:@bkc;">
+        <td class="display1">
+            @Html.DisplayFor(modelItem => item.Text.ToString())
+            @*byte[] byteArray = item.text;
+            @*string txt = Encoding.UTF8.GetString(binarystring);           @*Html.DisplayFor(txt);
+            
+           @string result = System.Text.Encoding.UTF8.GetString(item.Text);
+            @Html.DisplayFor(result);
+    
+}*@
+    

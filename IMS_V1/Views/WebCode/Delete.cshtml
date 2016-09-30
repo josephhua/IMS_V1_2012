@@ -1,0 +1,53 @@
+﻿@model IMS_V1.WebCode
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>WebCode</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CatWebCode_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CatWebCode_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WebCode1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WebCode1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WebCodeDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WebCodeDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

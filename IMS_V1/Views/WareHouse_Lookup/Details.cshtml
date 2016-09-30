@@ -1,0 +1,57 @@
+﻿@model IMS_V1.WareHouse_Lookup
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>WareHouse_Lookup</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WareHouse_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WareHouse_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WareHouseNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WareHouseNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WareHouseName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WareHouseName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Active)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Active)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedBy)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

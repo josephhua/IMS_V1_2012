@@ -1,0 +1,2856 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IMS_V1Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="IMS_V1ModelStoreContainer">
+          <EntitySet Name="ABC_Lookup" EntityType="IMS_V1Model.Store.ABC_Lookup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="APlusItems" EntityType="IMS_V1Model.Store.APlusItems" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Attribute_Lookup" EntityType="IMS_V1Model.Store.Attribute_Lookup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AttributeType" EntityType="IMS_V1Model.Store.AttributeType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Buyers" EntityType="IMS_V1Model.Store.Buyers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CategoryAttributes" EntityType="IMS_V1Model.Store.CategoryAttributes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CategoryClass" EntityType="IMS_V1Model.Store.CategoryClass" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FFLType" EntityType="IMS_V1Model.Store.FFLType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FineLineClass" EntityType="IMS_V1Model.Store.FineLineClass" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Freight_Lookup" EntityType="IMS_V1Model.Store.Freight_Lookup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ItemAttributes" EntityType="IMS_V1Model.Store.ItemAttributes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ItemDescriptionOrder" EntityType="IMS_V1Model.Store.ItemDescriptionOrder" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Items" EntityType="IMS_V1Model.Store.Items" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ItemTextAttachments" EntityType="IMS_V1Model.Store.ItemTextAttachments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ItemWareHouses" EntityType="IMS_V1Model.Store.ItemWareHouses" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PrintedItemsForAPlus" EntityType="IMS_V1Model.Store.PrintedItemsForAPlus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SubClass" EntityType="IMS_V1Model.Store.SubClass" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UM_Lookup" EntityType="IMS_V1Model.Store.UM_Lookup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="IMS_V1Model.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserTypes" EntityType="IMS_V1Model.Store.UserTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VendorTradeNames" EntityType="IMS_V1Model.Store.VendorTradeNames" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WareHouse_Lookup" EntityType="IMS_V1Model.Store.WareHouse_Lookup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WebCodes" EntityType="IMS_V1Model.Store.WebCodes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="zManufacturersLogo" EntityType="IMS_V1Model.Store.zManufacturersLogo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="zManufacturersLogo_History" EntityType="IMS_V1Model.Store.zManufacturersLogo_History" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Attribute_Lookup_AttributeType" Association="IMS_V1Model.Store.FK_Attribute_Lookup_AttributeType">
+            <End Role="AttributeType" EntitySet="AttributeType" />
+            <End Role="Attribute_Lookup" EntitySet="Attribute_Lookup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryAttributes_AttributeType" Association="IMS_V1Model.Store.FK_CategoryAttributes_AttributeType">
+            <End Role="AttributeType" EntitySet="AttributeType" />
+            <End Role="CategoryAttributes" EntitySet="CategoryAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryAttributes_CategoryClass" Association="IMS_V1Model.Store.FK_CategoryAttributes_CategoryClass">
+            <End Role="CategoryClass" EntitySet="CategoryClass" />
+            <End Role="CategoryAttributes" EntitySet="CategoryAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryAttributes_FineLineClass" Association="IMS_V1Model.Store.FK_CategoryAttributes_FineLineClass">
+            <End Role="FineLineClass" EntitySet="FineLineClass" />
+            <End Role="CategoryAttributes" EntitySet="CategoryAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryAttributes_SubClass" Association="IMS_V1Model.Store.FK_CategoryAttributes_SubClass">
+            <End Role="SubClass" EntitySet="SubClass" />
+            <End Role="CategoryAttributes" EntitySet="CategoryAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemAttributes_Attribute_Lookup" Association="IMS_V1Model.Store.FK_ItemAttributes_Attribute_Lookup">
+            <End Role="Attribute_Lookup" EntitySet="Attribute_Lookup" />
+            <End Role="ItemAttributes" EntitySet="ItemAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemAttributes_Items" Association="IMS_V1Model.Store.FK_ItemAttributes_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="ItemAttributes" EntitySet="ItemAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemDescriptionOrder_AttributeType" Association="IMS_V1Model.Store.FK_ItemDescriptionOrder_AttributeType">
+            <End Role="AttributeType" EntitySet="AttributeType" />
+            <End Role="ItemDescriptionOrder" EntitySet="ItemDescriptionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemDescriptionOrder_CategoryClass" Association="IMS_V1Model.Store.FK_ItemDescriptionOrder_CategoryClass">
+            <End Role="CategoryClass" EntitySet="CategoryClass" />
+            <End Role="ItemDescriptionOrder" EntitySet="ItemDescriptionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemDescriptionOrder_FineLineClass" Association="IMS_V1Model.Store.FK_ItemDescriptionOrder_FineLineClass">
+            <End Role="FineLineClass" EntitySet="FineLineClass" />
+            <End Role="ItemDescriptionOrder" EntitySet="ItemDescriptionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemDescriptionOrder_FineLineClass1" Association="IMS_V1Model.Store.FK_ItemDescriptionOrder_FineLineClass1">
+            <End Role="FineLineClass" EntitySet="FineLineClass" />
+            <End Role="ItemDescriptionOrder" EntitySet="ItemDescriptionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemDescriptionOrder_SubClass" Association="IMS_V1Model.Store.FK_ItemDescriptionOrder_SubClass">
+            <End Role="SubClass" EntitySet="SubClass" />
+            <End Role="ItemDescriptionOrder" EntitySet="ItemDescriptionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_ABC_Lookup" Association="IMS_V1Model.Store.FK_Items_ABC_Lookup">
+            <End Role="ABC_Lookup" EntitySet="ABC_Lookup" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_CategoryClass" Association="IMS_V1Model.Store.FK_Items_CategoryClass">
+            <End Role="CategoryClass" EntitySet="CategoryClass" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_FFLType" Association="IMS_V1Model.Store.FK_Items_FFLType">
+            <End Role="FFLType" EntitySet="FFLType" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_FineLineClass" Association="IMS_V1Model.Store.FK_Items_FineLineClass">
+            <End Role="FineLineClass" EntitySet="FineLineClass" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Freight_Lookup" Association="IMS_V1Model.Store.FK_Items_Freight_Lookup">
+            <End Role="Freight_Lookup" EntitySet="Freight_Lookup" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_SubClass" Association="IMS_V1Model.Store.FK_Items_SubClass">
+            <End Role="SubClass" EntitySet="SubClass" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_UM_Lookup" Association="IMS_V1Model.Store.FK_Items_UM_Lookup">
+            <End Role="UM_Lookup" EntitySet="UM_Lookup" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_WebCodes" Association="IMS_V1Model.Store.FK_Items_WebCodes">
+            <End Role="WebCodes" EntitySet="WebCodes" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_zManufacturersLogo" Association="IMS_V1Model.Store.FK_Items_zManufacturersLogo">
+            <End Role="zManufacturersLogo" EntitySet="zManufacturersLogo" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemTextAttachments" Association="IMS_V1Model.Store.FK_ItemTextAttachments">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="ItemTextAttachments" EntitySet="ItemTextAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemWareHouses_Items" Association="IMS_V1Model.Store.FK_ItemWareHouses_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="ItemWareHouses" EntitySet="ItemWareHouses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemWareHouses_WareHouse_Lookup" Association="IMS_V1Model.Store.FK_ItemWareHouses_WareHouse_Lookup">
+            <End Role="WareHouse_Lookup" EntitySet="WareHouse_Lookup" />
+            <End Role="ItemWareHouses" EntitySet="ItemWareHouses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrintedItemsForAPlus_Items" Association="IMS_V1Model.Store.FK_PrintedItemsForAPlus_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="PrintedItemsForAPlus" EntitySet="PrintedItemsForAPlus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserTypes" Association="IMS_V1Model.Store.FK_Users_UserTypes">
+            <End Role="UserTypes" EntitySet="UserTypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_zManufacturersLogo_History_zManufacturersLogo" Association="IMS_V1Model.Store.FK_zManufacturersLogo_History_zManufacturersLogo">
+            <End Role="zManufacturersLogo" EntitySet="zManufacturersLogo" />
+            <End Role="zManufacturersLogo_History" EntitySet="zManufacturersLogo_History" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ABC_Lookup">
+          <Key>
+            <PropertyRef Name="ABC_Id" />
+          </Key>
+          <Property Name="ABC_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ABC_Code" Type="nchar" MaxLength="2" />
+          <Property Name="ABC_Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Enabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="APlusItems">
+          <Key>
+            <PropertyRef Name="APlusItem_Id" />
+          </Key>
+          <Property Name="APlusItem_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Itm_Num" Type="nvarchar" MaxLength="30" />
+          <Property Name="Item_Desc1" Type="nvarchar" MaxLength="31" />
+          <Property Name="Item_Desc2" Type="nvarchar" MaxLength="31" />
+          <Property Name="VendorNumber" Type="varchar" MaxLength="6" />
+          <Property Name="MFG_Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPC" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Attribute_Lookup">
+          <Key>
+            <PropertyRef Name="AttributeLookup_Id" />
+          </Key>
+          <Property Name="AttributeLookup_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AttributeType_Id" Type="int" Nullable="false" />
+          <Property Name="WebsiteAttributeValue" Type="nvarchar" MaxLength="100" />
+          <Property Name="APlusAttributeValue" Type="nvarchar" MaxLength="30" />
+          <Property Name="DefaultActualValue" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="AttributeType">
+          <Key>
+            <PropertyRef Name="AttributeType_Id" />
+          </Key>
+          <Property Name="AttributeType_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AttributeType" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Range" Type="bit" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Enabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="Buyers">
+          <Key>
+            <PropertyRef Name="Buyer_Id" />
+          </Key>
+          <Property Name="Buyer_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BuyerNumber" Type="nchar" MaxLength="10" />
+          <Property Name="BuyerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModfiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CategoryAttributes">
+          <Key>
+            <PropertyRef Name="CategoryAttribute_Id" />
+          </Key>
+          <Property Name="CategoryAttribute_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryClass_Id" Type="int" Nullable="false" />
+          <Property Name="SubClassCode_Id" Type="int" />
+          <Property Name="FineLineCode_Id" Type="int" />
+          <Property Name="AttributeType_Id" Type="int" Nullable="false" />
+          <Property Name="Required" Type="bit" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CategoryClass">
+          <Key>
+            <PropertyRef Name="CategoryClass_Id" />
+          </Key>
+          <Property Name="CategoryClass_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Id" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FFLType">
+          <Key>
+            <PropertyRef Name="FFLType_Id" />
+          </Key>
+          <Property Name="FFLType_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FFLType_Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="FFLType_Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Enabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="FineLineClass">
+          <Key>
+            <PropertyRef Name="FineLineCode_Id" />
+          </Key>
+          <Property Name="FineLineCode_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Id" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="SubClass_id" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="FineLine_Id" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="FinelineName" Type="nvarchar" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="Freight_Lookup">
+          <Key>
+            <PropertyRef Name="Freight_Id" />
+          </Key>
+          <Property Name="Freight_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Freight_APlusClass" Type="nchar" MaxLength="5" />
+          <Property Name="Freight_DotClass" Type="nchar" MaxLength="5" />
+          <Property Name="Freight_ItemClass" Type="nvarchar" MaxLength="150" />
+          <Property Name="Freight_Commodity" Type="nvarchar" MaxLength="150" />
+          <Property Name="Freight_NMFCItemNumber" Type="int" />
+          <Property Name="Freight_Hazard" Type="nchar" MaxLength="1" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Enabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="ItemAttributes">
+          <Key>
+            <PropertyRef Name="ItemAttribute_Id" />
+          </Key>
+          <Property Name="ItemAttribute_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Id" Type="int" />
+          <Property Name="AttributeLookup_Id" Type="int" />
+          <Property Name="ActualAttributeValue" Type="nvarchar" MaxLength="100" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="PrintedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ItemDescriptionOrder">
+          <Key>
+            <PropertyRef Name="ItemDescriptionOrder_Id" />
+          </Key>
+          <Property Name="ItemDescriptionOrder_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DescriptionField" Type="nvarchar" MaxLength="50" />
+          <Property Name="CategoryClass_Id" Type="int" />
+          <Property Name="SubClassCode_Id" Type="int" />
+          <Property Name="FineLineCode_Id" Type="int" />
+          <Property Name="AttributeType_Id" Type="int" />
+          <Property Name="SystemType" Type="nchar" MaxLength="10" />
+          <Property Name="OrderNumber" Type="int" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="Item_id" />
+          </Key>
+          <Property Name="Item_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Itm_Num" Type="nvarchar" MaxLength="10" />
+          <Property Name="ManufacturerLogo_Id" Type="int" />
+          <Property Name="Item_Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="APlusDescription1" Type="nvarchar" MaxLength="31" />
+          <Property Name="APlusDescription2" Type="nvarchar" MaxLength="31" />
+          <Property Name="MFG_Number" Type="nvarchar" MaxLength="27" />
+          <Property Name="UM_Id" Type="int" />
+          <Property Name="MSRP" Type="money" />
+          <Property Name="Level1" Type="money" />
+          <Property Name="Level2" Type="money" />
+          <Property Name="Level3" Type="money" />
+          <Property Name="JSCLevel5" Type="money" />
+          <Property Name="Qty_Break" Type="nvarchar" MaxLength="10" />
+          <Property Name="Qty_BreakPrice" Type="money" />
+          <Property Name="CategoryClass_Id" Type="int" Nullable="false" />
+          <Property Name="SubClassCode_Id" Type="int" />
+          <Property Name="FineLineCode_Id" Type="int" />
+          <Property Name="CatWebCode_Id" Type="int" />
+          <Property Name="Freight_Id" Type="int" />
+          <Property Name="Plan_YN" Type="nvarchar" MaxLength="1" />
+          <Property Name="ABC_Id" Type="int" />
+          <Property Name="DS" Type="nvarchar" MaxLength="1" />
+          <Property Name="STD" Type="int" />
+          <Property Name="MIN" Type="nvarchar" MaxLength="10" />
+          <Property Name="VICost" Type="money" />
+          <Property Name="Haz" Type="nvarchar" MaxLength="2" />
+          <Property Name="UPC" Type="nvarchar" MaxLength="50" />
+          <Property Name="Buyer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Exclusive" Type="char" MaxLength="1" />
+          <Property Name="Allocated" Type="char" MaxLength="1" />
+          <Property Name="DropShip" Type="char" MaxLength="1" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Approved" Type="char" MaxLength="1" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="ReadyForApproval" Type="char" MaxLength="1" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="FastTrack" Type="char" MaxLength="1" />
+          <Property Name="FastTrackBy" Type="int" />
+          <Property Name="FastTrackDate" Type="datetime" />
+          <Property Name="FFLType_Id" Type="int" />
+          <Property Name="FFLCaliber" Type="nvarchar" MaxLength="100" />
+          <Property Name="FFLModel" Type="nvarchar" MaxLength="100" />
+          <Property Name="FFLMFGName" Type="nvarchar" MaxLength="150" />
+          <Property Name="FFLMFGImportName" Type="nvarchar" MaxLength="150" />
+          <Property Name="PreventFromWeb" Type="char" MaxLength="1" />
+          <Property Name="SpecialOrder" Type="char" MaxLength="1" />
+          <Property Name="EDIUPC" Type="nvarchar" MaxLength="50" />
+          <Property Name="FFLGauge" Type="nvarchar" MaxLength="50" />
+          <Property Name="FFLLock" Type="nvarchar" MaxLength="1" />
+          <Property Name="FFLLockDate" Type="datetime" />
+          <Property Name="MinAdvertisePrice" Type="money" />
+          <Property Name="WholeSaleMTP" Type="char" MaxLength="1" />
+          <Property Name="Printed" Type="nchar" MaxLength="1" />
+          <Property Name="AssignedBuyer_Id" Type="int" />
+          <Property Name="Level4" Type="money" />
+          <Property Name="SF_Item_Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MinAdvertisePriceFlag" Type="char" MaxLength="1" />
+          <Property Name="Company99" Type="char" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="ItemTextAttachments">
+          <Key>
+            <PropertyRef Name="ItemTextAttachment_Id" />
+          </Key>
+          <Property Name="ItemTextAttachment_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Item_id" Type="int" />
+          <Property Name="Content_Key" Type="nvarchar" MaxLength="50" />
+          <Property Name="Text" Type="varbinary(max)" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="int" />
+          <Property Name="DeletedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ItemWareHouses">
+          <Key>
+            <PropertyRef Name="ItemWareHouse_Id" />
+          </Key>
+          <Property Name="ItemWareHouse_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Item_id" Type="int" Nullable="false" />
+          <Property Name="WareHouse_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrintedItemsForAPlus">
+          <Key>
+            <PropertyRef Name="Printed_Id" />
+          </Key>
+          <Property Name="Printed_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Id" Type="int" Nullable="false" />
+          <Property Name="DatePrinted" Type="datetime" />
+          <Property Name="PrintedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="SubClass">
+          <Key>
+            <PropertyRef Name="SubClassCode_Id" />
+          </Key>
+          <Property Name="SubClassCode_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Id" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="SubClass_Id" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="SubClassName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UM_Lookup">
+          <Key>
+            <PropertyRef Name="UM_Id" />
+          </Key>
+          <Property Name="UM_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UM_Code" Type="nchar" MaxLength="5" />
+          <Property Name="UM_Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Enabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="UserType_Id" Type="int" />
+          <Property Name="ResetPassword" Type="bit" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Buyer_Number" Type="nvarchar" MaxLength="3" />
+          <Property Name="CreateAPlusImport_MarineShooting" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="UserTypes">
+          <Key>
+            <PropertyRef Name="UserType_id" />
+          </Key>
+          <Property Name="UserType_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserTypeDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Enabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="VendorTradeNames">
+          <Key>
+            <PropertyRef Name="VT_Id" />
+          </Key>
+          <Property Name="VT_Id" Type="int" Nullable="false" />
+          <Property Name="VendorNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="VendorAbbreviation" Type="nchar" MaxLength="10" />
+          <Property Name="TradeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WareHouse_Lookup">
+          <Key>
+            <PropertyRef Name="WareHouse_id" />
+          </Key>
+          <Property Name="WareHouse_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WareHouseNumber" Type="nvarchar" MaxLength="2" />
+          <Property Name="WareHouseName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="WebCodes">
+          <Key>
+            <PropertyRef Name="CatWebCode_Id" />
+          </Key>
+          <Property Name="CatWebCode_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WebCode" Type="nchar" MaxLength="10" />
+          <Property Name="WebCodeDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Enabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="zManufacturersLogo">
+          <Key>
+            <PropertyRef Name="ManufacturerLogo_Id" />
+          </Key>
+          <Property Name="ManufacturerLogo_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="VendorNumber" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="APlusVendorName" Type="nvarchar" MaxLength="200" />
+          <Property Name="LogoName" Type="nvarchar" MaxLength="200" />
+          <Property Name="WebVendorName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Abbrev" Type="nvarchar" MaxLength="50" />
+          <Property Name="URL" Type="nvarchar" MaxLength="150" />
+          <Property Name="Buyer_Id" Type="int" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Enabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="zManufacturersLogo_History">
+          <Key>
+            <PropertyRef Name="ManufacturerLogoHistory_Id" />
+          </Key>
+          <Property Name="ManufacturerLogoHistory_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ManufacturerLogo_Id" Type="int" Nullable="false" />
+          <Property Name="VendorNumber" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="APlusVendorName_Original" Type="nvarchar" MaxLength="200" />
+          <Property Name="LogoName_Original" Type="nvarchar" MaxLength="200" />
+          <Property Name="WebVendorName_Original" Type="nvarchar" MaxLength="200" />
+          <Property Name="Abbrev_Original" Type="nvarchar" MaxLength="50" />
+          <Property Name="APlusVendorName_New" Type="nvarchar" MaxLength="200" />
+          <Property Name="LogoName_New" Type="nvarchar" MaxLength="200" />
+          <Property Name="WebVendorName_New" Type="nvarchar" MaxLength="200" />
+          <Property Name="Abbrev_New" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChangeDate" Type="datetime" Nullable="false" />
+          <Property Name="URL_Original" Type="nvarchar" MaxLength="150" />
+          <Property Name="URL_New" Type="nvarchar" MaxLength="150" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Attribute_Lookup_AttributeType">
+          <End Role="AttributeType" Type="IMS_V1Model.Store.AttributeType" Multiplicity="1" />
+          <End Role="Attribute_Lookup" Type="IMS_V1Model.Store.Attribute_Lookup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeType">
+              <PropertyRef Name="AttributeType_Id" />
+            </Principal>
+            <Dependent Role="Attribute_Lookup">
+              <PropertyRef Name="AttributeType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryAttributes_AttributeType">
+          <End Role="AttributeType" Type="IMS_V1Model.Store.AttributeType" Multiplicity="1" />
+          <End Role="CategoryAttributes" Type="IMS_V1Model.Store.CategoryAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeType">
+              <PropertyRef Name="AttributeType_Id" />
+            </Principal>
+            <Dependent Role="CategoryAttributes">
+              <PropertyRef Name="AttributeType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryAttributes_CategoryClass">
+          <End Role="CategoryClass" Type="IMS_V1Model.Store.CategoryClass" Multiplicity="1" />
+          <End Role="CategoryAttributes" Type="IMS_V1Model.Store.CategoryAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryClass">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Principal>
+            <Dependent Role="CategoryAttributes">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryAttributes_FineLineClass">
+          <End Role="FineLineClass" Type="IMS_V1Model.Store.FineLineClass" Multiplicity="0..1" />
+          <End Role="CategoryAttributes" Type="IMS_V1Model.Store.CategoryAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FineLineClass">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Principal>
+            <Dependent Role="CategoryAttributes">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryAttributes_SubClass">
+          <End Role="SubClass" Type="IMS_V1Model.Store.SubClass" Multiplicity="0..1" />
+          <End Role="CategoryAttributes" Type="IMS_V1Model.Store.CategoryAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubClass">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Principal>
+            <Dependent Role="CategoryAttributes">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemAttributes_Attribute_Lookup">
+          <End Role="Attribute_Lookup" Type="IMS_V1Model.Store.Attribute_Lookup" Multiplicity="0..1" />
+          <End Role="ItemAttributes" Type="IMS_V1Model.Store.ItemAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attribute_Lookup">
+              <PropertyRef Name="AttributeLookup_Id" />
+            </Principal>
+            <Dependent Role="ItemAttributes">
+              <PropertyRef Name="AttributeLookup_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemAttributes_Items">
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="0..1" />
+          <End Role="ItemAttributes" Type="IMS_V1Model.Store.ItemAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="Item_id" />
+            </Principal>
+            <Dependent Role="ItemAttributes">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemDescriptionOrder_AttributeType">
+          <End Role="AttributeType" Type="IMS_V1Model.Store.AttributeType" Multiplicity="0..1" />
+          <End Role="ItemDescriptionOrder" Type="IMS_V1Model.Store.ItemDescriptionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeType">
+              <PropertyRef Name="AttributeType_Id" />
+            </Principal>
+            <Dependent Role="ItemDescriptionOrder">
+              <PropertyRef Name="AttributeType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemDescriptionOrder_CategoryClass">
+          <End Role="CategoryClass" Type="IMS_V1Model.Store.CategoryClass" Multiplicity="0..1" />
+          <End Role="ItemDescriptionOrder" Type="IMS_V1Model.Store.ItemDescriptionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryClass">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Principal>
+            <Dependent Role="ItemDescriptionOrder">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemDescriptionOrder_FineLineClass">
+          <End Role="FineLineClass" Type="IMS_V1Model.Store.FineLineClass" Multiplicity="0..1" />
+          <End Role="ItemDescriptionOrder" Type="IMS_V1Model.Store.ItemDescriptionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FineLineClass">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Principal>
+            <Dependent Role="ItemDescriptionOrder">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemDescriptionOrder_FineLineClass1">
+          <End Role="FineLineClass" Type="IMS_V1Model.Store.FineLineClass" Multiplicity="0..1" />
+          <End Role="ItemDescriptionOrder" Type="IMS_V1Model.Store.ItemDescriptionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FineLineClass">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Principal>
+            <Dependent Role="ItemDescriptionOrder">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemDescriptionOrder_SubClass">
+          <End Role="SubClass" Type="IMS_V1Model.Store.SubClass" Multiplicity="0..1" />
+          <End Role="ItemDescriptionOrder" Type="IMS_V1Model.Store.ItemDescriptionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubClass">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Principal>
+            <Dependent Role="ItemDescriptionOrder">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_ABC_Lookup">
+          <End Role="ABC_Lookup" Type="IMS_V1Model.Store.ABC_Lookup" Multiplicity="0..1" />
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABC_Lookup">
+              <PropertyRef Name="ABC_Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ABC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_CategoryClass">
+          <End Role="CategoryClass" Type="IMS_V1Model.Store.CategoryClass" Multiplicity="1" />
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryClass">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_FFLType">
+          <End Role="FFLType" Type="IMS_V1Model.Store.FFLType" Multiplicity="0..1" />
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FFLType">
+              <PropertyRef Name="FFLType_Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="FFLType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_FineLineClass">
+          <End Role="FineLineClass" Type="IMS_V1Model.Store.FineLineClass" Multiplicity="0..1" />
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FineLineClass">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Freight_Lookup">
+          <End Role="Freight_Lookup" Type="IMS_V1Model.Store.Freight_Lookup" Multiplicity="0..1" />
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Freight_Lookup">
+              <PropertyRef Name="Freight_Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="Freight_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_SubClass">
+          <End Role="SubClass" Type="IMS_V1Model.Store.SubClass" Multiplicity="0..1" />
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubClass">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_UM_Lookup">
+          <End Role="UM_Lookup" Type="IMS_V1Model.Store.UM_Lookup" Multiplicity="0..1" />
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UM_Lookup">
+              <PropertyRef Name="UM_Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="UM_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_WebCodes">
+          <End Role="WebCodes" Type="IMS_V1Model.Store.WebCodes" Multiplicity="0..1" />
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebCodes">
+              <PropertyRef Name="CatWebCode_Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="CatWebCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_zManufacturersLogo">
+          <End Role="zManufacturersLogo" Type="IMS_V1Model.Store.zManufacturersLogo" Multiplicity="0..1" />
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zManufacturersLogo">
+              <PropertyRef Name="ManufacturerLogo_Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ManufacturerLogo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemTextAttachments">
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="0..1" />
+          <End Role="ItemTextAttachments" Type="IMS_V1Model.Store.ItemTextAttachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="Item_id" />
+            </Principal>
+            <Dependent Role="ItemTextAttachments">
+              <PropertyRef Name="Item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemWareHouses_Items">
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="1" />
+          <End Role="ItemWareHouses" Type="IMS_V1Model.Store.ItemWareHouses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="Item_id" />
+            </Principal>
+            <Dependent Role="ItemWareHouses">
+              <PropertyRef Name="Item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemWareHouses_WareHouse_Lookup">
+          <End Role="WareHouse_Lookup" Type="IMS_V1Model.Store.WareHouse_Lookup" Multiplicity="1" />
+          <End Role="ItemWareHouses" Type="IMS_V1Model.Store.ItemWareHouses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse_Lookup">
+              <PropertyRef Name="WareHouse_id" />
+            </Principal>
+            <Dependent Role="ItemWareHouses">
+              <PropertyRef Name="WareHouse_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrintedItemsForAPlus_Items">
+          <End Role="Items" Type="IMS_V1Model.Store.Items" Multiplicity="1" />
+          <End Role="PrintedItemsForAPlus" Type="IMS_V1Model.Store.PrintedItemsForAPlus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="Item_id" />
+            </Principal>
+            <Dependent Role="PrintedItemsForAPlus">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserTypes">
+          <End Role="UserTypes" Type="IMS_V1Model.Store.UserTypes" Multiplicity="0..1" />
+          <End Role="Users" Type="IMS_V1Model.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypes">
+              <PropertyRef Name="UserType_id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_zManufacturersLogo_History_zManufacturersLogo">
+          <End Role="zManufacturersLogo" Type="IMS_V1Model.Store.zManufacturersLogo" Multiplicity="1" />
+          <End Role="zManufacturersLogo_History" Type="IMS_V1Model.Store.zManufacturersLogo_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zManufacturersLogo">
+              <PropertyRef Name="ManufacturerLogo_Id" />
+            </Principal>
+            <Dependent Role="zManufacturersLogo_History">
+              <PropertyRef Name="ManufacturerLogo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddItemToAPlusImportItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddItemWareHouse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Item_Id" Type="int" Mode="In" />
+          <Parameter Name="WareHouse_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddLongDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemId" Type="int" Mode="In" />
+          <Parameter Name="Text" Type="varchar(max)" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddNewItemDefaultAttributes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Item_Id" Type="int" Mode="In" />
+          <Parameter Name="CategoryClass_Id" Type="int" Mode="In" />
+          <Parameter Name="User_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="APlusEntryItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemId" Type="int" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="APlusImport_ITBAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="APlusImport_ITMST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="APlusItemsPrinted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CheckCategoryAttribute" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CategoryClass_Id" Type="int" Mode="In" />
+          <Parameter Name="AttributeType_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CheckForAPlusImportItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="CheckForAPlusImportRunning" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="CheckForMarineAPlusImportItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="CreateContent_Key" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DeleteItemAttributes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Item_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteItemWareHouses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Item_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAPlusImportKeyCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetExistingLongDescriptions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetExistingWareHousesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Item_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetItemDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="itemid" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetLongDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMarineAPlusImportKeyCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetNewItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemId" Type="int" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetRemainingAttributeTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetWareHouses" ReturnType="varchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Item_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InWareHouse" ReturnType="varchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Item_id" Type="int" Mode="In" />
+          <Parameter Name="WarehouseName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="TurnRunningFlagOff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TurnRunningFlagOn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateItemDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Item_Id" Type="int" Mode="In" />
+          <Parameter Name="NewDescription" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateItemRFA_FT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Item_Id" Type="int" Mode="In" />
+          <Parameter Name="ReadyForApproval" Type="nvarchar" Mode="In" />
+          <Parameter Name="FastTrack" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateItemsWithItm_Num" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Item_id" Type="int" Mode="In" />
+          <Parameter Name="CategoryClass_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateLongDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="Text" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UpdateSFItemDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Item_Id" Type="int" Mode="In" />
+          <Parameter Name="NewSFDescription" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IMS_V1Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="IMS_V1Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="VendorTradeNames" EntityType="IMS_V1Model.VendorTradeName" />
+          <FunctionImport Name="AddItemWareHouse">
+            <Parameter Name="Item_Id" Mode="In" Type="Int32" />
+            <Parameter Name="WareHouse_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CheckCategoryAttribute" ReturnType="Collection(Int32)">
+            <Parameter Name="CategoryClass_Id" Mode="In" Type="Int32" />
+            <Parameter Name="AttributeType_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteItemWareHouses">
+          <Parameter Name="Item_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateItemsWithItm_Num">
+            <Parameter Name="Item_id" Mode="In" Type="Int32" />
+            <Parameter Name="CategoryClass_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetItemDescription" ReturnType="Collection(String)">
+            <Parameter Name="itemid" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="ABC_Lookup" EntityType="IMS_V1Model.ABC_Lookup" />
+          <EntitySet Name="Attribute_Lookup" EntityType="IMS_V1Model.Attribute_Lookup" />
+          <EntitySet Name="AttributeTypes" EntityType="IMS_V1Model.AttributeType" />
+          <EntitySet Name="Buyers" EntityType="IMS_V1Model.Buyer" />
+          <EntitySet Name="CategoryAttributes" EntityType="IMS_V1Model.CategoryAttribute" />
+          <EntitySet Name="CategoryClasses" EntityType="IMS_V1Model.CategoryClass" />
+          <EntitySet Name="FFLTypes" EntityType="IMS_V1Model.FFLType" />
+          <EntitySet Name="FineLineClasses" EntityType="IMS_V1Model.FineLineClass" />
+          <EntitySet Name="Freight_Lookup" EntityType="IMS_V1Model.Freight_Lookup" />
+          <EntitySet Name="ItemAttributes" EntityType="IMS_V1Model.ItemAttribute" />
+          <EntitySet Name="Items" EntityType="IMS_V1Model.Item" />
+          <EntitySet Name="ItemWareHouses" EntityType="IMS_V1Model.ItemWareHous" />
+          <EntitySet Name="SubClasses" EntityType="IMS_V1Model.SubClass" />
+          <EntitySet Name="UM_Lookup" EntityType="IMS_V1Model.UM_Lookup" />
+          <EntitySet Name="Users" EntityType="IMS_V1Model.User" />
+          <EntitySet Name="UserTypes" EntityType="IMS_V1Model.UserType" />
+          
+          <EntitySet Name="WebCodes" EntityType="IMS_V1Model.WebCode" />
+          <EntitySet Name="zManufacturersLogoes" EntityType="IMS_V1Model.zManufacturersLogo" />
+          <EntitySet Name="zManufacturersLogo_History" EntityType="IMS_V1Model.zManufacturersLogo_History" />
+          <AssociationSet Name="FK_Items_ABC_Lookup" Association="IMS_V1Model.FK_Items_ABC_Lookup">
+            <End Role="ABC_Lookup" EntitySet="ABC_Lookup" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attribute_Lookup_AttributeType" Association="IMS_V1Model.FK_Attribute_Lookup_AttributeType">
+            <End Role="AttributeType" EntitySet="AttributeTypes" />
+            <End Role="Attribute_Lookup" EntitySet="Attribute_Lookup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemAttributes_Attribute_Lookup" Association="IMS_V1Model.FK_ItemAttributes_Attribute_Lookup">
+            <End Role="Attribute_Lookup" EntitySet="Attribute_Lookup" />
+            <End Role="ItemAttribute" EntitySet="ItemAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryAttributes_AttributeType" Association="IMS_V1Model.FK_CategoryAttributes_AttributeType">
+            <End Role="AttributeType" EntitySet="AttributeTypes" />
+            <End Role="CategoryAttribute" EntitySet="CategoryAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryAttributes_CategoryClass" Association="IMS_V1Model.FK_CategoryAttributes_CategoryClass">
+            <End Role="CategoryClass" EntitySet="CategoryClasses" />
+            <End Role="CategoryAttribute" EntitySet="CategoryAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_CategoryClass" Association="IMS_V1Model.FK_Items_CategoryClass">
+            <End Role="CategoryClass" EntitySet="CategoryClasses" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_FFLType" Association="IMS_V1Model.FK_Items_FFLType">
+            <End Role="FFLType" EntitySet="FFLTypes" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_FineLineClass" Association="IMS_V1Model.FK_Items_FineLineClass">
+            <End Role="FineLineClass" EntitySet="FineLineClasses" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Freight_Lookup" Association="IMS_V1Model.FK_Items_Freight_Lookup">
+            <End Role="Freight_Lookup" EntitySet="Freight_Lookup" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemAttributes_Items" Association="IMS_V1Model.FK_ItemAttributes_Items">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ItemAttribute" EntitySet="ItemAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_SubClass" Association="IMS_V1Model.FK_Items_SubClass">
+            <End Role="SubClass" EntitySet="SubClasses" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_UM_Lookup" Association="IMS_V1Model.FK_Items_UM_Lookup">
+            <End Role="UM_Lookup" EntitySet="UM_Lookup" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_WebCodes" Association="IMS_V1Model.FK_Items_WebCodes">
+            <End Role="WebCode" EntitySet="WebCodes" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_zManufacturersLogo" Association="IMS_V1Model.FK_Items_zManufacturersLogo">
+            <End Role="zManufacturersLogo" EntitySet="zManufacturersLogoes" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemWareHouses_Items" Association="IMS_V1Model.FK_ItemWareHouses_Items">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ItemWareHous" EntitySet="ItemWareHouses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserTypes" Association="IMS_V1Model.FK_Users_UserTypes">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_zManufacturersLogo_History_zManufacturersLogo" Association="IMS_V1Model.FK_zManufacturersLogo_History_zManufacturersLogo">
+            <End Role="zManufacturersLogo" EntitySet="zManufacturersLogoes" />
+            <End Role="zManufacturersLogo_History" EntitySet="zManufacturersLogo_History" />
+          </AssociationSet>
+          <FunctionImport Name="GetNewItem" ReturnType="Collection(Int32)">
+            <Parameter Name="ItemId" Mode="In" Type="Int32" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRemainingAttributeTypes" ReturnType="Collection(IMS_V1Model.GetRemainingAttributeTypes_Result)">
+          <Parameter Name="ItemId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewItemDefaultAttributes">
+            <Parameter Name="Item_Id" Mode="In" Type="Int32" />
+            <Parameter Name="CategoryClass_Id" Mode="In" Type="Int32" />
+            <Parameter Name="User_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateItemDescription">
+            <Parameter Name="Item_Id" Mode="In" Type="Int32" />
+            <Parameter Name="NewDescription" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateItemRFA_FT" ReturnType="Collection(IMS_V1Model.UpdateItemRFA_FT_Result)">
+            <Parameter Name="Item_Id" Mode="In" Type="Int32" />
+            <Parameter Name="ReadyForApproval" Mode="In" Type="String" />
+            <Parameter Name="FastTrack" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteItemAttributes">
+          <Parameter Name="Item_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="PrintedItemsForAPlus" EntityType="IMS_V1Model.PrintedItemsForAPlu" />
+          <AssociationSet Name="FK_PrintedItemsForAPlus_Items" Association="IMS_V1Model.FK_PrintedItemsForAPlus_Items">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="PrintedItemsForAPlu" EntitySet="PrintedItemsForAPlus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryAttributes_FineLineClass" Association="IMS_V1Model.FK_CategoryAttributes_FineLineClass">
+            <End Role="FineLineClass" EntitySet="FineLineClasses" />
+            <End Role="CategoryAttribute" EntitySet="CategoryAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryAttributes_SubClass" Association="IMS_V1Model.FK_CategoryAttributes_SubClass">
+            <End Role="SubClass" EntitySet="SubClasses" />
+            <End Role="CategoryAttribute" EntitySet="CategoryAttributes" />
+          </AssociationSet>
+          <EntitySet Name="ItemDescriptionOrders" EntityType="IMS_V1Model.ItemDescriptionOrder" />
+          <AssociationSet Name="FK_ItemDescriptionOrder_AttributeType" Association="IMS_V1Model.FK_ItemDescriptionOrder_AttributeType">
+            <End Role="AttributeType" EntitySet="AttributeTypes" />
+            <End Role="ItemDescriptionOrder" EntitySet="ItemDescriptionOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemDescriptionOrder_CategoryClass" Association="IMS_V1Model.FK_ItemDescriptionOrder_CategoryClass">
+            <End Role="CategoryClass" EntitySet="CategoryClasses" />
+            <End Role="ItemDescriptionOrder" EntitySet="ItemDescriptionOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemDescriptionOrder_FineLineClass" Association="IMS_V1Model.FK_ItemDescriptionOrder_FineLineClass">
+            <End Role="FineLineClass" EntitySet="FineLineClasses" />
+            <End Role="ItemDescriptionOrder" EntitySet="ItemDescriptionOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemDescriptionOrder_FineLineClass1" Association="IMS_V1Model.FK_ItemDescriptionOrder_FineLineClass1">
+            <End Role="FineLineClass" EntitySet="FineLineClasses" />
+            <End Role="ItemDescriptionOrder" EntitySet="ItemDescriptionOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemDescriptionOrder_SubClass" Association="IMS_V1Model.FK_ItemDescriptionOrder_SubClass">
+            <End Role="SubClass" EntitySet="SubClasses" />
+            <End Role="ItemDescriptionOrder" EntitySet="ItemDescriptionOrders" />
+          </AssociationSet>
+          <EntitySet Name="APlusItems" EntityType="IMS_V1Model.APlusItem" />
+          <FunctionImport Name="APlusEntryItem">
+            <Parameter Name="ItemId" Mode="In" Type="Int32" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ItemTextAttachments" EntityType="IMS_V1Model.ItemTextAttachment" />
+          <AssociationSet Name="FK_ItemTextAttachments" Association="IMS_V1Model.FK_ItemTextAttachments">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ItemTextAttachment" EntitySet="ItemTextAttachments" />
+          </AssociationSet>
+          <FunctionImport Name="AddLongDescription">
+            <Parameter Name="ItemId" Mode="In" Type="Int32" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetExistingLongDescriptions" ReturnType="Collection(IMS_V1Model.GetExistingLongDescriptions_Result)">
+          <Parameter Name="ItemId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateLongDescription">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetLongDescription" ReturnType="Collection(IMS_V1Model.GetLongDescription_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="APlusItemsPrinted">
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetExistingWareHousesList" ReturnType="Collection(IMS_V1Model.GetExistingWareHousesList_Result)">
+          <Parameter Name="Item_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="WareHouse_Lookup" EntityType="IMS_V1Model.WareHouse_Lookup" />
+          <AssociationSet Name="FK_ItemWareHouses_WareHouse_Lookup" Association="IMS_V1Model.FK_ItemWareHouses_WareHouse_Lookup">
+            <End Role="WareHouse_Lookup" EntitySet="WareHouse_Lookup" />
+            <End Role="ItemWareHous" EntitySet="ItemWareHouses" />
+          </AssociationSet>
+          <FunctionImport Name="CheckForAPlusImportItems" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="APlusImport_ITBAL" ReturnType="Collection(IMS_V1Model.APlusImport_ITBAL_Result)">
+          </FunctionImport>
+          <FunctionImport Name="APlusImport_ITMST" ReturnType="Collection(IMS_V1Model.APlusImport_ITMST_Result)">
+          </FunctionImport>
+          <FunctionImport Name="APlusImport_ZADITM" ReturnType="Collection(IMS_V1Model.APlusImport_ZADITM_Result)">
+          </FunctionImport>
+          <FunctionImport Name="APlusImportItemsKeyCode" ReturnType="Collection(String)" />
+          <FunctionImport Name="CheckForMarineAPlusImportItems" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="GetMarineAPlusImportKeyCode" ReturnType="Collection(IMS_V1Model.GetMarineAPlusImportKeyCode_Result)" />
+          <FunctionImport Name="TurnRunningFlagOff" />
+          <FunctionImport Name="TurnRunningFlagOn" />
+          <FunctionImport Name="CheckForAPlusImportRunning" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="GetAPlusImportKeyCode" ReturnType="Collection(IMS_V1Model.GetAPlusImportKeyCode_Result)" />
+          <FunctionImport Name="UpdateSFItemDescription">
+            <Parameter Name="Item_Id" Mode="In" Type="Int32" />
+            <Parameter Name="NewSFDescription" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddItemToAPlusImportItem">
+          <Parameter Name="ItemId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="VendorTradeName">
+          <Key>
+            <PropertyRef Name="VT_Id" />
+          </Key>
+          <Property Name="VT_Id" Type="Int32" Nullable="false" />
+          <Property Name="VendorNumber" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="VendorAbbreviation" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="TradeName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ABC_Lookup">
+          <Key>
+            <PropertyRef Name="ABC_Id" />
+          </Key>
+          <Property Type="Int32" Name="ABC_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ABC_Code" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="ABC_Description" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <NavigationProperty Name="Items" Relationship="IMS_V1Model.FK_Items_ABC_Lookup" FromRole="ABC_Lookup" ToRole="Item" />
+          <Property Type="Boolean" Name="Enabled" />
+        </EntityType>
+        <EntityType Name="Attribute_Lookup">
+          <Key>
+            <PropertyRef Name="AttributeLookup_Id" />
+          </Key>
+          <Property Type="Int32" Name="AttributeLookup_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AttributeType_Id" Nullable="false" />
+          <Property Type="String" Name="WebsiteAttributeValue" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="APlusAttributeValue" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DefaultActualValue" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <NavigationProperty Name="AttributeType" Relationship="IMS_V1Model.FK_Attribute_Lookup_AttributeType" FromRole="Attribute_Lookup" ToRole="AttributeType" />
+          <NavigationProperty Name="ItemAttributes" Relationship="IMS_V1Model.FK_ItemAttributes_Attribute_Lookup" FromRole="Attribute_Lookup" ToRole="ItemAttribute" />
+          <Property Type="Boolean" Name="Active" />
+        </EntityType>
+        <EntityType Name="AttributeType">
+          <Key>
+            <PropertyRef Name="AttributeType_Id" />
+          </Key>
+          <Property Type="Int32" Name="AttributeType_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="AttributeType1" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Range" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <Property Type="Boolean" Name="Enabled" />
+          <NavigationProperty Name="Attribute_Lookup" Relationship="IMS_V1Model.FK_Attribute_Lookup_AttributeType" FromRole="AttributeType" ToRole="Attribute_Lookup" />
+          <NavigationProperty Name="CategoryAttributes" Relationship="IMS_V1Model.FK_CategoryAttributes_AttributeType" FromRole="AttributeType" ToRole="CategoryAttribute" />
+          <NavigationProperty Name="ItemDescriptionOrders" Relationship="IMS_V1Model.FK_ItemDescriptionOrder_AttributeType" FromRole="AttributeType" ToRole="ItemDescriptionOrder" />
+        </EntityType>
+        <EntityType Name="Buyer">
+          <Key>
+            <PropertyRef Name="Buyer_Id" />
+          </Key>
+          <Property Type="Int32" Name="Buyer_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="BuyerNumber" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="BuyerName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ModfiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+        </EntityType>
+        <EntityType Name="CategoryAttribute">
+          <Key>
+            <PropertyRef Name="CategoryAttribute_Id" />
+          </Key>
+          <Property Type="Int32" Name="CategoryAttribute_Id" Nullable="false" />
+          <Property Type="Int32" Name="CategoryClass_Id" Nullable="false" />
+          <Property Type="Int32" Name="SubClassCode_Id" />
+          <Property Type="Int32" Name="FineLineCode_Id" />
+          <Property Type="Int32" Name="AttributeType_Id" Nullable="false" />
+          <Property Type="Boolean" Name="Required" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <NavigationProperty Name="AttributeType" Relationship="IMS_V1Model.FK_CategoryAttributes_AttributeType" FromRole="CategoryAttribute" ToRole="AttributeType" />
+          <NavigationProperty Name="CategoryClass" Relationship="IMS_V1Model.FK_CategoryAttributes_CategoryClass" FromRole="CategoryAttribute" ToRole="CategoryClass" />
+          <NavigationProperty Name="FineLineClass" Relationship="IMS_V1Model.FK_CategoryAttributes_FineLineClass" FromRole="CategoryAttribute" ToRole="FineLineClass" />
+          <NavigationProperty Name="SubClass" Relationship="IMS_V1Model.FK_CategoryAttributes_SubClass" FromRole="CategoryAttribute" ToRole="SubClass" />
+        </EntityType>
+        <EntityType Name="CategoryClass">
+          <Key>
+            <PropertyRef Name="CategoryClass_Id" />
+          </Key>
+          <Property Type="Int32" Name="CategoryClass_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Category_Id" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CategoryName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CategoryAttributes" Relationship="IMS_V1Model.FK_CategoryAttributes_CategoryClass" FromRole="CategoryClass" ToRole="CategoryAttribute" />
+          <NavigationProperty Name="Items" Relationship="IMS_V1Model.FK_Items_CategoryClass" FromRole="CategoryClass" ToRole="Item" />
+          <NavigationProperty Name="ItemDescriptionOrders" Relationship="IMS_V1Model.FK_ItemDescriptionOrder_CategoryClass" FromRole="CategoryClass" ToRole="ItemDescriptionOrder" />
+        </EntityType>
+        <EntityType Name="FFLType">
+          <Key>
+            <PropertyRef Name="FFLType_Id" />
+          </Key>
+          <Property Type="Int32" Name="FFLType_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FFLType_Code" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FFLType_Description" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <NavigationProperty Name="Items" Relationship="IMS_V1Model.FK_Items_FFLType" FromRole="FFLType" ToRole="Item" />
+          <Property Type="Boolean" Name="Enabled" />
+        </EntityType>
+        <EntityType Name="FineLineClass">
+          <Key>
+            <PropertyRef Name="FineLineCode_Id" />
+          </Key>
+          <Property Type="Int32" Name="FineLineCode_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Category_Id" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SubClass_id" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FineLine_Id" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FinelineName" MaxLength="60" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Items" Relationship="IMS_V1Model.FK_Items_FineLineClass" FromRole="FineLineClass" ToRole="Item" />
+          <NavigationProperty Name="CategoryAttributes" Relationship="IMS_V1Model.FK_CategoryAttributes_FineLineClass" FromRole="FineLineClass" ToRole="CategoryAttribute" />
+          <NavigationProperty Name="ItemDescriptionOrders" Relationship="IMS_V1Model.FK_ItemDescriptionOrder_FineLineClass" FromRole="FineLineClass" ToRole="ItemDescriptionOrder" />
+          <NavigationProperty Name="ItemDescriptionOrders1" Relationship="IMS_V1Model.FK_ItemDescriptionOrder_FineLineClass1" FromRole="FineLineClass" ToRole="ItemDescriptionOrder" />
+        </EntityType>
+        <EntityType Name="Freight_Lookup">
+          <Key>
+            <PropertyRef Name="Freight_Id" />
+          </Key>
+          <Property Type="Int32" Name="Freight_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Freight_APlusClass" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Freight_DotClass" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Freight_ItemClass" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Freight_Commodity" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Freight_NMFCItemNumber" />
+          <Property Type="String" Name="Freight_Hazard" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <NavigationProperty Name="Items" Relationship="IMS_V1Model.FK_Items_Freight_Lookup" FromRole="Freight_Lookup" ToRole="Item" />
+          <Property Type="Boolean" Name="Enabled" />
+        </EntityType>
+        <EntityType Name="ItemAttribute">
+          <Key>
+            <PropertyRef Name="ItemAttribute_Id" />
+          </Key>
+          <Property Type="Int32" Name="ItemAttribute_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Item_Id" />
+          <Property Type="Int32" Name="AttributeLookup_Id" />
+          <Property Type="String" Name="ActualAttributeValue" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="AddedBy" />
+          <Property Type="DateTime" Name="AddedDate" Precision="3" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <NavigationProperty Name="Attribute_Lookup" Relationship="IMS_V1Model.FK_ItemAttributes_Attribute_Lookup" FromRole="ItemAttribute" ToRole="Attribute_Lookup" />
+          <NavigationProperty Name="Item" Relationship="IMS_V1Model.FK_ItemAttributes_Items" FromRole="ItemAttribute" ToRole="Item" />
+          <Property Type="DateTime" Name="PrintedDate" Precision="3" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Item_id" />
+          </Key>
+          <Property Type="Int32" Name="Item_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Itm_Num" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ManufacturerLogo_Id" />
+          <Property Type="String" Name="Item_Description" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="APlusDescription1" MaxLength="31" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="APlusDescription2" MaxLength="31" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MFG_Number" MaxLength="27" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UM_Id" />
+          <Property Type="Decimal" Name="MSRP" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Level1" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Level2" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Level3" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="JSCLevel5" Precision="19" Scale="4" />
+          <Property Type="String" Name="Qty_Break" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Qty_BreakPrice" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="CategoryClass_Id" Nullable="false" />
+          <Property Type="Int32" Name="SubClassCode_Id" />
+          <Property Type="Int32" Name="FineLineCode_Id" />
+          <Property Type="Int32" Name="CatWebCode_Id" />
+          <Property Type="Int32" Name="Freight_Id" />
+          <Property Type="String" Name="Plan_YN" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ABC_Id" />
+          <Property Type="String" Name="DS" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MIN" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="VICost" Precision="19" Scale="4" />
+          <Property Type="String" Name="Haz" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UPC" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Buyer" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Exclusive" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Type="String" Name="Allocated" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Type="String" Name="DropShip" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Type="Int32" Name="CreatedBy" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+          <Property Type="String" Name="Approved" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Type="Int32" Name="ApprovedBy" />
+          <Property Type="DateTime" Name="ApprovedDate" Precision="3" />
+          <Property Type="String" Name="ReadyForApproval" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <Property Type="String" Name="FastTrack" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Type="Int32" Name="FastTrackBy" />
+          <Property Type="DateTime" Name="FastTrackDate" Precision="3" />
+          <Property Type="Int32" Name="FFLType_Id" />
+          <Property Type="String" Name="FFLCaliber" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FFLModel" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FFLMFGName" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FFLMFGImportName" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PreventFromWeb" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Type="String" Name="SpecialOrder" MaxLength="1" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="ABC_Lookup" Relationship="IMS_V1Model.FK_Items_ABC_Lookup" FromRole="Item" ToRole="ABC_Lookup" />
+          <NavigationProperty Name="CategoryClass" Relationship="IMS_V1Model.FK_Items_CategoryClass" FromRole="Item" ToRole="CategoryClass" />
+          <NavigationProperty Name="FFLType" Relationship="IMS_V1Model.FK_Items_FFLType" FromRole="Item" ToRole="FFLType" />
+          <NavigationProperty Name="FineLineClass" Relationship="IMS_V1Model.FK_Items_FineLineClass" FromRole="Item" ToRole="FineLineClass" />
+          <NavigationProperty Name="Freight_Lookup" Relationship="IMS_V1Model.FK_Items_Freight_Lookup" FromRole="Item" ToRole="Freight_Lookup" />
+          <NavigationProperty Name="ItemAttributes" Relationship="IMS_V1Model.FK_ItemAttributes_Items" FromRole="Item" ToRole="ItemAttribute" />
+          <NavigationProperty Name="SubClass" Relationship="IMS_V1Model.FK_Items_SubClass" FromRole="Item" ToRole="SubClass" />
+          <NavigationProperty Name="UM_Lookup" Relationship="IMS_V1Model.FK_Items_UM_Lookup" FromRole="Item" ToRole="UM_Lookup" />
+          <NavigationProperty Name="WebCode" Relationship="IMS_V1Model.FK_Items_WebCodes" FromRole="Item" ToRole="WebCode" />
+          <NavigationProperty Name="zManufacturersLogo" Relationship="IMS_V1Model.FK_Items_zManufacturersLogo" FromRole="Item" ToRole="zManufacturersLogo" />
+          <NavigationProperty Name="ItemWareHouses" Relationship="IMS_V1Model.FK_ItemWareHouses_Items" FromRole="Item" ToRole="ItemWareHous" />
+          <Property Type="String" Name="EDIUPC" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="STD" />
+          <Property Type="String" Name="FFLGauge" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FFLLock" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FFLLockDate" Precision="3" />
+          <Property Type="Decimal" Name="MinAdvertisePrice" Precision="19" Scale="4" />
+          <NavigationProperty Name="PrintedItemsForAPlus" Relationship="IMS_V1Model.FK_PrintedItemsForAPlus_Items" FromRole="Item" ToRole="PrintedItemsForAPlu" />
+          <Property Type="String" Name="WholeSaleMTP" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Printed" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="AssignedBuyer_Id" />
+          <NavigationProperty Name="ItemTextAttachments" Relationship="IMS_V1Model.FK_ItemTextAttachments" FromRole="Item" ToRole="ItemTextAttachment" />
+          <Property Type="Decimal" Name="Level4" Precision="19" Scale="4" />
+          <Property Type="String" Name="SF_Item_Description" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MinAdvertisePriceFlag" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Company99" MaxLength="2" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ItemWareHous">
+          <Key>
+            <PropertyRef Name="ItemWareHouse_Id" />
+          </Key>
+          <Property Type="Int32" Name="ItemWareHouse_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Item_id" Nullable="false" />
+          <Property Type="Int32" Name="WareHouse_id" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="IMS_V1Model.FK_ItemWareHouses_Items" FromRole="ItemWareHous" ToRole="Item" />
+          <NavigationProperty Name="WareHouse_Lookup" Relationship="IMS_V1Model.FK_ItemWareHouses_WareHouse_Lookup" FromRole="ItemWareHous" ToRole="WareHouse_Lookup" />
+        </EntityType>
+        <EntityType Name="SubClass">
+          <Key>
+            <PropertyRef Name="SubClassCode_Id" />
+          </Key>
+          <Property Type="Int32" Name="SubClassCode_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Category_Id" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SubClass_Id" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SubClassName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Items" Relationship="IMS_V1Model.FK_Items_SubClass" FromRole="SubClass" ToRole="Item" />
+          <NavigationProperty Name="CategoryAttributes" Relationship="IMS_V1Model.FK_CategoryAttributes_SubClass" FromRole="SubClass" ToRole="CategoryAttribute" />
+          <NavigationProperty Name="ItemDescriptionOrders" Relationship="IMS_V1Model.FK_ItemDescriptionOrder_SubClass" FromRole="SubClass" ToRole="ItemDescriptionOrder" />
+        </EntityType>
+        <EntityType Name="UM_Lookup">
+          <Key>
+            <PropertyRef Name="UM_Id" />
+          </Key>
+          <Property Type="Int32" Name="UM_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UM_Code" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="UM_Description" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <NavigationProperty Name="Items" Relationship="IMS_V1Model.FK_Items_UM_Lookup" FromRole="UM_Lookup" ToRole="Item" />
+          <Property Type="Boolean" Name="Enabled" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Type="Int32" Name="User_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UserType_Id" />
+          <Property Type="Boolean" Name="ResetPassword" />
+          <Property Type="String" Name="EmailAddress" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FirstName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <Property Type="Boolean" Name="Active" />
+          <NavigationProperty Name="UserType" Relationship="IMS_V1Model.FK_Users_UserTypes" FromRole="User" ToRole="UserType" />
+          <Property Type="String" Name="Buyer_Number" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CreateAPlusImport_MarineShooting" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserType_id" />
+          </Key>
+          <Property Type="Int32" Name="UserType_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserTypeDescription" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="IMS_V1Model.FK_Users_UserTypes" FromRole="UserType" ToRole="User" />
+          <Property Type="Boolean" Name="Enabled" />
+        </EntityType>
+        <EntityType Name="WebCode">
+          <Key>
+            <PropertyRef Name="CatWebCode_Id" />
+          </Key>
+          <Property Type="Int32" Name="CatWebCode_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="WebCode1" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="WebCodeDescription" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <NavigationProperty Name="Items" Relationship="IMS_V1Model.FK_Items_WebCodes" FromRole="WebCode" ToRole="Item" />
+          <Property Type="Boolean" Name="Enabled" />
+        </EntityType>
+        <EntityType Name="zManufacturersLogo">
+          <Key>
+            <PropertyRef Name="ManufacturerLogo_Id" />
+          </Key>
+          <Property Type="Int32" Name="ManufacturerLogo_Id" Nullable="false" />
+          <Property Type="String" Name="VendorNumber" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="APlusVendorName" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LogoName" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WebVendorName" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Abbrev" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="URL" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Buyer_Id" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <Property Type="Boolean" Name="Enabled" />
+          <NavigationProperty Name="Items" Relationship="IMS_V1Model.FK_Items_zManufacturersLogo" FromRole="zManufacturersLogo" ToRole="Item" />
+          <NavigationProperty Name="zManufacturersLogo_History" Relationship="IMS_V1Model.FK_zManufacturersLogo_History_zManufacturersLogo" FromRole="zManufacturersLogo" ToRole="zManufacturersLogo_History" />
+        </EntityType>
+        <EntityType Name="zManufacturersLogo_History">
+          <Key>
+            <PropertyRef Name="ManufacturerLogoHistory_Id" />
+          </Key>
+          <Property Type="Int32" Name="ManufacturerLogoHistory_Id" Nullable="false" />
+          <Property Type="Int32" Name="ManufacturerLogo_Id" Nullable="false" />
+          <Property Type="String" Name="VendorNumber" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="APlusVendorName_Original" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LogoName_Original" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WebVendorName_Original" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Abbrev_Original" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="APlusVendorName_New" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LogoName_New" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WebVendorName_New" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Abbrev_New" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ChangeDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="URL_Original" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="URL_New" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="zManufacturersLogo" Relationship="IMS_V1Model.FK_zManufacturersLogo_History_zManufacturersLogo" FromRole="zManufacturersLogo_History" ToRole="zManufacturersLogo" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Items_ABC_Lookup">
+          <End Type="IMS_V1Model.ABC_Lookup" Role="ABC_Lookup" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABC_Lookup">
+              <PropertyRef Name="ABC_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ABC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attribute_Lookup_AttributeType">
+          <End Type="IMS_V1Model.AttributeType" Role="AttributeType" Multiplicity="1" />
+          <End Type="IMS_V1Model.Attribute_Lookup" Role="Attribute_Lookup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeType">
+              <PropertyRef Name="AttributeType_Id" />
+            </Principal>
+            <Dependent Role="Attribute_Lookup">
+              <PropertyRef Name="AttributeType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemAttributes_Attribute_Lookup">
+          <End Type="IMS_V1Model.Attribute_Lookup" Role="Attribute_Lookup" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.ItemAttribute" Role="ItemAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attribute_Lookup">
+              <PropertyRef Name="AttributeLookup_Id" />
+            </Principal>
+            <Dependent Role="ItemAttribute">
+              <PropertyRef Name="AttributeLookup_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryAttributes_AttributeType">
+          <End Type="IMS_V1Model.AttributeType" Role="AttributeType" Multiplicity="1" />
+          <End Type="IMS_V1Model.CategoryAttribute" Role="CategoryAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeType">
+              <PropertyRef Name="AttributeType_Id" />
+            </Principal>
+            <Dependent Role="CategoryAttribute">
+              <PropertyRef Name="AttributeType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryAttributes_CategoryClass">
+          <End Type="IMS_V1Model.CategoryClass" Role="CategoryClass" Multiplicity="1" />
+          <End Type="IMS_V1Model.CategoryAttribute" Role="CategoryAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryClass">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Principal>
+            <Dependent Role="CategoryAttribute">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_CategoryClass">
+          <End Type="IMS_V1Model.CategoryClass" Role="CategoryClass" Multiplicity="1" />
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryClass">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_FFLType">
+          <End Type="IMS_V1Model.FFLType" Role="FFLType" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FFLType">
+              <PropertyRef Name="FFLType_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="FFLType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_FineLineClass">
+          <End Type="IMS_V1Model.FineLineClass" Role="FineLineClass" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FineLineClass">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Freight_Lookup">
+          <End Type="IMS_V1Model.Freight_Lookup" Role="Freight_Lookup" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Freight_Lookup">
+              <PropertyRef Name="Freight_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Freight_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemAttributes_Items">
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.ItemAttribute" Role="ItemAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Item_id" />
+            </Principal>
+            <Dependent Role="ItemAttribute">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_SubClass">
+          <End Type="IMS_V1Model.SubClass" Role="SubClass" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubClass">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_UM_Lookup">
+          <End Type="IMS_V1Model.UM_Lookup" Role="UM_Lookup" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UM_Lookup">
+              <PropertyRef Name="UM_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="UM_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_WebCodes">
+          <End Type="IMS_V1Model.WebCode" Role="WebCode" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebCode">
+              <PropertyRef Name="CatWebCode_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="CatWebCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_zManufacturersLogo">
+          <End Type="IMS_V1Model.zManufacturersLogo" Role="zManufacturersLogo" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zManufacturersLogo">
+              <PropertyRef Name="ManufacturerLogo_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ManufacturerLogo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemWareHouses_Items">
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="1" />
+          <End Type="IMS_V1Model.ItemWareHous" Role="ItemWareHous" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Item_id" />
+            </Principal>
+            <Dependent Role="ItemWareHous">
+              <PropertyRef Name="Item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserTypes">
+          <End Type="IMS_V1Model.UserType" Role="UserType" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserType_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_zManufacturersLogo_History_zManufacturersLogo">
+          <End Type="IMS_V1Model.zManufacturersLogo" Role="zManufacturersLogo" Multiplicity="1" />
+          <End Type="IMS_V1Model.zManufacturersLogo_History" Role="zManufacturersLogo_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zManufacturersLogo">
+              <PropertyRef Name="ManufacturerLogo_Id" />
+            </Principal>
+            <Dependent Role="zManufacturersLogo_History">
+              <PropertyRef Name="ManufacturerLogo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetRemainingAttributeTypes_Result">
+          <Property Type="String" Name="AttributeType" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Required" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UpdateItemRFA_FT_Result">
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+          <Property Type="Int32" Name="Column2" Nullable="true" />
+          <Property Type="Int32" Name="Column3" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="PrintedItemsForAPlu">
+          <Key>
+            <PropertyRef Name="Printed_Id" />
+          </Key>
+          <Property Type="Int32" Name="Printed_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Item_Id" Nullable="false" />
+          <Property Type="DateTime" Name="DatePrinted" Precision="3" />
+          <NavigationProperty Name="Item" Relationship="IMS_V1Model.FK_PrintedItemsForAPlus_Items" FromRole="PrintedItemsForAPlu" ToRole="Item" />
+          <Property Type="Int32" Name="PrintedBy" />
+        </EntityType>
+        <Association Name="FK_PrintedItemsForAPlus_Items">
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="1" />
+          <End Type="IMS_V1Model.PrintedItemsForAPlu" Role="PrintedItemsForAPlu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Item_id" />
+            </Principal>
+            <Dependent Role="PrintedItemsForAPlu">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryAttributes_FineLineClass">
+          <End Type="IMS_V1Model.FineLineClass" Role="FineLineClass" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.CategoryAttribute" Role="CategoryAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FineLineClass">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Principal>
+            <Dependent Role="CategoryAttribute">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryAttributes_SubClass">
+          <End Type="IMS_V1Model.SubClass" Role="SubClass" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.CategoryAttribute" Role="CategoryAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubClass">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Principal>
+            <Dependent Role="CategoryAttribute">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ItemDescriptionOrder">
+          <Key>
+            <PropertyRef Name="ItemDescriptionOrder_Id" />
+          </Key>
+          <Property Type="Int32" Name="ItemDescriptionOrder_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="DescriptionField" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CategoryClass_Id" />
+          <Property Type="Int32" Name="SubClassCode_Id" />
+          <Property Type="Int32" Name="FineLineCode_Id" />
+          <Property Type="Int32" Name="AttributeType_Id" />
+          <Property Type="String" Name="SystemType" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="OrderNumber" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <NavigationProperty Name="AttributeType" Relationship="IMS_V1Model.FK_ItemDescriptionOrder_AttributeType" FromRole="ItemDescriptionOrder" ToRole="AttributeType" />
+          <NavigationProperty Name="CategoryClass" Relationship="IMS_V1Model.FK_ItemDescriptionOrder_CategoryClass" FromRole="ItemDescriptionOrder" ToRole="CategoryClass" />
+          <NavigationProperty Name="FineLineClass" Relationship="IMS_V1Model.FK_ItemDescriptionOrder_FineLineClass" FromRole="ItemDescriptionOrder" ToRole="FineLineClass" />
+          <NavigationProperty Name="FineLineClass1" Relationship="IMS_V1Model.FK_ItemDescriptionOrder_FineLineClass1" FromRole="ItemDescriptionOrder" ToRole="FineLineClass" />
+          <NavigationProperty Name="SubClass" Relationship="IMS_V1Model.FK_ItemDescriptionOrder_SubClass" FromRole="ItemDescriptionOrder" ToRole="SubClass" />
+        </EntityType>
+        <Association Name="FK_ItemDescriptionOrder_AttributeType">
+          <End Type="IMS_V1Model.AttributeType" Role="AttributeType" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.ItemDescriptionOrder" Role="ItemDescriptionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeType">
+              <PropertyRef Name="AttributeType_Id" />
+            </Principal>
+            <Dependent Role="ItemDescriptionOrder">
+              <PropertyRef Name="AttributeType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemDescriptionOrder_CategoryClass">
+          <End Type="IMS_V1Model.CategoryClass" Role="CategoryClass" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.ItemDescriptionOrder" Role="ItemDescriptionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryClass">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Principal>
+            <Dependent Role="ItemDescriptionOrder">
+              <PropertyRef Name="CategoryClass_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemDescriptionOrder_FineLineClass">
+          <End Type="IMS_V1Model.FineLineClass" Role="FineLineClass" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.ItemDescriptionOrder" Role="ItemDescriptionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FineLineClass">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Principal>
+            <Dependent Role="ItemDescriptionOrder">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemDescriptionOrder_FineLineClass1">
+          <End Type="IMS_V1Model.FineLineClass" Role="FineLineClass" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.ItemDescriptionOrder" Role="ItemDescriptionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FineLineClass">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Principal>
+            <Dependent Role="ItemDescriptionOrder">
+              <PropertyRef Name="FineLineCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemDescriptionOrder_SubClass">
+          <End Type="IMS_V1Model.SubClass" Role="SubClass" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.ItemDescriptionOrder" Role="ItemDescriptionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubClass">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Principal>
+            <Dependent Role="ItemDescriptionOrder">
+              <PropertyRef Name="SubClassCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="APlusItem">
+          <Key>
+            <PropertyRef Name="APlusItem_Id" />
+          </Key>
+          <Property Type="Int32" Name="APlusItem_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Itm_Num" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Item_Desc1" MaxLength="31" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Item_Desc2" MaxLength="31" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="VendorNumber" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MFG_Number" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UPC" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ItemTextAttachment">
+          <Key>
+            <PropertyRef Name="ItemTextAttachment_Id" />
+          </Key>
+          <Property Type="Int32" Name="ItemTextAttachment_Id" Nullable="false" />
+          <Property Type="Int32" Name="Item_id" />
+          <Property Type="String" Name="Content_Key" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="Text" MaxLength="Max" FixedLength="false" />
+          <Property Type="Int32" Name="AddedBy" />
+          <Property Type="DateTime" Name="AddedDate" Precision="3" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <Property Type="Int32" Name="DeletedBy" />
+          <Property Type="DateTime" Name="DeletedDate" Precision="3" />
+          <NavigationProperty Name="Item" Relationship="IMS_V1Model.FK_ItemTextAttachments" FromRole="ItemTextAttachment" ToRole="Item" />
+        </EntityType>
+        <Association Name="FK_ItemTextAttachments">
+          <End Type="IMS_V1Model.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="IMS_V1Model.ItemTextAttachment" Role="ItemTextAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Item_id" />
+            </Principal>
+            <Dependent Role="ItemTextAttachment">
+              <PropertyRef Name="Item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetExistingLongDescriptions_Result">
+          <Property Type="Int32" Name="ItemTextAttachment_Id" Nullable="false" />
+          <Property Type="Int32" Name="item_id" Nullable="true" />
+          <Property Type="String" Name="content_key" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LongDescription" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetLongDescription_Result">
+          <Property Type="Int32" Name="ItemTextAttachment_Id" Nullable="false" />
+          <Property Type="Int32" Name="item_id" Nullable="true" />
+          <Property Type="String" Name="content_key" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LongDescription" Nullable="true" />
+          <Property Type="String" Name="itm_num" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Item_Description" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        <ComplexType Name="GetExistingWareHousesList_Result">
+          <Property Type="Int32" Name="WareHouse_id" Nullable="false" />
+          <Property Type="String" Name="WareHouseName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Selected" Nullable="false" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="WareHouse_Lookup">
+          <Key>
+            <PropertyRef Name="WareHouse_id" />
+          </Key>
+          <Property Type="Int32" Name="WareHouse_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="WareHouseNumber" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WareHouseName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Active" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <Property Type="Int32" Name="ModifiedBy" />
+          <NavigationProperty Name="ItemWareHouses" Relationship="IMS_V1Model.FK_ItemWareHouses_WareHouse_Lookup" FromRole="WareHouse_Lookup" ToRole="ItemWareHous" />
+        </EntityType>
+        <Association Name="FK_ItemWareHouses_WareHouse_Lookup">
+          <End Type="IMS_V1Model.WareHouse_Lookup" Role="WareHouse_Lookup" Multiplicity="1" />
+          <End Type="IMS_V1Model.ItemWareHous" Role="ItemWareHous" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse_Lookup">
+              <PropertyRef Name="WareHouse_id" />
+            </Principal>
+            <Dependent Role="ItemWareHous">
+              <PropertyRef Name="WareHouse_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="APlusImport_ITBAL_Result">
+          <Property Type="String" Name="itm_num" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Warehouse_ID" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="FunctionCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="VendorNumber" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="PrimaryLocation" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SecondaryLocation" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CycleCountCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="PhysicalInventoryCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="StandardCost" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UserCost" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="AverageCost" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="LastCost" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="LastCostDate" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MaxOnHandQtyUM1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MaxOnHandQtyUM2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MaxOnHandQtyUM3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MinOnHandQtyUM1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MinOnHandQtyUM2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MinOnHandQtyUM3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Forecast" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="SpecialOrderCode" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="C20CharacterUserArea" Nullable="false" MaxLength="1" />
+          <Property Type="Decimal" Name="Level1" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Level2" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Level3" Nullable="true" Precision="19" />
+          <Property Type="String" Name="ListPrice4" Nullable="false" MaxLength="1" />
+          <Property Type="Decimal" Name="JSCLevel5" Nullable="true" Precision="19" />
+          <Property Type="String" Name="abc_code" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="PriceClass" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Qty_Break" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="AllowCashDiscountCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="DefaultOrderingUM" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="TimePhasedItem" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CommissionCostCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CommissionCost" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="BuyerReviewRequired" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CountryofOrigin1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CountryofOrigin2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="TaxableCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ReuseCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ItemTaxClass" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="C30CharacterUserArea" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="PointofSaleLineType" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UpdateDemandPlanning" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MinimumPutAwayQuantity" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MaximumPickQuantity" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CaseQuantityFlag" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CaseDescription" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CaseQuantity" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="OverrideWarehouseLocation" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MaximumPutAwayQuantity" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="PutAwayMessage" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="QuantityperPallet" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="LocationClassCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="OverridePOSLocation" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ForecastModel" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ServiceLevel" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ServiceLevelMaintenanceCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SafetyStockQuantity" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SafetyStockQuantityMaintenanceCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="LeadTime" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="LeadTime_MaintenanceCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="OrderingLevel" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="OrderLevelMaintenanceCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="OrderingFrequency" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="OrderFrequencyMaintenanceCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="AdditionalGrowthPercent" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="GrowthPercentMaintenanceCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MaximumBalanceMaintenanceCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="IMPOrderQuantity" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="OrderQuantityMaintenanceCode" Nullable="false" MaxLength="1" />
+		  <Property Type="String" Name="ItemContractCode" Nullable="false" MaxLength="1" />
+		  <Property Type="String" Name="PromptForPointOfSaleLineType" Nullable="false" MaxLength="1" />
+		  <Property Type="String" Name="PutAwayQuantity" Nullable="false" MaxLength="1" />
+		  <Property Type="String" Name="PalletID" Nullable="false" MaxLength="1" />
+		  <Property Type="String" Name="ItemLabelFlag" Nullable="false" MaxLength="1" />
+		  <Property Type="String" Name="MinimumBalanceMaintenanceCode" Nullable="false" MaxLength="1" />
+
+        </ComplexType>
+        <ComplexType Name="APlusImport_ITMST_Result">
+          <Property Type="String" Name="itm_num" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FunctionCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="APlusDescription1" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="APlusDescription2" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="UnitofMeasure1" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="UnitofMeasure2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UnitofMeasure3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UMConversion1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UMConversion2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="DefaultUMCode" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="PricingUM" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="PricingUMConversion" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UMSurcharge1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UMSurcharge2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UMSurcharge3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SurchargeCode1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SurchargeCode2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SurchargeCode3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UnitWeightUM1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UnitWeightUM2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UnitWeightUM3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ItemClass" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="ItemSubclass" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="PriceClass" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="QuantityBreakClass" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MfgItemNumber" Nullable="true" MaxLength="27" />
+          <Property Type="String" Name="ContainerCharge1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ContainerCharge2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ContainerCharge3" Nullable="false" MaxLength="1" />
+          <Property Type="Decimal" Name="ListPrice1" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="ListPrice2" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="ListPrice3" Nullable="true" Precision="19" />
+          <Property Type="String" Name="ListPrice4" Nullable="false" MaxLength="1" />
+          <Property Type="Decimal" Name="ListPrice5" Nullable="true" Precision="19" />
+          <Property Type="String" Name="TaxableCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ReuseCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="BackorderCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="AllowCashDiscountCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MiscCode1" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MiscCode2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MiscCode3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CompanyNumber" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="UpdateInventoryCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CatchWeightCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ItemGLCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="LocationClassCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="FederalExciseTaxAmount" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="VendorNumber" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="LocationSize1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="LocationSize2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="LocationSize3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="WHManagementCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ExpirationDateRequiredFlag" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ShowLotSerialonInvoice" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="C15CharacterUserArea" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ProductRestrictionCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MSDSDate" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ItemTaxClass" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="RebateClass" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UserField1" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="UserField2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UserField3" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="UserField4" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="UserField5" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UserField6" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="InquiryUM" Nullable="false" MaxLength="1" />
+		  <Property Type="String" Name="ItemEIDGroup" Nullable="false" MaxLength="1" />
+		  <Property Type="String" Name="ItemContractCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="BuyerItemClass" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="BuyerItemSubclass" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ItemCommitmentCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HarmonizeTariffCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UniqueLots" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="PreventFromWeb" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="StandardUsage" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="C30CharacterUserArea" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="TrackCountryofOrigin" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UM1Length" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UM1Width" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UM1Height" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UM2Length" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UM2Width" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UM2Height" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UM3Length" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UM3Width" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UM3Height" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="BoxType" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="BoxQuantityUM1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="BoxQuantityUM2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="BoxQuantityUM3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HazardousMaterialGrade" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ProperShippingName" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="PrimaryHazardClassCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="DOTNumber" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="PackageGroup" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasofIngredient1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasofIngredient2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasofIngredient3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasofIngredient4" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasofIngredient5" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasofIngredient6" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasbyWeight1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasbyWeight2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasbyWeight3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasbyWeight4" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasbyWeight5" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HAZMATCasbyWeight6" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="LimitedQuantity" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HazardousMaterialMsgCd1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HazardousMaterialMsgCd2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HazardousMaterialMsgCd3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HazardousMaterialMsgCd4" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="DOTRegulated" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ProperShippingNameLine2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ProperShippingNameLine3" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ProperShippingNameLine4" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SubsidiaryHazardClassCode1" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SubsidiaryHazardClassCode2" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="PackageType" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ReportingUM" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ProductID" Nullable="false" MaxLength="1" />
+		  <Property Type="String" Name="DiscontinuedCode" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="APlusImport_ZADITM_Result">
+          <Property Type="String" Name="Itm_num" Nullable="true" MaxLength="10" />
+          <Property Type="Decimal" Name="MSRP" Nullable="true" Precision="19" />
+          <Property Type="String" Name="FunctionCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="DropShipSpecialOrder" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="STD" Nullable="true" />
+          <Property Type="String" Name="MIN" Nullable="true" MaxLength="10" />
+          <Property Type="Decimal" Name="VICost" Nullable="true" Precision="19" />
+          <Property Type="String" Name="UPC" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FFLType_Id" Nullable="true" />
+          <Property Type="String" Name="FFLCaliber" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FFLModel" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FFLMFGName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="FFLMFGImportName" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="MinAdvertisePrice" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="GetMarineAPlusImportKeyCode_Result" >
+          <Property Type="String" Name="APlusImportKeyCode" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAPlusImportKeyCode_Result" >
+          <Property Type="String" Name="APlusImportKeyCode" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IMS_V1ModelStoreContainer" CdmEntityContainer="IMS_V1Entities">
+          <EntitySetMapping Name="VendorTradeNames">
+            <EntityTypeMapping TypeName="IMS_V1Model.VendorTradeName">
+              <MappingFragment StoreEntitySet="VendorTradeNames">
+                <ScalarProperty Name="VT_Id" ColumnName="VT_Id" />
+                <ScalarProperty Name="VendorNumber" ColumnName="VendorNumber" />
+                <ScalarProperty Name="VendorAbbreviation" ColumnName="VendorAbbreviation" />
+                <ScalarProperty Name="TradeName" ColumnName="TradeName" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddItemWareHouse" FunctionName="IMS_V1Model.Store.AddItemWareHouse" />
+          <FunctionImportMapping FunctionImportName="CheckCategoryAttribute" FunctionName="IMS_V1Model.Store.CheckCategoryAttribute" />
+          <FunctionImportMapping FunctionImportName="DeleteItemWareHouses" FunctionName="IMS_V1Model.Store.DeleteItemWareHouses" />
+          <FunctionImportMapping FunctionImportName="UpdateItemsWithItm_Num" FunctionName="IMS_V1Model.Store.UpdateItemsWithItm_Num" />
+          <FunctionImportMapping FunctionImportName="GetItemDescription" FunctionName="IMS_V1Model.Store.GetItemDescription" />
+          <EntitySetMapping Name="ABC_Lookup">
+            <EntityTypeMapping TypeName="IMS_V1Model.ABC_Lookup">
+              <MappingFragment StoreEntitySet="ABC_Lookup">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ABC_Description" ColumnName="ABC_Description" />
+                <ScalarProperty Name="ABC_Code" ColumnName="ABC_Code" />
+                <ScalarProperty Name="ABC_Id" ColumnName="ABC_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attribute_Lookup">
+            <EntityTypeMapping TypeName="IMS_V1Model.Attribute_Lookup">
+              <MappingFragment StoreEntitySet="Attribute_Lookup">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DefaultActualValue" ColumnName="DefaultActualValue" />
+                <ScalarProperty Name="APlusAttributeValue" ColumnName="APlusAttributeValue" />
+                <ScalarProperty Name="WebsiteAttributeValue" ColumnName="WebsiteAttributeValue" />
+                <ScalarProperty Name="AttributeType_Id" ColumnName="AttributeType_Id" />
+                <ScalarProperty Name="AttributeLookup_Id" ColumnName="AttributeLookup_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttributeTypes">
+            <EntityTypeMapping TypeName="IMS_V1Model.AttributeType">
+              <MappingFragment StoreEntitySet="AttributeType">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Range" ColumnName="Range" />
+                <ScalarProperty Name="AttributeType1" ColumnName="AttributeType" />
+                <ScalarProperty Name="AttributeType_Id" ColumnName="AttributeType_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buyers">
+            <EntityTypeMapping TypeName="IMS_V1Model.Buyer">
+              <MappingFragment StoreEntitySet="Buyers">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModfiedBy" ColumnName="ModfiedBy" />
+                <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+                <ScalarProperty Name="BuyerNumber" ColumnName="BuyerNumber" />
+                <ScalarProperty Name="Buyer_Id" ColumnName="Buyer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryAttributes">
+            <EntityTypeMapping TypeName="IMS_V1Model.CategoryAttribute">
+              <MappingFragment StoreEntitySet="CategoryAttributes">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Required" ColumnName="Required" />
+                <ScalarProperty Name="AttributeType_Id" ColumnName="AttributeType_Id" />
+                <ScalarProperty Name="FineLineCode_Id" ColumnName="FineLineCode_Id" />
+                <ScalarProperty Name="SubClassCode_Id" ColumnName="SubClassCode_Id" />
+                <ScalarProperty Name="CategoryClass_Id" ColumnName="CategoryClass_Id" />
+                <ScalarProperty Name="CategoryAttribute_Id" ColumnName="CategoryAttribute_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryClasses">
+            <EntityTypeMapping TypeName="IMS_V1Model.CategoryClass">
+              <MappingFragment StoreEntitySet="CategoryClass">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="CategoryClass_Id" ColumnName="CategoryClass_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FFLTypes">
+            <EntityTypeMapping TypeName="IMS_V1Model.FFLType">
+              <MappingFragment StoreEntitySet="FFLType">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="FFLType_Description" ColumnName="FFLType_Description" />
+                <ScalarProperty Name="FFLType_Code" ColumnName="FFLType_Code" />
+                <ScalarProperty Name="FFLType_Id" ColumnName="FFLType_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FineLineClasses">
+            <EntityTypeMapping TypeName="IMS_V1Model.FineLineClass">
+              <MappingFragment StoreEntitySet="FineLineClass">
+                <ScalarProperty Name="FinelineName" ColumnName="FinelineName" />
+                <ScalarProperty Name="FineLine_Id" ColumnName="FineLine_Id" />
+                <ScalarProperty Name="SubClass_id" ColumnName="SubClass_id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="FineLineCode_Id" ColumnName="FineLineCode_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Freight_Lookup">
+            <EntityTypeMapping TypeName="IMS_V1Model.Freight_Lookup">
+              <MappingFragment StoreEntitySet="Freight_Lookup">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Freight_Hazard" ColumnName="Freight_Hazard" />
+                <ScalarProperty Name="Freight_NMFCItemNumber" ColumnName="Freight_NMFCItemNumber" />
+                <ScalarProperty Name="Freight_Commodity" ColumnName="Freight_Commodity" />
+                <ScalarProperty Name="Freight_ItemClass" ColumnName="Freight_ItemClass" />
+                <ScalarProperty Name="Freight_DotClass" ColumnName="Freight_DotClass" />
+                <ScalarProperty Name="Freight_APlusClass" ColumnName="Freight_APlusClass" />
+                <ScalarProperty Name="Freight_Id" ColumnName="Freight_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemAttributes">
+            <EntityTypeMapping TypeName="IMS_V1Model.ItemAttribute">
+              <MappingFragment StoreEntitySet="ItemAttributes">
+                <ScalarProperty Name="PrintedDate" ColumnName="PrintedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="ActualAttributeValue" ColumnName="ActualAttributeValue" />
+                <ScalarProperty Name="AttributeLookup_Id" ColumnName="AttributeLookup_Id" />
+                <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+                <ScalarProperty Name="ItemAttribute_Id" ColumnName="ItemAttribute_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="IMS_V1Model.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="Company99" ColumnName="Company99" />
+                <ScalarProperty Name="MinAdvertisePriceFlag" ColumnName="MinAdvertisePriceFlag" />
+                <ScalarProperty Name="SF_Item_Description" ColumnName="SF_Item_Description" />
+                <ScalarProperty Name="Level4" ColumnName="Level4" />
+                <ScalarProperty Name="AssignedBuyer_Id" ColumnName="AssignedBuyer_Id" />
+                <ScalarProperty Name="Printed" ColumnName="Printed" />
+                <ScalarProperty Name="WholeSaleMTP" ColumnName="WholeSaleMTP" />
+                <ScalarProperty Name="MinAdvertisePrice" ColumnName="MinAdvertisePrice" />
+                <ScalarProperty Name="FFLLockDate" ColumnName="FFLLockDate" />
+                <ScalarProperty Name="FFLLock" ColumnName="FFLLock" />
+                <ScalarProperty Name="FFLGauge" ColumnName="FFLGauge" />
+                <ScalarProperty Name="STD" ColumnName="STD" />
+                <ScalarProperty Name="EDIUPC" ColumnName="EDIUPC" />
+                <ScalarProperty Name="SpecialOrder" ColumnName="SpecialOrder" />
+                <ScalarProperty Name="PreventFromWeb" ColumnName="PreventFromWeb" />
+                <ScalarProperty Name="FFLMFGImportName" ColumnName="FFLMFGImportName" />
+                <ScalarProperty Name="FFLMFGName" ColumnName="FFLMFGName" />
+                <ScalarProperty Name="FFLModel" ColumnName="FFLModel" />
+                <ScalarProperty Name="FFLCaliber" ColumnName="FFLCaliber" />
+                <ScalarProperty Name="FFLType_Id" ColumnName="FFLType_Id" />
+                <ScalarProperty Name="FastTrackDate" ColumnName="FastTrackDate" />
+                <ScalarProperty Name="FastTrackBy" ColumnName="FastTrackBy" />
+                <ScalarProperty Name="FastTrack" ColumnName="FastTrack" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ReadyForApproval" ColumnName="ReadyForApproval" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DropShip" ColumnName="DropShip" />
+                <ScalarProperty Name="Allocated" ColumnName="Allocated" />
+                <ScalarProperty Name="Exclusive" ColumnName="Exclusive" />
+                <ScalarProperty Name="Buyer" ColumnName="Buyer" />
+                <ScalarProperty Name="UPC" ColumnName="UPC" />
+                <ScalarProperty Name="Haz" ColumnName="Haz" />
+                <ScalarProperty Name="VICost" ColumnName="VICost" />
+                <ScalarProperty Name="MIN" ColumnName="MIN" />
+                <ScalarProperty Name="DS" ColumnName="DS" />
+                <ScalarProperty Name="ABC_Id" ColumnName="ABC_Id" />
+                <ScalarProperty Name="Plan_YN" ColumnName="Plan_YN" />
+                <ScalarProperty Name="Freight_Id" ColumnName="Freight_Id" />
+                <ScalarProperty Name="CatWebCode_Id" ColumnName="CatWebCode_Id" />
+                <ScalarProperty Name="FineLineCode_Id" ColumnName="FineLineCode_Id" />
+                <ScalarProperty Name="SubClassCode_Id" ColumnName="SubClassCode_Id" />
+                <ScalarProperty Name="CategoryClass_Id" ColumnName="CategoryClass_Id" />
+                <ScalarProperty Name="Qty_BreakPrice" ColumnName="Qty_BreakPrice" />
+                <ScalarProperty Name="Qty_Break" ColumnName="Qty_Break" />
+                <ScalarProperty Name="JSCLevel5" ColumnName="JSCLevel5" />
+                <ScalarProperty Name="Level3" ColumnName="Level3" />
+                <ScalarProperty Name="Level2" ColumnName="Level2" />
+                <ScalarProperty Name="Level1" ColumnName="Level1" />
+                <ScalarProperty Name="MSRP" ColumnName="MSRP" />
+                <ScalarProperty Name="UM_Id" ColumnName="UM_Id" />
+                <ScalarProperty Name="MFG_Number" ColumnName="MFG_Number" />
+                <ScalarProperty Name="APlusDescription2" ColumnName="APlusDescription2" />
+                <ScalarProperty Name="APlusDescription1" ColumnName="APlusDescription1" />
+                <ScalarProperty Name="Item_Description" ColumnName="Item_Description" />
+                <ScalarProperty Name="ManufacturerLogo_Id" ColumnName="ManufacturerLogo_Id" />
+                <ScalarProperty Name="Itm_Num" ColumnName="Itm_Num" />
+                <ScalarProperty Name="Item_id" ColumnName="Item_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemWareHouses">
+            <EntityTypeMapping TypeName="IMS_V1Model.ItemWareHous">
+              <MappingFragment StoreEntitySet="ItemWareHouses">
+                <ScalarProperty Name="WareHouse_id" ColumnName="WareHouse_id" />
+                <ScalarProperty Name="Item_id" ColumnName="Item_id" />
+                <ScalarProperty Name="ItemWareHouse_Id" ColumnName="ItemWareHouse_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubClasses">
+            <EntityTypeMapping TypeName="IMS_V1Model.SubClass">
+              <MappingFragment StoreEntitySet="SubClass">
+                <ScalarProperty Name="SubClassName" ColumnName="SubClassName" />
+                <ScalarProperty Name="SubClass_Id" ColumnName="SubClass_Id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="SubClassCode_Id" ColumnName="SubClassCode_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UM_Lookup">
+            <EntityTypeMapping TypeName="IMS_V1Model.UM_Lookup">
+              <MappingFragment StoreEntitySet="UM_Lookup">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="UM_Description" ColumnName="UM_Description" />
+                <ScalarProperty Name="UM_Code" ColumnName="UM_Code" />
+                <ScalarProperty Name="UM_Id" ColumnName="UM_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="IMS_V1Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="CreateAPlusImport_MarineShooting" ColumnName="CreateAPlusImport_MarineShooting" />
+                <ScalarProperty Name="Buyer_Number" ColumnName="Buyer_Number" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="ResetPassword" ColumnName="ResetPassword" />
+                <ScalarProperty Name="UserType_Id" ColumnName="UserType_Id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="IMS_V1Model.UserType">
+              <MappingFragment StoreEntitySet="UserTypes">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="UserTypeDescription" ColumnName="UserTypeDescription" />
+                <ScalarProperty Name="UserType_id" ColumnName="UserType_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebCodes">
+            <EntityTypeMapping TypeName="IMS_V1Model.WebCode">
+              <MappingFragment StoreEntitySet="WebCodes">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="WebCodeDescription" ColumnName="WebCodeDescription" />
+                <ScalarProperty Name="WebCode1" ColumnName="WebCode" />
+                <ScalarProperty Name="CatWebCode_Id" ColumnName="CatWebCode_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zManufacturersLogoes">
+            <EntityTypeMapping TypeName="IMS_V1Model.zManufacturersLogo">
+              <MappingFragment StoreEntitySet="zManufacturersLogo">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Buyer_Id" ColumnName="Buyer_Id" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Abbrev" ColumnName="Abbrev" />
+                <ScalarProperty Name="WebVendorName" ColumnName="WebVendorName" />
+                <ScalarProperty Name="LogoName" ColumnName="LogoName" />
+                <ScalarProperty Name="APlusVendorName" ColumnName="APlusVendorName" />
+                <ScalarProperty Name="VendorNumber" ColumnName="VendorNumber" />
+                <ScalarProperty Name="ManufacturerLogo_Id" ColumnName="ManufacturerLogo_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zManufacturersLogo_History">
+            <EntityTypeMapping TypeName="IMS_V1Model.zManufacturersLogo_History">
+              <MappingFragment StoreEntitySet="zManufacturersLogo_History">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="URL_New" ColumnName="URL_New" />
+                <ScalarProperty Name="URL_Original" ColumnName="URL_Original" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="Abbrev_New" ColumnName="Abbrev_New" />
+                <ScalarProperty Name="WebVendorName_New" ColumnName="WebVendorName_New" />
+                <ScalarProperty Name="LogoName_New" ColumnName="LogoName_New" />
+                <ScalarProperty Name="APlusVendorName_New" ColumnName="APlusVendorName_New" />
+                <ScalarProperty Name="Abbrev_Original" ColumnName="Abbrev_Original" />
+                <ScalarProperty Name="WebVendorName_Original" ColumnName="WebVendorName_Original" />
+                <ScalarProperty Name="LogoName_Original" ColumnName="LogoName_Original" />
+                <ScalarProperty Name="APlusVendorName_Original" ColumnName="APlusVendorName_Original" />
+                <ScalarProperty Name="VendorNumber" ColumnName="VendorNumber" />
+                <ScalarProperty Name="ManufacturerLogo_Id" ColumnName="ManufacturerLogo_Id" />
+                <ScalarProperty Name="ManufacturerLogoHistory_Id" ColumnName="ManufacturerLogoHistory_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetNewItem" FunctionName="IMS_V1Model.Store.GetNewItem" />
+          <FunctionImportMapping FunctionImportName="GetRemainingAttributeTypes" FunctionName="IMS_V1Model.Store.GetRemainingAttributeTypes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_V1Model.GetRemainingAttributeTypes_Result">
+                <ScalarProperty Name="AttributeType" ColumnName="AttributeType" />
+                <ScalarProperty Name="Required" ColumnName="Required" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddNewItemDefaultAttributes" FunctionName="IMS_V1Model.Store.AddNewItemDefaultAttributes" />
+          <FunctionImportMapping FunctionImportName="UpdateItemDescription" FunctionName="IMS_V1Model.Store.UpdateItemDescription" />
+          <FunctionImportMapping FunctionImportName="UpdateItemRFA_FT" FunctionName="IMS_V1Model.Store.UpdateItemRFA_FT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_V1Model.UpdateItemRFA_FT_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Column2" ColumnName="Column2" />
+                <ScalarProperty Name="Column3" ColumnName="Column3" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteItemAttributes" FunctionName="IMS_V1Model.Store.DeleteItemAttributes" />
+          <EntitySetMapping Name="PrintedItemsForAPlus">
+            <EntityTypeMapping TypeName="IMS_V1Model.PrintedItemsForAPlu">
+              <MappingFragment StoreEntitySet="PrintedItemsForAPlus">
+                <ScalarProperty Name="PrintedBy" ColumnName="PrintedBy" />
+                <ScalarProperty Name="DatePrinted" ColumnName="DatePrinted" />
+                <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+                <ScalarProperty Name="Printed_Id" ColumnName="Printed_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemDescriptionOrders">
+            <EntityTypeMapping TypeName="IMS_V1Model.ItemDescriptionOrder">
+              <MappingFragment StoreEntitySet="ItemDescriptionOrder">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="SystemType" ColumnName="SystemType" />
+                <ScalarProperty Name="AttributeType_Id" ColumnName="AttributeType_Id" />
+                <ScalarProperty Name="FineLineCode_Id" ColumnName="FineLineCode_Id" />
+                <ScalarProperty Name="SubClassCode_Id" ColumnName="SubClassCode_Id" />
+                <ScalarProperty Name="CategoryClass_Id" ColumnName="CategoryClass_Id" />
+                <ScalarProperty Name="DescriptionField" ColumnName="DescriptionField" />
+                <ScalarProperty Name="ItemDescriptionOrder_Id" ColumnName="ItemDescriptionOrder_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APlusItems">
+            <EntityTypeMapping TypeName="IMS_V1Model.APlusItem">
+              <MappingFragment StoreEntitySet="APlusItems">
+                <ScalarProperty Name="UPC" ColumnName="UPC" />
+                <ScalarProperty Name="MFG_Number" ColumnName="MFG_Number" />
+                <ScalarProperty Name="VendorNumber" ColumnName="VendorNumber" />
+                <ScalarProperty Name="Item_Desc2" ColumnName="Item_Desc2" />
+                <ScalarProperty Name="Item_Desc1" ColumnName="Item_Desc1" />
+                <ScalarProperty Name="Itm_Num" ColumnName="Itm_Num" />
+                <ScalarProperty Name="APlusItem_Id" ColumnName="APlusItem_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="APlusEntryItem" FunctionName="IMS_V1Model.Store.APlusEntryItem" />
+          <EntitySetMapping Name="ItemTextAttachments">
+            <EntityTypeMapping TypeName="IMS_V1Model.ItemTextAttachment">
+              <MappingFragment StoreEntitySet="ItemTextAttachments">
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Content_Key" ColumnName="Content_Key" />
+                <ScalarProperty Name="Item_id" ColumnName="Item_id" />
+                <ScalarProperty Name="ItemTextAttachment_Id" ColumnName="ItemTextAttachment_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddLongDescription" FunctionName="IMS_V1Model.Store.AddLongDescription" />
+          <FunctionImportMapping FunctionImportName="GetExistingLongDescriptions" FunctionName="IMS_V1Model.Store.GetExistingLongDescriptions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_V1Model.GetExistingLongDescriptions_Result">
+                <ScalarProperty Name="ItemTextAttachment_Id" ColumnName="ItemTextAttachment_Id" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="content_key" ColumnName="content_key" />
+                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateLongDescription" FunctionName="IMS_V1Model.Store.UpdateLongDescription" />
+          <FunctionImportMapping FunctionImportName="GetLongDescription" FunctionName="IMS_V1Model.Store.GetLongDescription">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_V1Model.GetLongDescription_Result">
+                <ScalarProperty Name="ItemTextAttachment_Id" ColumnName="ItemTextAttachment_Id" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="content_key" ColumnName="content_key" />
+                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
+                <ScalarProperty Name="itm_num" ColumnName="itm_num" />
+                <ScalarProperty Name="Item_Description" ColumnName="Item_Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="APlusItemsPrinted" FunctionName="IMS_V1Model.Store.APlusItemsPrinted" />
+          <FunctionImportMapping FunctionImportName="GetExistingWareHousesList" FunctionName="IMS_V1Model.Store.GetExistingWareHousesList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_V1Model.GetExistingWareHousesList_Result">
+                <ScalarProperty Name="WareHouse_id" ColumnName="WareHouse_id" />
+                <ScalarProperty Name="WareHouseName" ColumnName="WareHouseName" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="WareHouse_Lookup">
+            <EntityTypeMapping TypeName="IMS_V1Model.WareHouse_Lookup">
+              <MappingFragment StoreEntitySet="WareHouse_Lookup">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="WareHouseName" ColumnName="WareHouseName" />
+                <ScalarProperty Name="WareHouseNumber" ColumnName="WareHouseNumber" />
+                <ScalarProperty Name="WareHouse_id" ColumnName="WareHouse_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CheckForAPlusImportItems" FunctionName="IMS_V1Model.Store.CheckForAPlusImportItems" />
+          <FunctionImportMapping FunctionImportName="APlusImport_ITBAL" FunctionName="IMS_V1Model.Store.APlusImport_ITBAL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_V1Model.APlusImport_ITBAL_Result">
+                <ScalarProperty Name="itm_num" ColumnName="itm_num" />
+                <ScalarProperty Name="Warehouse_ID" ColumnName="Warehouse_ID" />
+                <ScalarProperty Name="FunctionCode" ColumnName="FunctionCode" />
+                <ScalarProperty Name="VendorNumber" ColumnName="VendorNumber" />
+                <ScalarProperty Name="PrimaryLocation" ColumnName="PrimaryLocation" />
+                <ScalarProperty Name="SecondaryLocation" ColumnName="SecondaryLocation" />
+                <ScalarProperty Name="CycleCountCode" ColumnName="CycleCountCode" />
+                <ScalarProperty Name="PhysicalInventoryCode" ColumnName="PhysicalInventoryCode" />
+                <ScalarProperty Name="StandardCost" ColumnName="StandardCost" />
+                <ScalarProperty Name="UserCost" ColumnName="UserCost" />
+                <ScalarProperty Name="AverageCost" ColumnName="AverageCost" />
+                <ScalarProperty Name="LastCost" ColumnName="LastCost" />
+                <ScalarProperty Name="LastCostDate" ColumnName="LastCostDate" />
+                <ScalarProperty Name="MaxOnHandQtyUM1" ColumnName="MaxOnHandQtyUM1" />
+                <ScalarProperty Name="MaxOnHandQtyUM2" ColumnName="MaxOnHandQtyUM2" />
+                <ScalarProperty Name="MaxOnHandQtyUM3" ColumnName="MaxOnHandQtyUM3" />
+                <ScalarProperty Name="MinOnHandQtyUM1" ColumnName="MinOnHandQtyUM1" />
+                <ScalarProperty Name="MinOnHandQtyUM2" ColumnName="MinOnHandQtyUM2" />
+                <ScalarProperty Name="MinOnHandQtyUM3" ColumnName="MinOnHandQtyUM3" />
+                <ScalarProperty Name="Forecast" ColumnName="Forecast" />
+                <ScalarProperty Name="SpecialOrderCode" ColumnName="SpecialOrderCode" />
+                <ScalarProperty Name="C20CharacterUserArea" ColumnName="20CharacterUserArea" />
+                <ScalarProperty Name="Level1" ColumnName="Level1" />
+                <ScalarProperty Name="Level2" ColumnName="Level2" />
+                <ScalarProperty Name="Level3" ColumnName="Level3" />
+                <ScalarProperty Name="ListPrice4" ColumnName="ListPrice4" />
+                <ScalarProperty Name="JSCLevel5" ColumnName="JSCLevel5" />
+                <ScalarProperty Name="abc_code" ColumnName="abc_code" />
+                <ScalarProperty Name="PriceClass" ColumnName="PriceClass" />
+                <ScalarProperty Name="Qty_Break" ColumnName="Qty_Break" />
+                <ScalarProperty Name="AllowCashDiscountCode" ColumnName="AllowCashDiscountCode" />
+                <ScalarProperty Name="DefaultOrderingUM" ColumnName="DefaultOrderingUM" />
+                <ScalarProperty Name="TimePhasedItem" ColumnName="TimePhasedItem" />
+                <ScalarProperty Name="CommissionCostCode" ColumnName="CommissionCostCode" />
+                <ScalarProperty Name="CommissionCost" ColumnName="CommissionCost" />
+                <ScalarProperty Name="BuyerReviewRequired" ColumnName="BuyerReviewRequired" />
+                <ScalarProperty Name="CountryofOrigin1" ColumnName="CountryofOrigin1" />
+                <ScalarProperty Name="CountryofOrigin2" ColumnName="CountryofOrigin2" />
+                <ScalarProperty Name="TaxableCode" ColumnName="TaxableCode" />
+                <ScalarProperty Name="ReuseCode" ColumnName="ReuseCode" />
+                <ScalarProperty Name="ItemTaxClass" ColumnName="ItemTaxClass" />
+                <ScalarProperty Name="C30CharacterUserArea" ColumnName="30CharacterUserArea" />
+                <ScalarProperty Name="PointofSaleLineType" ColumnName="PointofSaleLineType" />
+                <ScalarProperty Name="UpdateDemandPlanning" ColumnName="UpdateDemandPlanning" />
+                <ScalarProperty Name="MinimumPutAwayQuantity" ColumnName="MinimumPutAwayQuantity" />
+                <ScalarProperty Name="MaximumPickQuantity" ColumnName="MaximumPickQuantity" />
+                <ScalarProperty Name="CaseQuantityFlag" ColumnName="CaseQuantityFlag" />
+                <ScalarProperty Name="CaseDescription" ColumnName="CaseDescription" />
+                <ScalarProperty Name="CaseQuantity" ColumnName="CaseQuantity" />
+                <ScalarProperty Name="OverrideWarehouseLocation" ColumnName="OverrideWarehouseLocation" />
+                <ScalarProperty Name="MaximumPutAwayQuantity" ColumnName="MaximumPutAwayQuantity" />
+                <ScalarProperty Name="PutAwayMessage" ColumnName="PutAwayMessage" />
+                <ScalarProperty Name="QuantityperPallet" ColumnName="QuantityperPallet" />
+                <ScalarProperty Name="LocationClassCode" ColumnName="LocationClassCode" />
+                <ScalarProperty Name="OverridePOSLocation" ColumnName="OverridePOSLocation" />
+                <ScalarProperty Name="ForecastModel" ColumnName="ForecastModel" />
+                <ScalarProperty Name="ServiceLevel" ColumnName="ServiceLevel" />
+                <ScalarProperty Name="ServiceLevelMaintenanceCode" ColumnName="ServiceLevelMaintenanceCode" />
+                <ScalarProperty Name="SafetyStockQuantity" ColumnName="SafetyStockQuantity" />
+                <ScalarProperty Name="SafetyStockQuantityMaintenanceCode" ColumnName="SafetyStockQuantityMaintenanceCode" />
+                <ScalarProperty Name="LeadTime" ColumnName="LeadTime" />
+                <ScalarProperty Name="LeadTime_MaintenanceCode" ColumnName="LeadTime MaintenanceCode" />
+                <ScalarProperty Name="OrderingLevel" ColumnName="OrderingLevel" />
+                <ScalarProperty Name="OrderLevelMaintenanceCode" ColumnName="OrderLevelMaintenanceCode" />
+                <ScalarProperty Name="OrderingFrequency" ColumnName="OrderingFrequency" />
+                <ScalarProperty Name="OrderFrequencyMaintenanceCode" ColumnName="OrderFrequencyMaintenanceCode" />
+                <ScalarProperty Name="AdditionalGrowthPercent" ColumnName="AdditionalGrowthPercent" />
+                <ScalarProperty Name="GrowthPercentMaintenanceCode" ColumnName="GrowthPercentMaintenanceCode" />
+                <ScalarProperty Name="MaximumBalanceMaintenanceCode" ColumnName="MaximumBalanceMaintenanceCode" />
+                <ScalarProperty Name="IMPOrderQuantity" ColumnName="IMPOrderQuantity" />
+                <ScalarProperty Name="OrderQuantityMaintenanceCode" ColumnName="OrderQuantityMaintenanceCode" />
+                <ScalarProperty Name="ItemContractCode" ColumnName="ItemContractCode" />
+                <ScalarProperty Name="PromptForPointOfSaleLineType" ColumnName="PromptForPointOfSaleLineType" />
+                <ScalarProperty Name="PutAwayQuantity" ColumnName="PutAwayQuantity" />
+                <ScalarProperty Name="PalletID" ColumnName="PalletID" />
+                <ScalarProperty Name="ItemLabelFlag" ColumnName="ItemLabelFlag" />
+                <ScalarProperty Name="MinimumBalanceMaintenanceCode" ColumnName="MinimumBalanceMaintenanceCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="APlusImport_ITMST" FunctionName="IMS_V1Model.Store.APlusImport_ITMST">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_V1Model.APlusImport_ITMST_Result">
+                <ScalarProperty Name="itm_num" ColumnName="itm_num" />
+                <ScalarProperty Name="FunctionCode" ColumnName="FunctionCode" />
+                <ScalarProperty Name="APlusDescription1" ColumnName="APlusDescription1" />
+                <ScalarProperty Name="APlusDescription2" ColumnName="APlusDescription2" />
+                <ScalarProperty Name="UnitofMeasure1" ColumnName="UnitofMeasure1" />
+                <ScalarProperty Name="UnitofMeasure2" ColumnName="UnitofMeasure2" />
+                <ScalarProperty Name="UnitofMeasure3" ColumnName="UnitofMeasure3" />
+                <ScalarProperty Name="UMConversion1" ColumnName="UMConversion1" />
+                <ScalarProperty Name="UMConversion2" ColumnName="UMConversion2" />
+                <ScalarProperty Name="DefaultUMCode" ColumnName="DefaultUMCode" />
+                <ScalarProperty Name="PricingUM" ColumnName="PricingUM" />
+                <ScalarProperty Name="PricingUMConversion" ColumnName="PricingUMConversion" />
+                <ScalarProperty Name="UMSurcharge1" ColumnName="UMSurcharge1" />
+                <ScalarProperty Name="UMSurcharge2" ColumnName="UMSurcharge2" />
+                <ScalarProperty Name="UMSurcharge3" ColumnName="UMSurcharge3" />
+                <ScalarProperty Name="SurchargeCode1" ColumnName="SurchargeCode1" />
+                <ScalarProperty Name="SurchargeCode2" ColumnName="SurchargeCode2" />
+                <ScalarProperty Name="SurchargeCode3" ColumnName="SurchargeCode3" />
+                <ScalarProperty Name="UnitWeightUM1" ColumnName="UnitWeightUM1" />
+                <ScalarProperty Name="UnitWeightUM2" ColumnName="UnitWeightUM2" />
+                <ScalarProperty Name="UnitWeightUM3" ColumnName="UnitWeightUM3" />
+                <ScalarProperty Name="ItemClass" ColumnName="ItemClass" />
+                <ScalarProperty Name="ItemSubclass" ColumnName="ItemSubclass" />
+                <ScalarProperty Name="PriceClass" ColumnName="PriceClass" />
+                <ScalarProperty Name="QuantityBreakClass" ColumnName="QuantityBreakClass" />
+                <ScalarProperty Name="MfgItemNumber" ColumnName="MfgItemNumber" />
+                <ScalarProperty Name="ContainerCharge1" ColumnName="ContainerCharge1" />
+                <ScalarProperty Name="ContainerCharge2" ColumnName="ContainerCharge2" />
+                <ScalarProperty Name="ContainerCharge3" ColumnName="ContainerCharge3" />
+                <ScalarProperty Name="ListPrice1" ColumnName="ListPrice1" />
+                <ScalarProperty Name="ListPrice2" ColumnName="ListPrice2" />
+                <ScalarProperty Name="ListPrice3" ColumnName="ListPrice3" />
+                <ScalarProperty Name="ListPrice4" ColumnName="ListPrice4" />
+                <ScalarProperty Name="ListPrice5" ColumnName="ListPrice5" />
+                <ScalarProperty Name="TaxableCode" ColumnName="TaxableCode" />
+                <ScalarProperty Name="ReuseCode" ColumnName="ReuseCode" />
+                <ScalarProperty Name="BackorderCode" ColumnName="BackorderCode" />
+                <ScalarProperty Name="AllowCashDiscountCode" ColumnName="AllowCashDiscountCode" />
+                <ScalarProperty Name="MiscCode1" ColumnName="MiscCode1" />
+                <ScalarProperty Name="MiscCode2" ColumnName="MiscCode2" />
+                <ScalarProperty Name="MiscCode3" ColumnName="MiscCode3" />
+                <ScalarProperty Name="CompanyNumber" ColumnName="CompanyNumber" />
+                <ScalarProperty Name="UpdateInventoryCode" ColumnName="UpdateInventoryCode" />
+                <ScalarProperty Name="CatchWeightCode" ColumnName="CatchWeightCode" />
+                <ScalarProperty Name="ItemGLCode" ColumnName="ItemGLCode" />
+                <ScalarProperty Name="LocationClassCode" ColumnName="LocationClassCode" />
+                <ScalarProperty Name="FederalExciseTaxAmount" ColumnName="FederalExciseTaxAmount" />
+                <ScalarProperty Name="VendorNumber" ColumnName="VendorNumber" />
+                <ScalarProperty Name="LocationSize1" ColumnName="LocationSize1" />
+                <ScalarProperty Name="LocationSize2" ColumnName="LocationSize2" />
+                <ScalarProperty Name="LocationSize3" ColumnName="LocationSize3" />
+                <ScalarProperty Name="WHManagementCode" ColumnName="WHManagementCode" />
+                <ScalarProperty Name="ExpirationDateRequiredFlag" ColumnName="ExpirationDateRequiredFlag" />
+                <ScalarProperty Name="ShowLotSerialonInvoice" ColumnName="ShowLotSerialonInvoice" />
+                <ScalarProperty Name="C15CharacterUserArea" ColumnName="C15CharacterUserArea" />
+                <ScalarProperty Name="ProductRestrictionCode" ColumnName="ProductRestrictionCode" />
+                <ScalarProperty Name="MSDSDate" ColumnName="MSDSDate" />
+                <ScalarProperty Name="ItemTaxClass" ColumnName="ItemTaxClass" />
+                <ScalarProperty Name="RebateClass" ColumnName="RebateClass" />
+                <ScalarProperty Name="UserField1" ColumnName="UserField1" />
+                <ScalarProperty Name="UserField2" ColumnName="UserField2" />
+                <ScalarProperty Name="UserField3" ColumnName="UserField3" />
+                <ScalarProperty Name="UserField4" ColumnName="UserField4" />
+                <ScalarProperty Name="UserField5" ColumnName="UserField5" />
+                <ScalarProperty Name="UserField6" ColumnName="UserField6" />
+                <ScalarProperty Name="InquiryUM" ColumnName="InquiryUM" />
+                <ScalarProperty Name="ItemEIDGroup" ColumnName="ItemEIDGroup" />
+                <ScalarProperty Name="ItemContractCode" ColumnName="ItemContractCode" />
+                <ScalarProperty Name="BuyerItemClass" ColumnName="BuyerItemClass" />
+                <ScalarProperty Name="BuyerItemSubclass" ColumnName="BuyerItemSubclass" />
+                <ScalarProperty Name="ItemCommitmentCode" ColumnName="ItemCommitmentCode" />
+                <ScalarProperty Name="HarmonizeTariffCode" ColumnName="HarmonizeTariffCode" />
+                <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
+                <ScalarProperty Name="UniqueLots" ColumnName="UniqueLots" />
+                <ScalarProperty Name="PreventFromWeb" ColumnName="PreventFromWeb" />
+                <ScalarProperty Name="StandardUsage" ColumnName="StandardUsage" />
+                <ScalarProperty Name="C30CharacterUserArea" ColumnName="C30CharacterUserArea" />
+                <ScalarProperty Name="TrackCountryofOrigin" ColumnName="TrackCountryofOrigin" />
+                <ScalarProperty Name="UM1Length" ColumnName="UM1Length" />
+                <ScalarProperty Name="UM1Width" ColumnName="UM1Width" />
+                <ScalarProperty Name="UM1Height" ColumnName="UM1Height" />
+                <ScalarProperty Name="UM2Length" ColumnName="UM2Length" />
+                <ScalarProperty Name="UM2Width" ColumnName="UM2Width" />
+                <ScalarProperty Name="UM2Height" ColumnName="UM2Height" />
+                <ScalarProperty Name="UM3Length" ColumnName="UM3Length" />
+                <ScalarProperty Name="UM3Width" ColumnName="UM3Width" />
+                <ScalarProperty Name="UM3Height" ColumnName="UM3Height" />
+                <ScalarProperty Name="BoxType" ColumnName="BoxType" />
+                <ScalarProperty Name="BoxQuantityUM1" ColumnName="BoxQuantityUM1" />
+                <ScalarProperty Name="BoxQuantityUM2" ColumnName="BoxQuantityUM2" />
+                <ScalarProperty Name="BoxQuantityUM3" ColumnName="BoxQuantityUM3" />
+                <ScalarProperty Name="HazardousMaterialGrade" ColumnName="HazardousMaterialGrade" />
+                <ScalarProperty Name="ProperShippingName" ColumnName="ProperShippingName" />
+                <ScalarProperty Name="PrimaryHazardClassCode" ColumnName="PrimaryHazardClassCode" />
+                <ScalarProperty Name="DOTNumber" ColumnName="DOTNumber" />
+                <ScalarProperty Name="PackageGroup" ColumnName="PackageGroup" />
+                <ScalarProperty Name="HAZMATCasofIngredient1" ColumnName="HAZMATCasofIngredient1" />
+                <ScalarProperty Name="HAZMATCasofIngredient2" ColumnName="HAZMATCasofIngredient2" />
+                <ScalarProperty Name="HAZMATCasofIngredient3" ColumnName="HAZMATCasofIngredient3" />
+                <ScalarProperty Name="HAZMATCasofIngredient4" ColumnName="HAZMATCasofIngredient4" />
+                <ScalarProperty Name="HAZMATCasofIngredient5" ColumnName="HAZMATCasofIngredient5" />
+                <ScalarProperty Name="HAZMATCasofIngredient6" ColumnName="HAZMATCasofIngredient6" />
+                <ScalarProperty Name="HAZMATCasbyWeight1" ColumnName="HAZMATCasbyWeight1" />
+                <ScalarProperty Name="HAZMATCasbyWeight2" ColumnName="HAZMATCasbyWeight2" />
+                <ScalarProperty Name="HAZMATCasbyWeight3" ColumnName="HAZMATCasbyWeight3" />
+                <ScalarProperty Name="HAZMATCasbyWeight4" ColumnName="HAZMATCasbyWeight4" />
+                <ScalarProperty Name="HAZMATCasbyWeight5" ColumnName="HAZMATCasbyWeight5" />
+                <ScalarProperty Name="HAZMATCasbyWeight6" ColumnName="HAZMATCasbyWeight6" />
+                <ScalarProperty Name="LimitedQuantity" ColumnName="LimitedQuantity" />
+                <ScalarProperty Name="HazardousMaterialMsgCd1" ColumnName="HazardousMaterialMsgCd1" />
+                <ScalarProperty Name="HazardousMaterialMsgCd2" ColumnName="HazardousMaterialMsgCd2" />
+                <ScalarProperty Name="HazardousMaterialMsgCd3" ColumnName="HazardousMaterialMsgCd3" />
+                <ScalarProperty Name="HazardousMaterialMsgCd4" ColumnName="HazardousMaterialMsgCd4" />
+                <ScalarProperty Name="DOTRegulated" ColumnName="DOTRegulated" />
+                <ScalarProperty Name="ProperShippingNameLine2" ColumnName="ProperShippingNameLine2" />
+                <ScalarProperty Name="ProperShippingNameLine3" ColumnName="ProperShippingNameLine3" />
+                <ScalarProperty Name="ProperShippingNameLine4" ColumnName="ProperShippingNameLine4" />
+                <ScalarProperty Name="SubsidiaryHazardClassCode1" ColumnName="SubsidiaryHazardClassCode1" />
+                <ScalarProperty Name="SubsidiaryHazardClassCode2" ColumnName="SubsidiaryHazardClassCode2" />
+                <ScalarProperty Name="PackageType" ColumnName="PackageType" />
+                <ScalarProperty Name="ReportingUM" ColumnName="ReportingUM" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="DiscontinuedCode" ColumnName="DiscontinuedCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CheckForMarineAPlusImportItems" FunctionName="IMS_V1Model.Store.CheckForMarineAPlusImportItems" />
+          <FunctionImportMapping FunctionImportName="GetMarineAPlusImportKeyCode" FunctionName="IMS_V1Model.Store.GetMarineAPlusImportKeyCode" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_V1Model.GetMarineAPlusImportKeyCode_Result">
+                <ScalarProperty Name="APlusImportKeyCode" ColumnName="APlusImportKeyCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TurnRunningFlagOff" FunctionName="IMS_V1Model.Store.TurnRunningFlagOff" />
+          <FunctionImportMapping FunctionImportName="TurnRunningFlagOn" FunctionName="IMS_V1Model.Store.TurnRunningFlagOn" />
+          <FunctionImportMapping FunctionImportName="CheckForAPlusImportRunning" FunctionName="IMS_V1Model.Store.CheckForAPlusImportRunning" />
+          <FunctionImportMapping FunctionImportName="GetAPlusImportKeyCode" FunctionName="IMS_V1Model.Store.GetAPlusImportKeyCode" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMS_V1Model.GetAPlusImportKeyCode_Result">
+                <ScalarProperty Name="APlusImportKeyCode" ColumnName="APlusImportKeyCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateSFItemDescription" FunctionName="IMS_V1Model.Store.UpdateSFItemDescription" />
+          <FunctionImportMapping FunctionImportName="AddItemToAPlusImportItem" FunctionName="IMS_V1Model.Store.AddItemToAPlusImportItem" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

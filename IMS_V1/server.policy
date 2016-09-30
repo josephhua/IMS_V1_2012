@@ -1,0 +1,3 @@
+grant codeBase "file:C:/josephh/compute" {
+    permission java.security.AllPermission;
+};

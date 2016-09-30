@@ -1,0 +1,13 @@
+﻿@model IMS_V1.User
+
+@{
+    ViewBag.Title = "";
+}
+
+<h2>AfterLogin</h2>
+@if (Session["LogedUserFullname"] != null)
+{
+    <text>
+        Welcome @Session["LogedUserFullname"].ToString()  to the Item Management System.
+    </text>
+}

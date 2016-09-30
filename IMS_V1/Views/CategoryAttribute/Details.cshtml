@@ -1,0 +1,71 @@
+﻿@model IMS_V1.CategoryAttribute
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>CategoryAttribute</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CategoryAttribute_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryAttribute_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CategoryClass.Category_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryClass.Category_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SubClassCode_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SubClassCode_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FineLineCode_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FineLineCode_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AttributeType.AttributeType1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AttributeType.AttributeType1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Required)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Required)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

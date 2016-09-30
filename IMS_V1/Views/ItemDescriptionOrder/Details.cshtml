@@ -1,0 +1,85 @@
+﻿@model IMS_V1.ItemDescriptionOrder
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ItemDescriptionOrder</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ItemDescriptionOrder_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ItemDescriptionOrder_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DescriptionField)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DescriptionField)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CategoryClass_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryClass_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SubClassCode_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SubClassCode_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FineLineCode_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FineLineCode_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AttributeType_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AttributeType_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SystemType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SystemType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
