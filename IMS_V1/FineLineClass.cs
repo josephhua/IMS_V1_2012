@@ -16,10 +16,10 @@ namespace IMS_V1
     {
         public FineLineClass()
         {
-            this.Items = new HashSet<Item>();
             this.CategoryAttributes = new HashSet<CategoryAttribute>();
             this.ItemDescriptionOrders = new HashSet<ItemDescriptionOrder>();
             this.ItemDescriptionOrders1 = new HashSet<ItemDescriptionOrder>();
+            this.Items = new HashSet<Item>();
         }
     
         public int FineLineCode_Id { get; set; }
@@ -28,9 +28,9 @@ namespace IMS_V1
         public string FineLine_Id { get; set; }
         public string FinelineName { get; set; }
     
-        public virtual ICollection<Item> Items { get; set; }
         public virtual ICollection<CategoryAttribute> CategoryAttributes { get; set; }
         public virtual ICollection<ItemDescriptionOrder> ItemDescriptionOrders { get; set; }
         public virtual ICollection<ItemDescriptionOrder> ItemDescriptionOrders1 { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

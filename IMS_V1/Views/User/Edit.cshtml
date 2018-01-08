@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Edit";
 }
-
+<center>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -19,6 +19,7 @@
         <tr>
             <td>
                 @Html.HiddenFor(model => model.User_id)
+                <input type="hidden" name="UserId" value="@ViewBag.UserId" />
             </td>
         </tr>
         <tr>
@@ -74,6 +75,8 @@
                 </div>
             </td>
         </tr>
+        @if (Session.Contents["UserTypeID"] != null && Session.Contents["Logout"] != "true" && int.Parse(Session.Contents["UserTypeID"].ToString()) == 1)
+        {
         <tr>
             <td>
                 <div class="editor-label">
@@ -87,6 +90,7 @@
                 </div>
             </td>
         </tr>
+        }
         <tr>
             <td>
                 <div class="editor-label">
@@ -136,11 +140,13 @@
  
  
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
+</center>
+@if (Session.Contents["UserTypeID"] != null && Session.Contents["Logout"] != "true" && int.Parse(Session.Contents["UserTypeID"].ToString()) == 1)
+{
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

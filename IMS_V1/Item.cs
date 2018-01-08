@@ -11,173 +11,47 @@ namespace IMS_V1
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     
     public partial class Item
     {
         public Item()
         {
             this.ItemAttributes = new HashSet<ItemAttribute>();
+            this.ItemTextAttachments = new HashSet<ItemTextAttachment>();
             this.ItemWareHouses = new HashSet<ItemWareHous>();
             this.PrintedItemsForAPlus = new HashSet<PrintedItemsForAPlu>();
-            this.ItemTextAttachments = new HashSet<ItemTextAttachment>();
         }
     
         public int Item_id { get; set; }
-        public string ItmNum = string.Empty;
-        public string Itm_Num
-        {
-            get
-            {
-                return ItmNum;
-            }
-            set
-            {
-                ItmNum = ReplaceSpecialCharacters(value);
-            }
-        }
+        public string Itm_Num { get; set; }
         public Nullable<int> ManufacturerLogo_Id { get; set; }
-
-        //public string Item_Description { get; set; }
-        private string itemDescription = string.Empty;
-        private string APlusDesc1 = string.Empty;
-        private string APlusDesc2 = string.Empty;
-        public string Item_Description
-        {
-            get
-            {
-                return itemDescription;
-            }
-            set
-            {               
-                itemDescription = ReplaceSpecialCharacters(value);               
-            }
-        }
-        
-        public string APlusDescription1
-        {
-            get
-            {
-                return APlusDesc1;
-            }
-            set
-            {               
-                APlusDesc1 = ReplaceSpecialCharacters(value);
-            }
-        }
-        public string APlusDescription2
-        {
-            get
-            {
-                return APlusDesc2;
-            }
-            set
-            {                
-                APlusDesc2 = ReplaceSpecialCharacters(value);
-            }
-        }
-
-        public string MFGNumber = string.Empty;
-        public string MFG_Number
-        {
-            get
-            {
-                return MFGNumber;
-            }
-            set
-            {
-                MFGNumber = ReplaceSpecialCharacters(value);
-            }
-        }
+        public string Item_Description { get; set; }
+        public string APlusDescription1 { get; set; }
+        public string APlusDescription2 { get; set; }
+        public string MFG_Number { get; set; }
         public Nullable<int> UM_Id { get; set; }
         public Nullable<decimal> MSRP { get; set; }
         public Nullable<decimal> Level1 { get; set; }
         public Nullable<decimal> Level2 { get; set; }
         public Nullable<decimal> Level3 { get; set; }
         public Nullable<decimal> JSCLevel5 { get; set; }
-        public string QtyBreak = string.Empty;
-        public string Qty_Break
-        {
-            get
-            {
-                return QtyBreak;
-            }
-            set
-            {
-                QtyBreak = ReplaceSpecialCharacters(value);
-            }
-        }
+        public string Qty_Break { get; set; }
         public Nullable<decimal> Qty_BreakPrice { get; set; }
         public int CategoryClass_Id { get; set; }
         public Nullable<int> SubClassCode_Id { get; set; }
         public Nullable<int> FineLineCode_Id { get; set; }
         public Nullable<int> CatWebCode_Id { get; set; }
         public Nullable<int> Freight_Id { get; set; }
-        public string PlanYN = string.Empty;
-        public string Plan_YN
-        {
-            get
-            {
-                return PlanYN;
-            }
-            set
-            {
-                PlanYN = ReplaceSpecialCharacters(value);
-            }
-        }
+        public string Plan_YN { get; set; }
         public Nullable<int> ABC_Id { get; set; }
-        public string DSnull = string.Empty;
-        public string DS
-        {
-            get
-            {
-                return DSnull;
-            }
-            set
-            {
-                DSnull = ReplaceSpecialCharacters(value);
-            }
-        }
-        public string MINim = string.Empty;
-        public string MIN
-        {
-            get
-            {
-                return MINim;
-            }
-            set
-            {
-                MINim = ReplaceSpecialCharacters(value);
-            }
-        }
+        public string DS { get; set; }
+        public Nullable<int> STD { get; set; }
+        public string MIN { get; set; }
         public Nullable<decimal> VICost { get; set; }
-        public string Haz { get; set; }       
-        public string UPCno = string.Empty;
-        public string UPC
-        {
-            get
-            {
-                return UPCno;
-            }
-            set
-            {
-                UPCno = ReplaceSpecialCharacters(value);
-            }
-        }
-        public string BuyerName = string.Empty;
-        public string Buyer
-        {
-            get
-            {
-                return BuyerName;
-            }
-            set
-            {
-                BuyerName = ReplaceSpecialCharacters(value);
-            }
-        }
+        public string Haz { get; set; }
+        public string UPC { get; set; }
+        public string Buyer { get; set; }
         public string Exclusive { get; set; }
-       
         public string Allocated { get; set; }
         public string DropShip { get; set; }
         public Nullable<int> CreatedBy { get; set; }
@@ -192,81 +66,14 @@ namespace IMS_V1
         public Nullable<int> FastTrackBy { get; set; }
         public Nullable<System.DateTime> FastTrackDate { get; set; }
         public Nullable<int> FFLType_Id { get; set; }
-        public string FFLCaliberStr = string.Empty;
-        public string FFLCaliber
-        {
-            get
-            {
-                return FFLCaliberStr;
-            }
-            set
-            {
-                FFLCaliberStr = ReplaceSpecialCharacters(value);
-            }
-        }
-        public string FFLModelStr = string.Empty; 
-        public string FFLModel
-        {
-            get
-            {
-                return FFLModelStr;
-            }
-            set
-            {
-                FFLModelStr = ReplaceSpecialCharacters(value);
-            }
-        }
-        public string FFLMFGNameStr = string.Empty;
-        public string FFLMFGName
-        {
-            get
-            {
-                return FFLMFGNameStr;
-            }
-            set
-            {
-                FFLMFGNameStr = ReplaceSpecialCharacters(value);
-            }
-        }
-        public string FFLMFGImportNameStr = string.Empty; 
-        public string FFLMFGImportName
-        {
-            get
-            {
-                return FFLMFGImportNameStr;
-            }
-            set
-            {
-                FFLMFGImportNameStr = ReplaceSpecialCharacters(value);
-            }
-        }
+        public string FFLCaliber { get; set; }
+        public string FFLModel { get; set; }
+        public string FFLMFGName { get; set; }
+        public string FFLMFGImportName { get; set; }
         public string PreventFromWeb { get; set; }
         public string SpecialOrder { get; set; }
-        public string EDIUPCNo = string.Empty;
-        public string EDIUPC
-        {
-            get
-            {
-                return EDIUPCNo;
-            }
-            set
-            {
-                EDIUPCNo = ReplaceSpecialCharacters(value);
-            }
-        }
-        public Nullable<int> STD { get; set; }
-        public string FFLGaugeStr = string.Empty; 
-        public string FFLGauge
-        {
-            get
-            {
-                return FFLGaugeStr;
-            }
-            set
-            {
-                FFLGaugeStr = ReplaceSpecialCharacters(value);
-            }
-        }
+        public string EDIUPC { get; set; }
+        public string FFLGauge { get; set; }
         public string FFLLock { get; set; }
         public Nullable<System.DateTime> FFLLockDate { get; set; }
         public Nullable<decimal> MinAdvertisePrice { get; set; }
@@ -274,25 +81,16 @@ namespace IMS_V1
         public string Printed { get; set; }
         public Nullable<int> AssignedBuyer_Id { get; set; }
         public Nullable<decimal> Level4 { get; set; }
-        public string SFItemDesc = string.Empty; 
-        public string SF_Item_Description
-        {
-            get
-            {
-                return SFItemDesc;
-            }
-            set
-            {                
-                SFItemDesc = ReplaceSpecialCharacters(value);
-            }
-        }
+        public string SF_Item_Description { get; set; }
         public string MinAdvertisePriceFlag { get; set; }
         public string Company99 { get; set; }
-
-        public List<int> WareHousesList { get; set; }
-        public List<int> GetWareHouseList { get; set; }
-
-
+        public string Restricted { get; set; }
+        public Nullable<int> AltUM_id { get; set; }
+        public Nullable<int> EDIUM_id { get; set; }
+        public Nullable<int> countryOrig_id { get; set; }
+        public Nullable<int> countryManuf_id { get; set; }
+        public Nullable<int> EDIUM_quantity { get; set; }
+    
         public virtual ABC_Lookup ABC_Lookup { get; set; }
         public virtual CategoryClass CategoryClass { get; set; }
         public virtual FFLType FFLType { get; set; }
@@ -303,39 +101,8 @@ namespace IMS_V1
         public virtual UM_Lookup UM_Lookup { get; set; }
         public virtual WebCode WebCode { get; set; }
         public virtual zManufacturersLogo zManufacturersLogo { get; set; }
+        public virtual ICollection<ItemTextAttachment> ItemTextAttachments { get; set; }
         public virtual ICollection<ItemWareHous> ItemWareHouses { get; set; }
         public virtual ICollection<PrintedItemsForAPlu> PrintedItemsForAPlus { get; set; }
-        public virtual ICollection<ItemTextAttachment> ItemTextAttachments { get; set; }
-
-        /// <summary>
-        /// A function to replace any special characters with a space. 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        protected string ReplaceSpecialCharacters(string input)
-        {
-            if (input != null)
-            {
-                char[] charArr = input.ToCharArray();
-                StringBuilder sb = new StringBuilder();
-                foreach (char ch in charArr)
-                {
-                    if ((int)ch < 32 || (int)ch > 126)
-                    {
-                        if ((int)ch == 8217)
-                        {
-                            sb.Append((char)39);
-                        }
-                        else
-                            sb.Append(" ");
-                    }
-                    else
-                        sb.Append(ch);
-                }
-                return sb.ToString();
-            }
-            else
-                return input;
-        }
     }
 }

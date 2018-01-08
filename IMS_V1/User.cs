@@ -27,6 +27,7 @@ namespace IMS_V1
         public Nullable<bool> Active { get; set; }
         public string Buyer_Number { get; set; }
         public string CreateAPlusImport_MarineShooting { get; set; }
+        public byte[] EncryptPwd { get; set; }
     
         public virtual UserType UserType { get; set; }
     }

@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Configuration;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace IMS_V1.Controllers
 {
@@ -494,16 +495,23 @@ namespace IMS_V1.Controllers
 
         public ActionResult CopyNew(int id = 0, int userid = 0)
         {
-           
-           var result2 = db.GetNewItem(id, userid);
-           ViewBag.NewItemList = result2.ToList();
-           Session.Contents["itemBeingCopied"] = id;
-
+            int usertypeid = int.Parse(Session.Contents["UserTypeId"].ToString());
+            if (usertypeid == 6)
+            {
+                var resultv = db.GetNewSimpleItem(id, userid);
+                ViewBag.NewItemList = resultv.ToList();
+                Session.Contents["itemBeingCopied"] = id;
+            }
+            else
+            {
+                var result2 = db.GetNewItem(id, userid);
+                ViewBag.NewItemList = result2.ToList();
+                Session.Contents["itemBeingCopied"] = id;
+            }
             foreach (var nii in ViewBag.NewItemList){
                 ViewBag.NewItemId = nii;
             }
 
-            int usertypeid = int.Parse(Session.Contents["UserTypeId"].ToString());
             Item item = db.Items.Find(ViewBag.NewItemId);
             if (item == null)
             {
@@ -590,6 +598,11 @@ namespace IMS_V1.Controllers
             ViewBag.MinAdvertisePriceFlag = LoadYesNo(item.MinAdvertisePriceFlag);
             ViewBag.Hazardous = LoadHazardous(item.Haz);
             GetRemainingAttributeTypesCount(id);
+            var ReplacementItems = db.ReplacementItems.Where(r => r.ItmId == item.Item_id);
+            if (ReplacementItems == null)
+                item.ReplacementItems = new List<ReplacementItem>();
+            else
+                item.ReplacementItems = new List<ReplacementItem>(ReplacementItems);
             if (usertypeid == 6)
             {
                 var BuyerList = db.Users.Where(u => (u.UserType_Id == 1) || (u.UserType_Id == 2)).Select(u => new
@@ -653,7 +666,6 @@ namespace IMS_V1.Controllers
                                                     .ToList();
             ViewBag.FineLineClass = new SelectList(FineLineClass, "FineLineCode_Id", "Description");
 
-
             var VendorNameList = db.zManufacturersLogoes.Select(z => new
             {
                 ManufacturerLogo_Id = z.ManufacturerLogo_Id,
@@ -662,6 +674,8 @@ namespace IMS_V1.Controllers
                 Enabled = z.Enabled
             }).Where(z => z.Enabled == true)
                                                     .ToList();
+            var vendorList = new SelectList(VendorNameList.OrderBy(ml => ml.OB), "ManufacturerLogo_Id", "Description");
+
             ViewBag.VendorName = new SelectList(VendorNameList.OrderBy(ml => ml.OB), "ManufacturerLogo_Id", "Description");
 
             
@@ -713,9 +727,12 @@ namespace IMS_V1.Controllers
             var Haz = model.Haz;
             var WholeSaleMTP = model.WholeSaleMTP;
             var MinAdvertisePriceFlag = model.MinAdvertisePriceFlag;
-            if (model.UPC == null)
+
+            var ds = Request.Form["chkDropShip"];
+
+            if ((model.UPC == null) && (ds != "on"))
                 ModelState.AddModelError("UPC", "Please enter a selling UPC code.");
-            if (model.EDIUPC == null)
+            if ((model.EDIUPC == null) && (ds != "on"))
                 ModelState.AddModelError("EDIUPC", "Please enter a purchasing UPC code.");
             if (model.ManufacturerLogo_Id.ToString().Trim() == "")
             {
@@ -726,13 +743,22 @@ namespace IMS_V1.Controllers
                 var vinfo = (from v in db.zManufacturersLogoes
                              where v.ManufacturerLogo_Id == model.ManufacturerLogo_Id && v.Enabled == true
                              select new { v.APlusVendorName, v.Abbrev, v.VendorNumber, v.ManufacturerLogo_Id, v.WebVendorName }).SingleOrDefault();
-                int index = model.Item_Description.IndexOf(" ");
+                int index = 0;
+                if (model.Item_Description != null && model.Item_Description.Trim().Length > 0)
+                    index = model.Item_Description.IndexOf(" ");
+                else
+                    ModelState.AddModelError("Item_Description", "Please enter item description.");
                 if (index > 0)
                 {
                     string vendorAbbrev = model.Item_Description.Substring(0, index);
-                    if (!vendorAbbrev.Equals(vinfo.Abbrev))
+                    if (!vendorAbbrev.Equals(vinfo.Abbrev.Trim()))
                         ModelState.AddModelError("Item_Description", "The first word of Item Description must be the vendor abbrevation!");
+                    else
+                    {
+                        model.Item_Description = ReplaceTradeMarker(model.Item_Description);                     
+                    }
                 }
+
             }
             if (model.CategoryClass_Id.ToString().Trim() == "0")
             {
@@ -748,23 +774,38 @@ namespace IMS_V1.Controllers
             }
             if (model.CategoryClass_Id == 1 || model.CategoryClass_Id == 2 || model.CategoryClass_Id == 28)
             {
-                if (model.FFLType_Id == null || model.FFLType_Id.Value == 0)
-                    ModelState.AddModelError("FFLType_Id", "Please select a FFL type.");
-                if ((model.FFLGauge == null || model.FFLGauge.Trim().Length == 0) && (model.FFLCaliber == null || model.FFLCaliber.Trim().Length == 0))
-                    ModelState.AddModelError("FFLCaliber", "Please enter a caliber or a gauge.");
-                if (model.FFLModel == null || model.FFLModel.Trim().Length == 0)
-                    ModelState.AddModelError("FFLModel", "Please enter a model.");
-                if (model.FFLMFGName == null || model.FFLMFGName.Trim().Length == 0)
-                    ModelState.AddModelError("FFLMFGName", "Please enter a manufacturer name");
+                if (int.Parse(Session.Contents["UserTypeID"].ToString()) != 6)
+                {
+                    if (model.FFLType_Id == null || model.FFLType_Id.Value == 0)
+                        ModelState.AddModelError("FFLType_Id", "Please select a FFL type.");
+                    if ((model.FFLGauge == null || model.FFLGauge.Trim().Length == 0) && (model.FFLCaliber == null || model.FFLCaliber.Trim().Length == 0))
+                        ModelState.AddModelError("FFLCaliber", "Please enter a caliber or a gauge.");
+                    if (model.FFLModel == null || model.FFLModel.Trim().Length == 0)
+                        ModelState.AddModelError("FFLModel", "Please enter a model.");
+                    if (model.FFLMFGName == null || model.FFLMFGName.Trim().Length == 0)
+                        ModelState.AddModelError("FFLMFGName", "Please enter a manufacturer name");
+                }
             } 
             
             if (model.UM_Id.ToString().Trim() == "")
             {
                 ModelState.AddModelError("UM_Id", "Please select a Unit/Measure value.");
             }
+            if (model.AltUM_id.ToString().Trim() == "")
+            {
+                ModelState.AddModelError("AltUM_id", "Please select a Vendor UOM value.");
+            }
             if (model.MFG_Number == null)
             {
                 ModelState.AddModelError("MFG_Number", "Please enter a MFG Number.");
+            }
+            else
+            {
+                string dupInfo = itemNumberDuplicateCheck(model);
+                if (dupInfo.Length > 0)
+                {
+                    ModelState.AddModelError("MFG_Number", "MFG Number is a duplicate " + dupInfo);
+                }
             }
             if (model.MSRP == null)
             {
@@ -894,7 +935,7 @@ namespace IMS_V1.Controllers
                         model.Allocated = "N";
                     }
 
-                    var ds = Request.Form["chkDropShip"];
+                    //var ds = Request.Form["chkDropShip"];
                     if (ds == "on")
                     {
                         model.DropShip = "Y";
@@ -1018,6 +1059,39 @@ namespace IMS_V1.Controllers
                         model.FastTrackBy = userid;
                         model.FastTrackDate = DateTime.Now;
                     }
+                    if ((model.Approved == "Y" || model.FastTrack == "Y") && (model.Itm_Num == "" || model.Itm_Num == null))
+                    {
+                        if (model.APlusDescription1 == null && model.APlusDescription2 == null)
+                        {
+                            if (model.Item_Description.Length < 31)
+                            {
+                                model.APlusDescription1 = model.Item_Description;
+                                model.APlusDescription2 = "";
+                            }
+                            else
+                            {
+                                model.APlusDescription1 = model.Item_Description.Substring(0, 31);
+                                model.APlusDescription2 = model.Item_Description.Substring(31);
+                            }
+                        }
+                    }
+                    if ((model.Approved == "Y" || model.FastTrack == "Y") && (model.Itm_Num == "" || model.Itm_Num == null))
+                    {
+                        if (model.APlusDescription1 == null && model.APlusDescription2 == null)
+                        {
+                            if (model.Item_Description.Length < 31)
+                            {
+                                model.APlusDescription1 = model.Item_Description;
+                                model.APlusDescription2 = "";
+                            }
+                            else
+                            {
+                                var index = FindLastIndex(model.Item_Description, 31);
+                                model.APlusDescription1 = model.Item_Description.Substring(0, index);
+                                model.APlusDescription2 = model.Item_Description.Substring(index+1);
+                            }
+                        }
+                    }
                     db.SaveChanges();
                     var Item_Id = model.Item_id;
                     var CategoryClass_Id = model.CategoryClass_Id;
@@ -1058,17 +1132,16 @@ namespace IMS_V1.Controllers
                 }
                 else
                 {
-                    foreach (ModelState modelState in ViewData.ModelState.Values)
-                    {
-                        foreach (ModelError error in modelState.Errors)
-                        {
-                            //HttpContext.Response.Write(error);
-                        }
-                    }
-
+                    //foreach (ModelState modelState in ViewData.ModelState.Values)
+                    //{
+                    //    foreach (ModelError error in modelState.Errors)
+                    //    {
+                    //        //HttpContext.Response.Write(error);
+                    //    }
+                    //}
                 }
             }
-            catch (DataException)
+            catch (DataException ex)
             {
                 ModelState.AddModelError("", "Unable to save changes.  Try, again later please." );
             }
@@ -1181,7 +1254,30 @@ namespace IMS_V1.Controllers
                 }
                 ViewBag.WareHousesList = ReLoadWarehouseList(WareHousesSelected);
             }
-
+            if (Request.Form["chkExclusive"] == "on")
+                ViewBag.Exclusive = "checked";
+            else
+                ViewBag.Exclusive = "";
+            if (Request.Form["chkAllocated"] == "on")
+                ViewBag.Allocated = "checked";
+            else
+                ViewBag.Allocated = "";
+            if (Request.Form["chkDropShip"] == "on")
+                ViewBag.DropShip = "checked";
+            else
+                ViewBag.DropShip = "";
+            if (Request.Form["chkPreventFromWeb"] == "on")
+                ViewBag.PreventFromWeb = "checked";
+            else
+                ViewBag.PreventFromWeb = "";
+            if (Request.Form["chkSpecialOrder"] == "on")
+                ViewBag.SpecialOrder = "checked";
+            else
+                ViewBag.SpecialOrder = "";
+            if (Request.Form["chkFastTrack"] == "on")
+                ViewBag.FastTrack = "checked";
+            else
+                ViewBag.FastTrack = "";
 
             return View(model);
         }
@@ -1314,6 +1410,14 @@ namespace IMS_V1.Controllers
             if (item.MFG_Number == null)
             {
                 ModelState.AddModelError("MFG_Number", "Please enter a MFG Number.");
+            }
+            else
+            {
+                string dupInfo = itemNumberDuplicateCheck(item);
+                if (dupInfo.Length > 0)
+                {
+                    ModelState.AddModelError("MFG_Number", "MFG Number is a duplicate " + dupInfo);
+                }
             }
             if (item.MSRP == null)
             {
@@ -1618,6 +1722,16 @@ namespace IMS_V1.Controllers
                                     .Select(c1 => c1.Category_Id).FirstOrDefault();
             ViewBag.CategoryClassDisplay = db.CategoryClasses.Where(cc => cc.CategoryClass_Id == item.CategoryClass_Id)
                                             .Select(cc => cc.Category_Id + "-" + cc.CategoryName).FirstOrDefault();
+
+            var ReplacementItems = db.ReplacementItems.Where(r => r.ItmId == item.Item_id);
+            if (ReplacementItems == null)
+                item.ReplacementItems = new List<ReplacementItem>();
+            else
+                item.ReplacementItems = new List<ReplacementItem>(ReplacementItems);
+            var replacementItemCodes = db.ReplacementItemCodes;
+            foreach (var rItem in item.ReplacementItems)
+                rItem.replacementCode = rItem.replacementCode + " - " + replacementItemCodes.Where(c => c.replacementCode == rItem.replacementCode).FirstOrDefault().replacementCodeDesc;
+                        
             var SubClass = db.SubClasses.Where(s => s.Category_Id == CategoryClassId)
                 .Select(s => new
                 {
@@ -1704,27 +1818,30 @@ namespace IMS_V1.Controllers
                       
             ViewBag.ReadyForApproval = item.ReadyForApproval;
             GetRemainingAttributeTypesCount(id);
-            var msrp = Math.Round((((item.MSRP - item.VICost) / item.MSRP) * 100).Value, 0);
-            if (msrp != 0)
+            if (item.MSRP != 0)
             {
-                if (msrp.ToString().Substring(0, 1) == "-")
+                var msrp = Math.Round((((item.MSRP - item.VICost) / item.MSRP) * 100).Value, 0);
+                if (msrp != 0)
                 {
-                    ViewBag.Msrp_Percent = "";
+                    if (msrp.ToString().Substring(0, 1) == "-")
+                    {
+                        ViewBag.Msrp_Percent = "";
+                    }
+                    else
+                    {
+                        ViewBag.Msrp_Percent = msrp.ToString();
+                    }
                 }
                 else
                 {
-                    ViewBag.Msrp_Percent = msrp.ToString();
+                    ViewBag.Msrp_Percent = "";
                 }
-            }
-            else
-            {
-                ViewBag.Msrp_Percent = "";
             }
             if (int.Parse(Session.Contents["UserTypeID"].ToString()) != 6)
             {
                 decimal lvl1;
 
-                if (item.Level1 == 0)
+                if (item.Level1 == null  || item.Level1 == 0)
                 {
                     lvl1 = 1;
                 }
@@ -1749,7 +1866,7 @@ namespace IMS_V1.Controllers
                     ViewBag.Level1_Percent = "";
                 }
                 decimal lvl2;
-                if (item.Level2 == 0)
+                if (item.Level2 == null || item.Level2 == 0)
                 {
                     lvl2 = 1;
                 }
@@ -1775,7 +1892,7 @@ namespace IMS_V1.Controllers
                 }
 
                 decimal lvl3;
-                if (item.Level3 == 0)
+                if (item.Level3 == null || item.Level3 == 0)
                 {
                     lvl3 = 1;
                 }
@@ -1836,7 +1953,7 @@ namespace IMS_V1.Controllers
                     ViewBag.Level4_Percent = "";
                 }
                 decimal lvl5;
-                if (item.JSCLevel5 == 0)
+                if (item.JSCLevel5 == null || item.JSCLevel5 == 0)
                 {
                     lvl5 = 1;
                 }
@@ -1868,6 +1985,8 @@ namespace IMS_V1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Item item)
         {
+            var ds = Request.Form["chkDropShip"];
+
             if (item.ManufacturerLogo_Id.ToString().Trim() == "")
             {
                 ModelState.AddModelError("ManufacturerLogo_Id", "Please select a Vendor value.");
@@ -1893,16 +2012,17 @@ namespace IMS_V1.Controllers
             }
             else if (item.CategoryClass_Id == 1 || item.CategoryClass_Id == 2 || item.CategoryClass_Id == 28)
             {
-                if (item.FFLType_Id == null || item.FFLType_Id.Value == 0)
-                    ModelState.AddModelError("FFLType_Id", "Please select a FFL type.");
-                if ((item.FFLGauge == null || item.FFLGauge.Trim().Length == 0) && (item.FFLCaliber == null || item.FFLCaliber.Trim().Length == 0))
-                    ModelState.AddModelError("FFLCaliber", "Please enter a caliber or a gauge.");
-                if (item.FFLModel == null || item.FFLModel.Trim().Length == 0)
-                    ModelState.AddModelError("FFLModel", "Please enter a model.");
-                if (item.FFLMFGName == null || item.FFLMFGName.Trim().Length == 0)
-                    ModelState.AddModelError("FFLMFGName", "Please enter a manufacturer name");
-                if (item.FFLMFGImportName == null || item.FFLMFGImportName.Trim().Length == 0)
-                    ModelState.AddModelError("FFLMFGImportName", "Please enter a manufacturer import name");
+                if (int.Parse(Session.Contents["UserTypeID"].ToString()) != 6)
+                {
+                    if (item.FFLType_Id == null || item.FFLType_Id.Value == 0)
+                        ModelState.AddModelError("FFLType_Id", "Please select a FFL type.");
+                    if ((item.FFLGauge == null || item.FFLGauge.Trim().Length == 0) && (item.FFLCaliber == null || item.FFLCaliber.Trim().Length == 0))
+                        ModelState.AddModelError("FFLCaliber", "Please enter a caliber or a gauge.");
+                    if (item.FFLModel == null || item.FFLModel.Trim().Length == 0)
+                        ModelState.AddModelError("FFLModel", "Please enter a model.");
+                    if (item.FFLMFGName == null || item.FFLMFGName.Trim().Length == 0)
+                        ModelState.AddModelError("FFLMFGName", "Please enter a manufacturer name");
+                }
             }
             if (item.SubClassCode_Id.ToString().Trim() == "0"|| item.SubClassCode_Id.ToString().Trim() == "" )
             {
@@ -1924,6 +2044,15 @@ namespace IMS_V1.Controllers
             {
                 ModelState.AddModelError("MFG_Number", "Please enter a MFG Number.");
             }
+            else
+            {
+                string dupInfo = itemNumberDuplicateCheck(item);
+                if (dupInfo.Length > 0)
+                {
+                    ModelState.AddModelError("MFG_Number", "MFG Number is a duplicate " + dupInfo);
+                }
+            }
+
             if (item.MSRP == null)
             {
                 ModelState.AddModelError("MSRP", "Please enter a valid dollar amount.");
@@ -1985,11 +2114,11 @@ namespace IMS_V1.Controllers
             {
                 ModelState.AddModelError("WareHousesList", "Please select a warehouse.");
             }
-            if (item.EDIUPC == null)
+            if ((item.EDIUPC == null) && (ds != "on"))
             {
                 ModelState.AddModelError("EDIUPC", "Please enter a value for purchasing UPC.");
             }
-            if (item.UPC == null)
+            if ((item.UPC == null) && (ds != "on"))
             {
                 ModelState.AddModelError("UPC", "Please enter a value for selling UPC.");
             }
@@ -2016,7 +2145,7 @@ namespace IMS_V1.Controllers
                     item.Allocated = "N";
                 }
 
-                var ds = Request.Form["chkDropShip"];
+                //var ds = Request.Form["chkDropShip"];
                 if (ds == "on")
                 {
                     item.DropShip = "Y";
@@ -2134,6 +2263,26 @@ namespace IMS_V1.Controllers
                 dbItems.FFLGauge = item.FFLGauge;
                 dbItems.FFLType_Id = item.FFLType_Id;
                 dbItems.Plan_YN = item.Plan_YN;
+                dbItems.AltUM_id = item.AltUM_id;
+                if ((dbItems.Approved == "Y" || dbItems.FastTrack == "Y"))
+                {
+                    if (dbItems.APlusDescription1 == null && dbItems.APlusDescription2 == null)
+                    {
+                        if (dbItems.Item_Description.Length < 31)
+                        {
+                            dbItems.APlusDescription1 = dbItems.Item_Description;
+                            dbItems.APlusDescription2 = "";
+                        }
+                        else
+                        {
+                            var index = FindLastIndex(dbItems.Item_Description, 31);
+                            dbItems.APlusDescription1 = dbItems.Item_Description.Substring(0, index);
+                            dbItems.APlusDescription2 = dbItems.Item_Description.Substring(index+1);
+                            if (dbItems.APlusDescription2.Length > 31)
+                                dbItems.APlusDescription2 = dbItems.APlusDescription2.Substring(0, 31);
+                        }
+                    }
+                }
                 try
                 {
                     db.SaveChanges();
@@ -2311,17 +2460,65 @@ namespace IMS_V1.Controllers
             ViewBag.CreatedUser = db.Users.Where(usr => usr.User_id == item.CreatedBy)
                                                        .Select(usr => usr.FirstName + " " + usr.LastName).FirstOrDefault();
 
-
-            GetExistingWareHousesList(item.Item_id);
-            
+            if (item.WareHousesList == null)
+                GetExistingWareHousesList(item.Item_id);
+            else
+            {
+                var results1 = db.GetExistingWareHousesList(item.Item_id);
+                var oldValue = results1.ToList();
+                foreach (var w in oldValue)
+                {
+                    if (WidInWareHousesList(w.WareHouse_id, item.WareHousesList))
+                        w.Selected = 1;
+                    else
+                        w.Selected = 0;
+                }
+                ViewBag.WareHousesList = oldValue;
+            }
             GetRemainingAttributeTypesCount(item.Item_id);
 
 //            return RedirectToAction("Edit", "Item", new { id =item.Item_id });
-
+            if (Request.Form["chkExclusive"] == "on")
+                item.Exclusive = "Y";
+            else
+                item.Exclusive = "";
+            if (Request.Form["chkAllocated"] == "on")
+                item.Allocated = "Y";
+            else
+                item.Allocated = "";
+            if (Request.Form["chkDropShip"] == "on")
+                item.DropShip = "Y";
+            else
+                item.DropShip = "";
+            if (Request.Form["chkPreventFromWeb"] == "on")
+                item.PreventFromWeb = "Y";
+            else
+                item.PreventFromWeb = "";
+            if (Request.Form["chkSpecialOrder"] == "on")
+                item.SpecialOrder = "Y";
+            else
+                item.SpecialOrder = "";
+            if (Request.Form["chkFastTrack"] == "on")
+                item.FastTrack = "Y";
+            else
+                item.FastTrack = "";
+            if (Request.Form["chkReadyForApproval"] == "on")
+                item.ReadyForApproval = "Y";
+            else
+                item.ReadyForApproval = "";
+            var ReplacementItems = db.ReplacementItems.Where(r => r.ItmId == item.Item_id);
+            if (ReplacementItems == null)
+                item.ReplacementItems = new List<ReplacementItem>();
+            else
+                item.ReplacementItems = new List<ReplacementItem>(ReplacementItems);
             return View(item);
         }
 
-            
+        private bool WidInWareHousesList(int wid, List<int> list)
+        {
+            int w = list.Where(i => i == wid).FirstOrDefault();
+            return w != 0;
+        }
             
         //
         // GET: /Item/Delete/5
@@ -2529,7 +2726,7 @@ namespace IMS_V1.Controllers
         }
         public void GetRemainingAttributeTypesCount(int Itemid)
         {
-            var results1 = db.GetRemainingAttributeTypes(Itemid).Where(r => r.Required == true);
+            var results1 = db.GetRemainingAttributeTypes(Itemid).Where(r => r.REQUIRED == true);
             
             ViewBag.AllRequired = results1.Count();
         }
@@ -2593,6 +2790,43 @@ namespace IMS_V1.Controllers
             {
                 return Json(DupCheck, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        protected string itemNumberDuplicateCheck(Item item)
+        {
+            string checkInfo = "";
+            if (item.ManufacturerLogo_Id != null && item.ManufacturerLogo_Id.Value > 0)
+            {
+                var manfacturerLogo = db.zManufacturersLogoes.Where(z => z.ManufacturerLogo_Id == item.ManufacturerLogo_Id.Value).FirstOrDefault();
+                if (manfacturerLogo != null)
+                {
+                    var DupCheck = (from i in db.Items
+                                    join u in db.Users on i.CreatedBy equals u.User_id
+                                    where i.MFG_Number == item.MFG_Number && i.zManufacturersLogo.VendorNumber == manfacturerLogo.VendorNumber && i.Item_id != item.Item_id
+                                    select new { i.Itm_Num, i.Item_Description, u.FirstName, u.LastName }).FirstOrDefault();
+                    if (DupCheck == null)
+                    {
+                        var DupCheck2 = (from i in db.APlusItems
+                                         where i.MFG_Number == item.MFG_Number && i.VendorNumber == manfacturerLogo.VendorNumber
+                                         select new { i.Itm_Num, i.Item_Desc1, i.Item_Desc2 }).FirstOrDefault();
+                        if (DupCheck2 != null)
+                        {
+                            checkInfo = "item number:" + DupCheck2.Itm_Num + " Item Description:" + DupCheck2.Item_Desc1 + DupCheck2.Item_Desc2;
+                        }
+                    }
+                    else
+                    {
+                        checkInfo = "item number:" + DupCheck.Itm_Num + " Item Description:" + DupCheck.Item_Description + " created by " + DupCheck.FirstName + " " + DupCheck.LastName;
+                    }
+                }
+                else
+                    checkInfo = " manufacturer is of invalid value";
+            }
+            else
+            {
+                checkInfo = " manufacturer is of invalid value";
+            }
+            return checkInfo;
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
@@ -2697,10 +2931,28 @@ namespace IMS_V1.Controllers
                     else
                         sb.Append(ch);
                 }
-                return sb.ToString();
+                return ReplaceTradeMarker(sb.ToString());
             }
             else
                 return input;
+        }
+
+        /// <summary>
+        /// This should allow all the keyboard characters except brackets [] since [] are reserved characters for regular expression
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        protected string ReplaceTradeMarker(string input) //mainly these three ©™®
+        {
+            string[] words = input.Split(' ');
+            string newStr = "";
+            foreach (var s in words)
+            {      
+                if (s.Trim().Length != 0)
+                    newStr += s + " ";
+            }
+            newStr = newStr.Trim();
+            return newStr;
         }
 
     }

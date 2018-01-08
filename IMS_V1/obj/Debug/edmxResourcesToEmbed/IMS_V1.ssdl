@@ -344,6 +344,7 @@
     <Property Name="SF_Item_Description" Type="nvarchar" MaxLength="1000" />
     <Property Name="MinAdvertisePriceFlag" Type="char" MaxLength="1" />
     <Property Name="Company99" Type="char" MaxLength="2" />
+    <Property Name="Restricted" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="ItemTextAttachments">
     <Key>
@@ -414,6 +415,7 @@
     <Property Name="Active" Type="bit" />
     <Property Name="Buyer_Number" Type="nvarchar" MaxLength="3" />
     <Property Name="CreateAPlusImport_MarineShooting" Type="nchar" MaxLength="1" />
+    <Property Name="EncryptPwd" Type="varbinary" MaxLength="20" />
   </EntityType>
   <EntityType Name="UserTypes">
     <Key>
@@ -900,6 +902,7 @@
     <Parameter Name="ReadyForApproval" Type="nvarchar" Mode="In" />
     <Parameter Name="FastTrack" Type="nvarchar" Mode="In" />
     <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="Company99" Type="char" Mode="In" />
   </Function>
   <Function Name="UpdateItemsWithItm_Num" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Item_id" Type="int" Mode="In" />

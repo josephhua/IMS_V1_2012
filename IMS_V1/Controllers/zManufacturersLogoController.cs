@@ -48,6 +48,12 @@ namespace IMS_V1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "ManufacturerLogo_Id")]zManufacturersLogo zmanufacturerslogo)
         {
+            if (zmanufacturerslogo.Abbrev != null && zmanufacturerslogo.Abbrev.Trim().Length > 4)
+                ModelState.AddModelError("Abbrev", "Abbrev is too long, it should be 3 for non-marine vendors, and 4 for marine vendors.");
+            else if (zmanufacturerslogo.Abbrev != null && zmanufacturerslogo.Abbrev.Trim().Contains(" "))
+                ModelState.AddModelError("Abbrev", "Abbrev can't contain spaces.");
+            else if (zmanufacturerslogo.Abbrev != null && zmanufacturerslogo.Abbrev.Trim().Length < 3)
+                ModelState.AddModelError("Abbrev", "Abbrev is too short, at least 3 letters.");
             if (ModelState.IsValid)
             {
                 db.zManufacturersLogoes.Add(zmanufacturerslogo);
@@ -81,7 +87,12 @@ namespace IMS_V1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(zManufacturersLogo zmanufacturerslogo)
         {
-            if (ModelState.IsValid)
+            if (zmanufacturerslogo.Abbrev != null && zmanufacturerslogo.Abbrev.Trim().Length > 4)
+                ModelState.AddModelError("Abbrev", "Abbrev is too long, it should be 3 for non-marine vendors, and 4 for marine vendors.");
+            else if (zmanufacturerslogo.Abbrev != null && zmanufacturerslogo.Abbrev.Trim().Contains(" "))
+                ModelState.AddModelError("Abbrev", "Abbrev can't contain spaces.");
+            else if (zmanufacturerslogo.Abbrev != null && zmanufacturerslogo.Abbrev.Trim().Length < 3)
+                ModelState.AddModelError("Abbrev", "Abbrev is too short, at least 3 letters."); if (ModelState.IsValid)
             {
                 db.Entry(zmanufacturerslogo).State = EntityState.Modified;
                 int userid = int.Parse(Session.Contents["UserID"].ToString());

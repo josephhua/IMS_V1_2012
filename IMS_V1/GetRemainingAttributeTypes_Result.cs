@@ -13,7 +13,7 @@ namespace IMS_V1
     
     public partial class GetRemainingAttributeTypes_Result
     {
-        public string AttributeType { get; set; }
-        public Nullable<bool> Required { get; set; }
+        public string attributeType { get; set; }
+        public Nullable<bool> REQUIRED { get; set; }
     }
 }

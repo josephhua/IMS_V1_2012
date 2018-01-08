@@ -1,0 +1,72 @@
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\IMS_V1.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\IMS_V1.pdb
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\Antlr3.Runtime.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\Autofac.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\Autofac.Extras.DomainServices.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\EntityFramework.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\Microsoft.Web.Infrastructure.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\Newtonsoft.Json.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\PagedList.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\PagedList.Mvc.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.Helpers.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.Mvc.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.Optimization.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.Razor.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.WebPages.Deployment.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.WebPages.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.WebPages.Razor.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\WebGrease.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\Autofac.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\Autofac.Extras.DomainServices.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\PagedList.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\PagedList.Mvc.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\EntityFramework.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\Newtonsoft.Json.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.Helpers.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.Mvc.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.Razor.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.WebPages.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.WebPages.Deployment.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\bin\System.Web.WebPages.Razor.xml
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\obj\Release\IMS_V1.csprojResolveAssemblyReference.cache
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\obj\Release\IMS_V1.dll
+C:\DavidVS2012\Projects\IMS_V1\IMS_V1\obj\Release\IMS_V1.pdb
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\IMS_V1.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\IMS_V1.pdb
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\Antlr3.Runtime.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\Autofac.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\Autofac.Extras.DomainServices.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\EntityFramework.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\Newtonsoft.Json.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\PagedList.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\PagedList.Mvc.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Net.Http.Formatting.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.Helpers.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.Http.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.Http.WebHost.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.Mvc.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.Optimization.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.Razor.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.WebPages.Deployment.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.WebPages.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.WebPages.Razor.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\WebGrease.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\Autofac.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\Autofac.Extras.DomainServices.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\PagedList.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\PagedList.Mvc.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\EntityFramework.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\Newtonsoft.Json.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Net.Http.Formatting.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.Helpers.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.Http.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.Http.WebHost.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.Mvc.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.Razor.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.WebPages.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.WebPages.Deployment.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\bin\System.Web.WebPages.Razor.xml
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\obj\Release\IMS_V1.csprojResolveAssemblyReference.cache
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\obj\Release\IMS_V1.dll
+C:\Users\josephh\Documents\Visual Studio 2012\Projects\DavidProjects\IMS_V1\IMS_V1\obj\Release\IMS_V1.pdb

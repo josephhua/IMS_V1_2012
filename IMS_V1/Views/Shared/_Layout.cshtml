@@ -32,14 +32,16 @@
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
 <!--                            <li>@Html.ActionLink("About", "About", "Home")</li>-->
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            
                              @if (Session.Contents["UserTypeID"] != null )
                              {
+                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                 <li>@Html.ActionLink("Logout","Logout","Home")</li>
                              }
                             @if (Session.Contents["UserTypeID"] == null)
                             {
                                 <li>@Html.ActionLink("Login","Login","Home")</li>
+                                <li>@Html.ActionLink("Download","DownloadExcel","Home")</li>
                             }
                         </ul>
                     </nav>
@@ -55,6 +57,10 @@
                 <ul class="dropdown">
         	    <li><a href="~/Item">  Items  </a>
         	    </li>
+                    <li><a href="~/User/Edit">Edit My Profile</a></li>
+                    <li>
+                        <a href="~/ImportedItem">Upload Items</a>
+                    </li>
                     @if (int.Parse(Session.Contents["UserTypeID"].ToString()) == 5){
         	        <li><a href="~/APlusEntry/APlusList">  APlus Entry  </a>
         	        </li>
@@ -97,6 +103,9 @@
                 </li>
                <li>
                     <a href="~/zManufacturersLogo">Vendors</a>
+                </li>
+                <li>
+                    <a href="~/ImportedItem">Upload</a>
                 </li>
             </ul>
             </section>

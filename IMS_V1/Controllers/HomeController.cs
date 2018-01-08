@@ -7,6 +7,7 @@ using System.Web.Routing;
 using System.Web.SessionState;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
+using System.Security.Cryptography;
 namespace IMS_V1.Controllers
 {
     public class HomeController : Controller
@@ -47,22 +48,32 @@ namespace IMS_V1.Controllers
             {
                 using (IMS_V1Entities db = new IMS_V1Entities())
                 {
-                    var v = db.Users.Where(a => a.UserName.Equals(u.UserName) && a.Password.Equals(u.Password)).FirstOrDefault();
+                    var v = db.Users.Where(a => a.UserName.Equals(u.UserName)).FirstOrDefault(); // && a.Password.Equals(u.Password)).FirstOrDefault();
                     if (v != null)
                     {
-                        Session.Add("UserID", v.User_id);
-                        Session.Add("UserTypeID", v.UserType_Id);
-                        Session.Add("LogedUserFullName", v.FirstName.ToString() + " " + v.LastName.ToString());
-                        Session.Add("Logout", "false");
-                        //Session.Add("CreateAPlusImport", v.CreateAPlusImport_MarineShooting);
-                        int usertypeid = int.Parse(Session.Contents["UserTypeId"].ToString());
-                        if (usertypeid == 2)
+                        byte[] enPwd = GetSHA1(v.UserName, u.Password);
+                        if (MatchSHA1(enPwd, v.EncryptPwd) && (v.Active != null && v.Active.Value))
                         {
-                            return RedirectToAction("Index", "Item");
+                            Session.Add("UserID", v.User_id);
+                            Session.Add("UserTypeID", v.UserType_Id);
+                            Session.Add("LogedUserFullName", v.FirstName.ToString() + " " + v.LastName.ToString());
+                            Session.Add("Logout", "false");
+                            //Session.Add("CreateAPlusImport", v.CreateAPlusImport_MarineShooting);
+                            int usertypeid = int.Parse(Session.Contents["UserTypeId"].ToString());
+                            if (usertypeid == 2)
+                            {
+                                return RedirectToAction("Index", "Item");
+                            }
+                            else
+                            {
+                                return RedirectToAction("Index", "Home");
+                            }
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Home");
+                            Session.Add("LogedUserFullName", "");
+                            Session.Add("Logout", "true");
+                            return RedirectToAction("Login", new { Login = 1, ErrorMessage = "UserName or Password is incorrect.  Please try again." });
                         }
                     }
                     else
@@ -71,11 +82,38 @@ namespace IMS_V1.Controllers
                         Session.Add("Logout", "true");
                         return RedirectToAction("Login", new { Login = 1, ErrorMessage = "UserName or Password is incorrect.  Please try again." });
                     }
+
                 }
             }
             return View(u);
         }
 
+        private byte[] GetSHA1(string userID, string password)
+        {
+            SHA1CryptoServiceProvider sha = new SHA1CryptoServiceProvider();
+            return sha.ComputeHash(System.Text.Encoding.ASCII.GetBytes(userID + password));
+        }
+
+        protected bool MatchSHA1(byte[] p1, byte[] p2)
+        {
+            bool result = false;
+            if (p1 != null && p2 != null)
+            {
+                if (p1.Length == p2.Length)
+                {
+                    result = true;
+                    for (int i = 0; i < p1.Length; i++)
+                    {
+                        if (p1[i] != p2[i])
+                        {
+                            result = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            return result;
+        }
 
         public ActionResult Logout()
         {
@@ -117,6 +155,57 @@ namespace IMS_V1.Controllers
             return View();
         }
 
+        public ActionResult DownloadExcel()
+        {
+            return View();
+        }
 
+        public FileResult DownLoadLongGunSheet()
+        {
+            //byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMS_V1\SpreadFiles\LongGunWorkbook082017r8.xlsm"); //intranet
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMSProd\SpreadFiles\LongGunWorkbook082017r8.xlsm"); //vendor site
+            string fileName = "LongGunWorkbook082017r8.xlsm";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        public FileResult DownLoadHandGunSheet()
+        {
+            //byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMS_V1\SpreadFiles\HandGunWorkbook082017r8.xlsm"); //intranet
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMSProd\SpreadFiles\HandGunWorkbook082017r8.xlsm"); //vendor site
+            string fileName = "HandGunWorkbook082017r8.xlsm";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        public FileResult DownLoadAmmoSheet()
+        {
+            //byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMS_V1\SpreadFiles\AmmoWorkbook082017r9.xlsm");
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMSProd\SpreadFiles\AmmoWorkbook082017r9.xlsm");
+            string fileName = "AmmoWorkbook082017r9.xlsm";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        public FileResult DownLoadIMSSheet()
+        {
+            //byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMS_V1\SpreadFiles\ImsWorkbook082017r8.xlsm");
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMSProd\SpreadFiles\ImsWorkbook082017r8.xlsm");
+            string fileName = "ImsWorkbook082017r8.xlsm";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        public FileResult DownLoadMarineSheet()
+        {
+            //byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMS_V1\SpreadFiles\MarineWorkbook082017r82.xlsm");
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMSProd\SpreadFiles\MarineWorkbook082017r82.xlsm");
+            string fileName = "MarineWorkbook082017r82.xlsm";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        public FileResult DownLoadNFASheet()
+        {
+            //byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMS_V1\SpreadFiles\NFAWorkbook092017r1.xlsm");
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\inetpub\wwwroot\IMSProd\SpreadFiles\NFAWorkbook092017r1.xlsm");
+            string fileName = "NFAWorkbook092017r1.xlsm";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
     }
 }

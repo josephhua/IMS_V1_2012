@@ -45,7 +45,7 @@ namespace IMS_V1
         public Nullable<decimal> ListPrice1 { get; set; }
         public Nullable<decimal> ListPrice2 { get; set; }
         public Nullable<decimal> ListPrice3 { get; set; }
-        public string ListPrice4 { get; set; }
+        public Nullable<decimal> ListPrice4 { get; set; }
         public Nullable<decimal> ListPrice5 { get; set; }
         public string TaxableCode { get; set; }
         public string ReuseCode { get; set; }
@@ -79,7 +79,9 @@ namespace IMS_V1
         public string UserField5 { get; set; }
         public string UserField6 { get; set; }
         public string InquiryUM { get; set; }
+        public string ReportingUM { get; set; }
         public string ItemEIDGroup { get; set; }
+        public string ProductID { get; set; }
         public string ItemContractCode { get; set; }
         public string BuyerItemClass { get; set; }
         public string BuyerItemSubclass { get; set; }
@@ -91,6 +93,7 @@ namespace IMS_V1
         public string StandardUsage { get; set; }
         public string C30CharacterUserArea { get; set; }
         public string TrackCountryofOrigin { get; set; }
+        public string DiscontinuedCode { get; set; }
         public string UM1Length { get; set; }
         public string UM1Width { get; set; }
         public string UM1Height { get; set; }
@@ -133,8 +136,5 @@ namespace IMS_V1
         public string SubsidiaryHazardClassCode1 { get; set; }
         public string SubsidiaryHazardClassCode2 { get; set; }
         public string PackageType { get; set; }
-        public string ReportingUM { get; set; }
-        public string ProductID { get; set; }
-        public string DiscontinuedCode { get; set; }
     }
 }

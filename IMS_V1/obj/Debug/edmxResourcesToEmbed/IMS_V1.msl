@@ -147,6 +147,7 @@
     <EntitySetMapping Name="Items">
       <EntityTypeMapping TypeName="IMS_V1Model.Item">
         <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="Restricted" ColumnName="Restricted" />
           <ScalarProperty Name="Company99" ColumnName="Company99" />
           <ScalarProperty Name="MinAdvertisePriceFlag" ColumnName="MinAdvertisePriceFlag" />
           <ScalarProperty Name="SF_Item_Description" ColumnName="SF_Item_Description" />
@@ -246,6 +247,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="IMS_V1Model.User">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="EncryptPwd" ColumnName="EncryptPwd" />
           <ScalarProperty Name="CreateAPlusImport_MarineShooting" ColumnName="CreateAPlusImport_MarineShooting" />
           <ScalarProperty Name="Buyer_Number" ColumnName="Buyer_Number" />
           <ScalarProperty Name="Active" ColumnName="Active" />

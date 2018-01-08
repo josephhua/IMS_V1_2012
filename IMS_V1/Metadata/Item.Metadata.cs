@@ -12,6 +12,13 @@ namespace IMS_V1
     [MetadataTypeAttribute(typeof(Item.ItemMetadata))]
     public partial class Item
     {
+        /// Gets or sets the WareHouses.
+        /// </summary>
+        public List<int> WareHousesList { get; set; }
+        public List<int> GetWareHouseList { get; set; }
+        public List<ReplacementItem> ReplacementItems { get; set; }
+        public int ImportedItemId { get; set; }
+
         internal sealed class ItemMetadata
         {
             public int Item_id { get; set; }
@@ -44,7 +51,7 @@ namespace IMS_V1
             [StringLength(31)]
             public string APlusDescription2 { get; set; }
             //[Required(ErrorMessage="Please enter a MFG. Number.")]
-            [RegularExpression("^[0-9a-zA-Z-/.+() ]{3,27}?$", ErrorMessage = "Please enter a MFG Number.")]
+            [RegularExpression("^[0-9a-zA-Z-/.+() ]{2,27}?$", ErrorMessage = "Please enter a MFG Number.")]
             public string MFG_Number { get; set; }
             //[Required(ErrorMessage="Please select a unit of measure.")]
             [Display(Name = "Unit/Measure")]
@@ -123,11 +130,11 @@ namespace IMS_V1
             public string Haz { get; set; }
 
             //[Required(ErrorMessage = "Please enter a UPC Number.")]
-            [RegularExpression(@"^[0-9]{5,20}$", ErrorMessage = "Please enter a numeric values between 5 and 20.")]
+            [RegularExpression(@"^[0-9]{12,16}$", ErrorMessage = "Please enter a numeric value with 12 to 16 digits.")]
             [Display(Name = "Selling UPC")]
             public string UPC { get; set; }
-            
-            [RegularExpression(@"^[0-9]{5,20}$", ErrorMessage = "Please enter a numeric values between 5 and 20.")]
+
+            [RegularExpression(@"^[0-9]{12,16}$", ErrorMessage = "Please enter a numeric value with 12 to 16 digits.")]
             [Display(Name = "Purchasing UPC")]
             public string EDIUPC { get; set; }
             
@@ -194,10 +201,6 @@ namespace IMS_V1
             [Display(Name="Company")]
             public string Company99 {get; set;}
 
-            /// Gets or sets the WareHouses.
-            /// </summary>
-            public List<int> WareHousesList { get; set; }
-            public List<int> GetWareHouseList { get; set; }
 
             //public  IMS_V1.ABC_Lookup ABC_Lookup { get; set; }
             //public  IMS_V1.CategoryClass CategoryClass { get; set; }

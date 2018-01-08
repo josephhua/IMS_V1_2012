@@ -46,6 +46,11 @@
       <HintPath>..\packages\Autofac.Extras.DomainServices.3.0.1\lib\net40\Autofac.Extras.DomainServices.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft Visual Studio 11.0\Visual Studio Tools for Office\PIA\Office14\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -145,9 +150,6 @@
     <Compile Include="APlusImport_ITMST_Result.cs">
       <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
-    <Compile Include="APlusImport_ZADITM_Result.cs">
-      <DependentUpon>IMS_V1.tt</DependentUpon>
-    </Compile>
     <Compile Include="APlusItem.cs">
       <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
@@ -178,10 +180,12 @@
     <Compile Include="Controllers\FFLTypeController.cs" />
     <Compile Include="Controllers\Freight_LookupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImportedItemController.cs" />
     <Compile Include="Controllers\ItemAttributeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ItemDescriptionOrderController.cs" />
     <Compile Include="Controllers\ItemTextAttachmentController.cs" />
+    <Compile Include="Controllers\ReplacementItemController.cs" />
     <Compile Include="Controllers\UM_LookupController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -189,6 +193,9 @@
     <Compile Include="Controllers\WareHouse_LookupController.cs" />
     <Compile Include="Controllers\WebCodeController.cs" />
     <Compile Include="Controllers\zManufacturersLogoController.cs" />
+    <Compile Include="Country.cs">
+      <DependentUpon>IMS_V1.tt</DependentUpon>
+    </Compile>
     <Compile Include="FFLType.cs">
       <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
@@ -196,9 +203,6 @@
       <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
     <Compile Include="Freight_Lookup.cs">
-      <DependentUpon>IMS_V1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GetAPlusImportKeyCode_Result.cs">
       <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
     <Compile Include="GetExistingLongDescriptions_Result.cs">
@@ -210,14 +214,17 @@
     <Compile Include="GetLongDescription_Result.cs">
       <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
-    <Compile Include="GetMarineAPlusImportKeyCode_Result.cs">
-      <DependentUpon>IMS_V1.tt</DependentUpon>
-    </Compile>
     <Compile Include="GetRemainingAttributeTypes_Result.cs">
       <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ImportedItem.cs">
+      <DependentUpon>IMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImportFile.cs">
+      <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
     <Compile Include="IMS_V1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -250,20 +257,25 @@
       <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
     <Compile Include="Metadata\CategoryAttribute.Metadata.cs" />
+    <Compile Include="Metadata\ImportedItem.Metadata.cs" />
     <Compile Include="Metadata\Item.Metadata.cs" />
+    <Compile Include="Metadata\ReplacementItem.Metadata.cs" />
     <Compile Include="Models\ItemAttribute.cs" />
     <Compile Include="PrintedItemsForAPlu.cs">
       <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Metadata\User.Metadata.cs" />
+    <Compile Include="ReplacementItem.cs">
+      <DependentUpon>IMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReplacementItemCode.cs">
+      <DependentUpon>IMS_V1.tt</DependentUpon>
+    </Compile>
     <Compile Include="SubClass.cs">
       <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
     <Compile Include="UM_Lookup.cs">
-      <DependentUpon>IMS_V1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UpdateItemRFA_FT_Result.cs">
       <DependentUpon>IMS_V1.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
@@ -346,28 +358,27 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Logo1.png" />
+    <Content Include="Images\Logo2.png" />
+    <Content Include="Images\UnitedSportingCompanies.jpg" />
     <EntityDeploy Include="IMS_V1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>IMS_V1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Images\Logo1.png" />
-    <Content Include="Images\Logo2.png" />
-    <Content Include="Images\UnitedSportingCompanies.jpg" />
+    <Content Include="IMS_V1.edmx.diagram">
+      <DependentUpon>IMS_V1.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="IMS_V1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>IMS_V1.edmx</DependentUpon>
       <LastGenOutput>IMS_V1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="IMS_V1.edmx.diagram">
-      <DependentUpon>IMS_V1.edmx</DependentUpon>
-      <SubType>Designer</SubType>
     </Content>
     <Content Include="IMS_V1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>IMS_V1.edmx</DependentUpon>
       <LastGenOutput>IMS_V1.cs</LastGenOutput>
     </Content>
-    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -507,6 +518,15 @@
     <Content Include="Views\ItemTextAttachment\Create.cshtml" />
     <Content Include="Views\ItemTextAttachment\Edit.cshtml" />
     <Content Include="Views\ItemTextAttachment\Delete.cshtml" />
+    <Content Include="Views\Home\DownloadExcel.cshtml" />
+    <Content Include="Views\ImportedItem\Index.cshtml" />
+    <Content Include="Views\ImportedItem\ImportItems.cshtml" />
+    <Content Include="Views\ImportedItem\CreateItem.cshtml" />
+    <Content Include="Views\ImportedItem\SaveUpload.cshtml" />
+    <Content Include="Views\ReplacementItem\Index.cshtml" />
+    <Content Include="Views\ReplacementItem\Create.cshtml" />
+    <Content Include="Views\ReplacementItem\Edit.cshtml" />
+    <Content Include="Views\ReplacementItem\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -533,9 +553,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>55827</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54291/</IISUrl>
+          <IISUrl>http://localhost:54292/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

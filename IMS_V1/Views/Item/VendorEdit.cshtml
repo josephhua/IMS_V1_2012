@@ -124,7 +124,13 @@
          });
 
          $("#MFG_Number").blur(function () {
+             var x = document.getElementById("popUpTimes").value;
              MFGNumber = $("#MFG_Number").val();
+             if (x != MFGNumber) {
+                 document.getElementById("popUpTimes").value = MFGNumber;
+             }
+             else
+                 return false;
              VendorNumber = $("#VendorNumber").val();
              Item_id = $("#Item_id").val();
              $.getJSON("../CheckForMFG_Number", { mfgnumber: MFGNumber, vendornumber: VendorNumber,itemid: Item_id },
@@ -231,7 +237,7 @@
        <tr>
             <td>
                 <div class="lblblue">
-                    @Html.HiddenFor(model => model.Item_id)              
+                    @Html.HiddenFor(model => model.Item_id) <input type="hidden" id="popUpTimes" value="0">              
                  </div>
                  @Html.LabelFor(model => model.Itm_Num):
             </td>

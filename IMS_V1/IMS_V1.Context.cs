@@ -28,91 +28,89 @@ namespace IMS_V1
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<VendorTradeName> VendorTradeNames { get; set; }
         public DbSet<ABC_Lookup> ABC_Lookup { get; set; }
+        public DbSet<APlusItem> APlusItems { get; set; }
         public DbSet<Attribute_Lookup> Attribute_Lookup { get; set; }
         public DbSet<AttributeType> AttributeTypes { get; set; }
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<CategoryAttribute> CategoryAttributes { get; set; }
         public DbSet<CategoryClass> CategoryClasses { get; set; }
+        public DbSet<Country> Countries { get; set; }
         public DbSet<FFLType> FFLTypes { get; set; }
         public DbSet<FineLineClass> FineLineClasses { get; set; }
         public DbSet<Freight_Lookup> Freight_Lookup { get; set; }
+        public DbSet<ImportedItem> ImportedItems { get; set; }
+        public DbSet<ImportFile> ImportFiles { get; set; }
         public DbSet<ItemAttribute> ItemAttributes { get; set; }
+        public DbSet<ItemDescriptionOrder> ItemDescriptionOrders { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<ItemTextAttachment> ItemTextAttachments { get; set; }
         public DbSet<ItemWareHous> ItemWareHouses { get; set; }
+        public DbSet<PrintedItemsForAPlu> PrintedItemsForAPlus { get; set; }
+        public DbSet<ReplacementItem> ReplacementItems { get; set; }
+        public DbSet<ReplacementItemCode> ReplacementItemCodes { get; set; }
         public DbSet<SubClass> SubClasses { get; set; }
         public DbSet<UM_Lookup> UM_Lookup { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
+        public DbSet<VendorTradeName> VendorTradeNames { get; set; }
+        public DbSet<WareHouse_Lookup> WareHouse_Lookup { get; set; }
         public DbSet<WebCode> WebCodes { get; set; }
         public DbSet<zManufacturersLogo> zManufacturersLogoes { get; set; }
         public DbSet<zManufacturersLogo_History> zManufacturersLogo_History { get; set; }
-        public DbSet<PrintedItemsForAPlu> PrintedItemsForAPlus { get; set; }
-        public DbSet<ItemDescriptionOrder> ItemDescriptionOrders { get; set; }
-        public DbSet<APlusItem> APlusItems { get; set; }
-        public DbSet<ItemTextAttachment> ItemTextAttachments { get; set; }
-        public DbSet<WareHouse_Lookup> WareHouse_Lookup { get; set; }
     
-        public virtual int AddItemWareHouse(Nullable<int> item_Id, Nullable<int> wareHouse_Id)
+        public virtual int AddLongDescription(Nullable<int> itemId, string text, Nullable<int> userId)
+        {
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(int));
+    
+            var textParameter = text != null ?
+                new ObjectParameter("Text", text) :
+                new ObjectParameter("Text", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddLongDescription", itemIdParameter, textParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<APlusImport_ITBAL_Result> APlusImport_ITBAL()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<APlusImport_ITBAL_Result>("APlusImport_ITBAL");
+        }
+    
+        public virtual ObjectResult<APlusImport_ITMST_Result> APlusImport_ITMST()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<APlusImport_ITMST_Result>("APlusImport_ITMST");
+        }
+    
+        public virtual ObjectResult<GetExistingLongDescriptions_Result> GetExistingLongDescriptions(Nullable<int> itemId)
+        {
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetExistingLongDescriptions_Result>("GetExistingLongDescriptions", itemIdParameter);
+        }
+    
+        public virtual ObjectResult<GetExistingWareHousesList_Result> GetExistingWareHousesList(Nullable<int> item_Id)
         {
             var item_IdParameter = item_Id.HasValue ?
                 new ObjectParameter("Item_Id", item_Id) :
                 new ObjectParameter("Item_Id", typeof(int));
     
-            var wareHouse_IdParameter = wareHouse_Id.HasValue ?
-                new ObjectParameter("WareHouse_Id", wareHouse_Id) :
-                new ObjectParameter("WareHouse_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddItemWareHouse", item_IdParameter, wareHouse_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetExistingWareHousesList_Result>("GetExistingWareHousesList", item_IdParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> CheckCategoryAttribute(Nullable<int> categoryClass_Id, Nullable<int> attributeType_id)
+        public virtual ObjectResult<GetLongDescription_Result> GetLongDescription(Nullable<int> id)
         {
-            var categoryClass_IdParameter = categoryClass_Id.HasValue ?
-                new ObjectParameter("CategoryClass_Id", categoryClass_Id) :
-                new ObjectParameter("CategoryClass_Id", typeof(int));
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
     
-            var attributeType_idParameter = attributeType_id.HasValue ?
-                new ObjectParameter("AttributeType_id", attributeType_id) :
-                new ObjectParameter("AttributeType_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("CheckCategoryAttribute", categoryClass_IdParameter, attributeType_idParameter);
-        }
-    
-        public virtual int DeleteItemWareHouses(Nullable<int> item_Id)
-        {
-            var item_IdParameter = item_Id.HasValue ?
-                new ObjectParameter("Item_Id", item_Id) :
-                new ObjectParameter("Item_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteItemWareHouses", item_IdParameter);
-        }
-    
-        public virtual int UpdateItemsWithItm_Num(Nullable<int> item_id, Nullable<int> categoryClass_Id)
-        {
-            var item_idParameter = item_id.HasValue ?
-                new ObjectParameter("Item_id", item_id) :
-                new ObjectParameter("Item_id", typeof(int));
-    
-            var categoryClass_IdParameter = categoryClass_Id.HasValue ?
-                new ObjectParameter("CategoryClass_Id", categoryClass_Id) :
-                new ObjectParameter("CategoryClass_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateItemsWithItm_Num", item_idParameter, categoryClass_IdParameter);
-        }
-    
-        public virtual ObjectResult<string> GetItemDescription(Nullable<int> itemid, string description)
-        {
-            var itemidParameter = itemid.HasValue ?
-                new ObjectParameter("itemid", itemid) :
-                new ObjectParameter("itemid", typeof(int));
-    
-            var descriptionParameter = description != null ?
-                new ObjectParameter("Description", description) :
-                new ObjectParameter("Description", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetItemDescription", itemidParameter, descriptionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLongDescription_Result>("GetLongDescription", idParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> GetNewItem(Nullable<int> itemId, Nullable<int> userId)
@@ -137,23 +135,6 @@ namespace IMS_V1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRemainingAttributeTypes_Result>("GetRemainingAttributeTypes", itemIdParameter);
         }
     
-        public virtual int AddNewItemDefaultAttributes(Nullable<int> item_Id, Nullable<int> categoryClass_Id, Nullable<int> user_Id)
-        {
-            var item_IdParameter = item_Id.HasValue ?
-                new ObjectParameter("Item_Id", item_Id) :
-                new ObjectParameter("Item_Id", typeof(int));
-    
-            var categoryClass_IdParameter = categoryClass_Id.HasValue ?
-                new ObjectParameter("CategoryClass_Id", categoryClass_Id) :
-                new ObjectParameter("CategoryClass_Id", typeof(int));
-    
-            var user_IdParameter = user_Id.HasValue ?
-                new ObjectParameter("User_Id", user_Id) :
-                new ObjectParameter("User_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewItemDefaultAttributes", item_IdParameter, categoryClass_IdParameter, user_IdParameter);
-        }
-    
         public virtual int UpdateItemDescription(Nullable<int> item_Id, string newDescription, Nullable<int> userId)
         {
             var item_IdParameter = item_Id.HasValue ?
@@ -171,75 +152,6 @@ namespace IMS_V1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateItemDescription", item_IdParameter, newDescriptionParameter, userIdParameter);
         }
     
-        public virtual ObjectResult<UpdateItemRFA_FT_Result> UpdateItemRFA_FT(Nullable<int> item_Id, string readyForApproval, string fastTrack, Nullable<int> userId)
-        {
-            var item_IdParameter = item_Id.HasValue ?
-                new ObjectParameter("Item_Id", item_Id) :
-                new ObjectParameter("Item_Id", typeof(int));
-    
-            var readyForApprovalParameter = readyForApproval != null ?
-                new ObjectParameter("ReadyForApproval", readyForApproval) :
-                new ObjectParameter("ReadyForApproval", typeof(string));
-    
-            var fastTrackParameter = fastTrack != null ?
-                new ObjectParameter("FastTrack", fastTrack) :
-                new ObjectParameter("FastTrack", typeof(string));
-    
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UpdateItemRFA_FT_Result>("UpdateItemRFA_FT", item_IdParameter, readyForApprovalParameter, fastTrackParameter, userIdParameter);
-        }
-    
-        public virtual int DeleteItemAttributes(Nullable<int> item_Id)
-        {
-            var item_IdParameter = item_Id.HasValue ?
-                new ObjectParameter("Item_Id", item_Id) :
-                new ObjectParameter("Item_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteItemAttributes", item_IdParameter);
-        }
-    
-        public virtual int APlusEntryItem(Nullable<int> itemId, Nullable<int> userId)
-        {
-            var itemIdParameter = itemId.HasValue ?
-                new ObjectParameter("ItemId", itemId) :
-                new ObjectParameter("ItemId", typeof(int));
-    
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("APlusEntryItem", itemIdParameter, userIdParameter);
-        }
-    
-        public virtual int AddLongDescription(Nullable<int> itemId, string text, Nullable<int> userId)
-        {
-            var itemIdParameter = itemId.HasValue ?
-                new ObjectParameter("ItemId", itemId) :
-                new ObjectParameter("ItemId", typeof(int));
-    
-            var textParameter = text != null ?
-                new ObjectParameter("Text", text) :
-                new ObjectParameter("Text", typeof(string));
-    
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddLongDescription", itemIdParameter, textParameter, userIdParameter);
-        }
-    
-        public virtual ObjectResult<GetExistingLongDescriptions_Result> GetExistingLongDescriptions(Nullable<int> itemId)
-        {
-            var itemIdParameter = itemId.HasValue ?
-                new ObjectParameter("ItemId", itemId) :
-                new ObjectParameter("ItemId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetExistingLongDescriptions_Result>("GetExistingLongDescriptions", itemIdParameter);
-        }
-    
         public virtual int UpdateLongDescription(Nullable<int> id, string text)
         {
             var idParameter = id.HasValue ?
@@ -253,112 +165,17 @@ namespace IMS_V1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateLongDescription", idParameter, textParameter);
         }
     
-        public virtual ObjectResult<GetLongDescription_Result> GetLongDescription(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLongDescription_Result>("GetLongDescription", idParameter);
-        }
-    
-        public virtual int APlusItemsPrinted(Nullable<int> userId)
-        {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("APlusItemsPrinted", userIdParameter);
-        }
-    
-        public virtual ObjectResult<GetExistingWareHousesList_Result> GetExistingWareHousesList(Nullable<int> item_Id)
-        {
-            var item_IdParameter = item_Id.HasValue ?
-                new ObjectParameter("Item_Id", item_Id) :
-                new ObjectParameter("Item_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetExistingWareHousesList_Result>("GetExistingWareHousesList", item_IdParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> CheckForAPlusImportItems()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("CheckForAPlusImportItems");
-        }
-    
-        public virtual ObjectResult<APlusImport_ITBAL_Result> APlusImport_ITBAL()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<APlusImport_ITBAL_Result>("APlusImport_ITBAL");
-        }
-    
-        public virtual ObjectResult<APlusImport_ITMST_Result> APlusImport_ITMST()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<APlusImport_ITMST_Result>("APlusImport_ITMST");
-        }
-    
-        public virtual ObjectResult<APlusImport_ZADITM_Result> APlusImport_ZADITM()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<APlusImport_ZADITM_Result>("APlusImport_ZADITM");
-        }
-    
-        public virtual ObjectResult<string> APlusImportItemsKeyCode()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("APlusImportItemsKeyCode");
-        }
-    
-        public virtual ObjectResult<Nullable<int>> CheckForMarineAPlusImportItems()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("CheckForMarineAPlusImportItems");
-        }
-    
-        public virtual ObjectResult<GetMarineAPlusImportKeyCode_Result> GetMarineAPlusImportKeyCode()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMarineAPlusImportKeyCode_Result>("GetMarineAPlusImportKeyCode");
-        }
-    
-        public virtual int TurnRunningFlagOff()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TurnRunningFlagOff");
-        }
-    
-        public virtual int TurnRunningFlagOn()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TurnRunningFlagOn");
-        }
-    
-        public virtual ObjectResult<Nullable<int>> CheckForAPlusImportRunning()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("CheckForAPlusImportRunning");
-        }
-    
-        public virtual ObjectResult<GetAPlusImportKeyCode_Result> GetAPlusImportKeyCode()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAPlusImportKeyCode_Result>("GetAPlusImportKeyCode");
-        }
-    
-        public virtual int UpdateSFItemDescription(Nullable<int> item_Id, string newSFDescription, Nullable<int> userId)
-        {
-            var item_IdParameter = item_Id.HasValue ?
-                new ObjectParameter("Item_Id", item_Id) :
-                new ObjectParameter("Item_Id", typeof(int));
-    
-            var newSFDescriptionParameter = newSFDescription != null ?
-                new ObjectParameter("NewSFDescription", newSFDescription) :
-                new ObjectParameter("NewSFDescription", typeof(string));
-    
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateSFItemDescription", item_IdParameter, newSFDescriptionParameter, userIdParameter);
-        }
-    
-        public virtual int AddItemToAPlusImportItem(Nullable<int> itemId)
+        public virtual ObjectResult<Nullable<int>> GetNewSimpleItem(Nullable<int> itemId, Nullable<int> userId)
         {
             var itemIdParameter = itemId.HasValue ?
                 new ObjectParameter("ItemId", itemId) :
                 new ObjectParameter("ItemId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddItemToAPlusImportItem", itemIdParameter);
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetNewSimpleItem", itemIdParameter, userIdParameter);
         }
     }
 }

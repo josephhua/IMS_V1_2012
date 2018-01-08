@@ -21,6 +21,7 @@ namespace IMS_V1.Controllers
 
         public ActionResult Index(int id)
         {
+            Session["ItemID"] = id;
             var itemattribute = db.ItemAttributes.Include(i => i.Attribute_Lookup.AttributeType).Include(i => i.Item).Where(i => i.Item_Id == id);
             ViewBag.Itm_num = db.Items.Where(i => i.Item_id == id).Select(i => i.Itm_Num).Single();
             ViewBag.ItemDescription = db.Items.Where(i => i.Item_id == id).Select(i => i.Item_Description).Single();
@@ -36,88 +37,164 @@ namespace IMS_V1.Controllers
                                     //new SelectListItem { Text = "", Value = "",Selected = (ViewBag.Company99 == "")},
                                     new SelectListItem { Text = "99", Value = "99",Selected = (ViewBag.Company99 == "99")},
                                 }, "Value", "Text");
-                            
+            if (Session["itemDescriptionError"] != null)
+            {
+                string itemDescriptionError = Session["itemDescriptionError"].ToString();
+                if (itemDescriptionError.Trim().Length > 0)
+                    ViewBag.ItemDescriptionError = Session["itemDescriptionError"];
+            }
+            Session["itemDescriptionError"] = null;
+            if (Session["CreateError"] != null)
+            {
+                string itemDescriptionError = Session["CreateError"].ToString();
+                if (itemDescriptionError.Trim().Length > 0)
+                    ViewBag.ItemDescriptionError = itemDescriptionError;
+            }
+            Session["CreateError"] = null; 
             GetRemainingAttributeTypes(id);
             GetRemainingAttributeTypesCount(id);
             GetCategoryClass(id);
-            if (ViewBag.ItemDescription != null) 
-            { 
-                int idl = ViewBag.ItemDescription.Length;
-                if (idl > 31)
-                {
-                    ViewBag.AplusDesc1 = ViewBag.ItemDescription.Substring(0, 31);
-                    ViewBag.APlusDesc2 = ViewBag.ItemDescription.Substring(31, idl - 31);
-                }
-                else
-                {
-                    ViewBag.AplusDesc1 = ViewBag.ItemDescription;
-                    ViewBag.APlusDesc2 = "";
-                }
-            }
+            //if (ViewBag.ItemDescription != null)
+            //{
+            //    int idl = ViewBag.ItemDescription.Length;
+            //    if (idl > 31)
+            //    {
+            //        ViewBag.AplusDesc1 = ViewBag.ItemDescription.Substring(0, 31);
+            //        ViewBag.APlusDesc2 = ViewBag.ItemDescription.Substring(31, idl - 31);
+            //    }
+            //    else
+            //    {
+            //        ViewBag.AplusDesc1 = ViewBag.ItemDescription;
+            //        ViewBag.APlusDesc2 = "";
+            //    }
+            //}
+            ViewBag.AplusDesc1 = db.Items.Where(i => i.Item_id == id).Select(i => i.APlusDescription1).Single();
+            ViewBag.AplusDesc2 = db.Items.Where(i => i.Item_id == id).Select(i => i.APlusDescription2).Single();
             return View(itemattribute.ToList());
         }
 
         [HttpPost]
         public ActionResult SaveDescription(int id)
         {
-
+            Item item = db.Items.Find(id);
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
             string nd = Request.Form["txtItemDescription"];
+            var vinfo = (from v in db.zManufacturersLogoes
+                         where v.ManufacturerLogo_Id == item.ManufacturerLogo_Id && v.Enabled == true
+                         select new { v.APlusVendorName, v.Abbrev, v.VendorNumber, v.ManufacturerLogo_Id, v.WebVendorName }).SingleOrDefault();
             if (nd != null)
             {
-                var result1 = db.Database.ExecuteSqlCommand("UpdateItemDescription @Item_Id,@NewDescription,@UserId", new SqlParameter("@Item_Id", id),
-                                                                                            new SqlParameter("@NewDescription", nd),
-                                                                                            new SqlParameter("@UserId", int.Parse(Session.Contents["UserId"].ToString())));
+                int index = nd.IndexOf(" ");
+                string vendorAbbrev;
+                if (index < 0)
+                    vendorAbbrev = nd.Trim();
+                else
+                    vendorAbbrev = nd.Substring(0, index);
+                if (!vendorAbbrev.Equals(vinfo.Abbrev.Trim()))
+                    ModelState.AddModelError("Item_Description", "The first word of Item Description must be the vendor abbrevation!");
             }
-
-            //string sfnd = Request.Form["txtSFItemDescription"];
-            //if (sfnd != null)
-            //{
-            //    var resultSFItemDescription = db.Database.ExecuteSqlCommand("UpdateSFItemDescription @Item_Id,@NewSFDescription,@UserId", new SqlParameter("@Item_Id", id),
-            //                                                                                new SqlParameter("@NewSFDescription", sfnd),
-            //                                                                                new SqlParameter("@UserId", int.Parse(Session.Contents["UserId"].ToString())));
-            //}
-            var company99 = Request.Form["Company99"];
-            string c99 = "";
-            if (company99 != null)
+            if (ModelState.IsValid)
             {
-                c99 = company99;
-            }
+                if (nd != null)
+                {
+                    var result1 = db.Database.ExecuteSqlCommand("UpdateItemDescription @Item_Id,@NewDescription,@UserId", new SqlParameter("@Item_Id", id),
+                                                                                                new SqlParameter("@NewDescription", nd),
+                                                                                                new SqlParameter("@UserId", int.Parse(Session.Contents["UserId"].ToString())));
+                }
 
-            string srfa = "";
-            string sft = "";
-            var rfa = Request.Form["chkReadyForApproval"];
-            //string chkspecialorder;
-            if (rfa == "on")
-            {
-                srfa = "Y";
+                //string sfnd = Request.Form["txtSFItemDescription"];
+                //if (sfnd != null)
+                //{
+                //    var resultSFItemDescription = db.Database.ExecuteSqlCommand("UpdateSFItemDescription @Item_Id,@NewSFDescription,@UserId", new SqlParameter("@Item_Id", id),
+                //                                                                                new SqlParameter("@NewSFDescription", sfnd),
+                //                                                                                new SqlParameter("@UserId", int.Parse(Session.Contents["UserId"].ToString())));
+                //}
+                var company99 = Request.Form["Company99"];
+                string c99 = "";
+                if (company99 != null)
+                {
+                    c99 = company99;
+                }
+
+                string srfa = "";
+                string sft = "";
+                var rfa = Request.Form["chkReadyForApproval"];
+                //string chkspecialorder;
+                if (rfa == "on")
+                {
+                    srfa = "Y";
+                }
+                else
+                {
+                    srfa = "N";
+                }
+
+                var ft = Request.Form["chkFastTrack"];
+                //string chkspecialorder;
+                if (ft == "on")
+                {
+                    sft = "Y";
+                }
+                else
+                {
+                    sft = "N";
+                }
+
+
+                var result2 = db.Database.ExecuteSqlCommand("UpdateItemRFA_FT @Item_Id,@ReadyForApproval,@FastTrack,@UserId,@Company99", new SqlParameter("@Item_Id", id),
+                                                                                            new SqlParameter("@ReadyForApproval", srfa),
+                                                                                            new SqlParameter("@FastTrack", sft),
+                                                                                            new SqlParameter("@UserId", int.Parse(Session.Contents["UserId"].ToString())),
+                                                                                            new SqlParameter("@Company99", c99));
+
+                string checkErr = CheckAttributesCompletion(id);
+                if (checkErr == "")
+                    return RedirectToAction("Index", "ReplacementItem", new { id = id });
+                else
+                {
+                    checkErr = checkErr.Substring(0, checkErr.Length - 1);
+                    checkErr = checkErr + " required.";
+                    Session["itemDescriptionError"] = checkErr;
+                    return RedirectToAction("Index", new { id = id });
+                }
+                
             }
             else
             {
-                srfa = "N";
+                Session["itemDescriptionError"] = "The first word of Item Description must be the vendor abbrevation!";
+                return RedirectToAction("Index", new { id = id });
             }
-
-            var ft = Request.Form["chkFastTrack"];
-            //string chkspecialorder;
-            if (ft == "on")
-            {
-                sft = "Y";
-            }
-            else
-            {
-                sft = "N";
-            }
-
-
-            var result2 = db.Database.ExecuteSqlCommand("UpdateItemRFA_FT @Item_Id,@ReadyForApproval,@FastTrack,@UserId,@Company99", new SqlParameter("@Item_Id", id),
-                                                                                        new SqlParameter("@ReadyForApproval", srfa),
-                                                                                        new SqlParameter("@FastTrack", sft),
-                                                                                        new SqlParameter("@UserId", int.Parse(Session.Contents["UserId"].ToString())),
-                                                                                        new SqlParameter("@Company99",c99));
-            
-            
-            return RedirectToAction("Index", new { id = id });
-
         }
+
+        public string CheckAttributesCompletion(int Itemid)
+        {
+            string retMessages = "";
+            Item item = db.Items.Find(Itemid);
+
+            var results1 = db.GetRemainingAttributeTypes(Itemid);
+            List<GetRemainingAttributeTypes_Result> remainingTypes = results1.ToList();
+            if (item == null)
+                retMessages = "Item not found";
+            else
+            {
+                foreach (var r in remainingTypes)
+                {
+                    if (r.REQUIRED.Value)
+                        retMessages += " " + r.attributeType + ",";
+                    else if (item.CategoryClass.CategoryClass_Id == 1 && r.attributeType.Equals("Finish"))
+                        retMessages += " " + r.attributeType + ",";
+                    //else if (item.CategoryClass.CategoryClass_Id == 2 && r.attributeType.Equals("Misc 1")) remove it by Myke's request
+                    //    retMessages += " " + r.attributeType + ",";
+                    else if (item.CategoryClass.CategoryClass_Id == 3 && r.attributeType.Equals("Feet Per Second"))
+                        retMessages += " " + r.attributeType + ",";
+                }
+            }
+            return retMessages.Trim();
+        }
+
         [HttpPost]
         public ActionResult SaveRFA_FastTrack(int id)
         {
@@ -227,23 +304,40 @@ namespace IMS_V1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "ItemAttribute_Id")]ItemAttribute itemattribute)
         {
+            string at = Request.Form["AttributeType_Id"];
+            if (at == "" || at == null)
+            {
+                at = "0";
+            }
+            int atid = int.Parse(at);
+            if ((itemattribute.AttributeLookup_Id == 0 || itemattribute.AttributeLookup_Id == null) && atid != 0)
+            {
+                int alid = db.Attribute_Lookup.Where(al => (al.AttributeType_Id == atid) && (al.WebsiteAttributeValue == "Not Selected")).Select(al => al.AttributeLookup_Id).Single();
+                itemattribute.AttributeLookup_Id = alid;
+            }
+            int id = int.Parse(Session["ItemID"].ToString());
+            var itemAttributes = db.ItemAttributes.Include(i => i.Attribute_Lookup.AttributeType).Include(i => i.Item).Where(i => i.Item_Id == id);
+            List<Attribute_Lookup> allALs = new List<Attribute_Lookup>();
+            foreach (var ia in itemAttributes)
+            {
+                allALs.Add(db.Attribute_Lookup.Where(a => a.AttributeLookup_Id == ia.AttributeLookup_Id).FirstOrDefault());
+            }
+            allALs.Add(db.Attribute_Lookup.Where(a => a.AttributeLookup_Id == itemattribute.AttributeLookup_Id).FirstOrDefault());
+            var duplicate = allALs.GroupBy(i => i.AttributeType_Id).Select(i => new { Attrbute = i.Key, Count = i.Count() }).Where(i => i.Count > 1);
+            var attributeLook_up = db.Attribute_Lookup.Where(a => a.AttributeLookup_Id == itemattribute.AttributeLookup_Id).FirstOrDefault();
+            var attributeType = db.AttributeTypes.Where(a => a.AttributeType_Id == attributeLook_up.AttributeType_Id).FirstOrDefault();
+            if (duplicate != null && duplicate.Count() > 0)
+            {
+                ModelState.AddModelError("AttributeLookup_Id", "Duplicate item attribute!");
+                Session["CreateError"] = "Attribute " + attributeType.AttributeType1 + " trying to added is a duplicate";
+            }
             if (ModelState.IsValid)
             {
                 int usertypeid = int.Parse(Session.Contents["UserTypeId"].ToString());
                 db.ItemAttributes.Add(itemattribute);
                 itemattribute.AddedBy = usertypeid;
                 itemattribute.AddedDate = DateTime.Now;
-                string at = Request.Form["AttributeType_Id"];
-                if (at == "" || at == null)
-                {
-                    at = "0";
-                }
-                int atid = int.Parse(at);
-                if ((itemattribute.AttributeLookup_Id == 0 || itemattribute.AttributeLookup_Id == null) && atid != 0)
-                {
-                    int alid = db.Attribute_Lookup.Where(al => (al.AttributeType_Id == atid) && (al.WebsiteAttributeValue == "Not Selected")).Select(al => al.AttributeLookup_Id).Single();
-                    itemattribute.AttributeLookup_Id = alid;
-                }
+
                 if (atid != 0)
                 {
                     db.SaveChanges();
@@ -260,16 +354,13 @@ namespace IMS_V1.Controllers
                 }
 
                 GetCategoryClass(item_id);
-                if (ViewBag.CategoryClass == "Y") 
+                if (ViewBag.CategoryClass == "Y")
                 {
                     GetItemDescription(item_id);
                 }
-                
-
-                return RedirectToAction("Index", new { id = itemattribute.Item_Id });
+                //return RedirectToAction("Index", new { id = itemattribute.Item_Id });
             }
-
-            return View(itemattribute);
+            return RedirectToAction("Index", new { id = itemattribute.Item_Id }); //View(itemattribute);
         }
 
         //
@@ -439,7 +530,7 @@ namespace IMS_V1.Controllers
         }
         public void GetRemainingAttributeTypesCount(int Itemid)
         {
-            var results1 = db.GetRemainingAttributeTypes(Itemid).Where(r => r.Required == true);
+            var results1 = db.GetRemainingAttributeTypes(Itemid).Where(r => r.REQUIRED == true);
 
             ViewBag.AllRequired = results1.Count();
         }

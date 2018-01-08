@@ -38,7 +38,7 @@ namespace IMS_V1
         public Nullable<decimal> Level1 { get; set; }
         public Nullable<decimal> Level2 { get; set; }
         public Nullable<decimal> Level3 { get; set; }
-        public string ListPrice4 { get; set; }
+        public Nullable<decimal> level4 { get; set; }
         public Nullable<decimal> JSCLevel5 { get; set; }
         public string abc_code { get; set; }
         public string PriceClass { get; set; }
@@ -48,6 +48,7 @@ namespace IMS_V1
         public string TimePhasedItem { get; set; }
         public string CommissionCostCode { get; set; }
         public string CommissionCost { get; set; }
+        public string ItemContractCode { get; set; }
         public string BuyerReviewRequired { get; set; }
         public string CountryofOrigin1 { get; set; }
         public string CountryofOrigin2 { get; set; }
@@ -56,7 +57,9 @@ namespace IMS_V1
         public string ItemTaxClass { get; set; }
         public string C30CharacterUserArea { get; set; }
         public string PointofSaleLineType { get; set; }
+        public string PromptForPointOfSaleLineType { get; set; }
         public string UpdateDemandPlanning { get; set; }
+        public string PutAwayQuantity { get; set; }
         public string MinimumPutAwayQuantity { get; set; }
         public string MaximumPickQuantity { get; set; }
         public string CaseQuantityFlag { get; set; }
@@ -66,7 +69,9 @@ namespace IMS_V1
         public string MaximumPutAwayQuantity { get; set; }
         public string PutAwayMessage { get; set; }
         public string QuantityperPallet { get; set; }
+        public string PalletId { get; set; }
         public string LocationClassCode { get; set; }
+        public string ItemLabelFlag { get; set; }
         public string OverridePOSLocation { get; set; }
         public string ForecastModel { get; set; }
         public string ServiceLevel { get; set; }
@@ -81,14 +86,9 @@ namespace IMS_V1
         public string OrderFrequencyMaintenanceCode { get; set; }
         public string AdditionalGrowthPercent { get; set; }
         public string GrowthPercentMaintenanceCode { get; set; }
+        public string MinimumBalanceMaintenanceCode { get; set; }
         public string MaximumBalanceMaintenanceCode { get; set; }
         public string IMPOrderQuantity { get; set; }
         public string OrderQuantityMaintenanceCode { get; set; }
-        public string ItemContractCode { get; set; }
-        public string PromptForPointOfSaleLineType { get; set; }
-        public string PutAwayQuantity { get; set; }
-        public string PalletID { get; set; }
-        public string ItemLabelFlag { get; set; }
-        public string MinimumBalanceMaintenanceCode { get; set; }
     }
 }

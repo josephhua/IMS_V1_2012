@@ -60,7 +60,7 @@
                  alert("Select a Category.");
                  $("#ddlCategory").focus();
              }
-             if ($("#ddlCategory").val == "1" || $("#ddlCategory").val == "2" || $("#ddlCategory").var == "3" || $("#ddlCategory").val == "9") {
+             if ($("#ddlCategory").val == "1" || $("#ddlCategory").val == "2" || $("#ddlCategory").var == "3") { // || $("#ddlCategory").val == "9") {
                  $("#D1").hide();
                  $("#D2").hide();
                  $("#D3").hide();
@@ -121,7 +121,12 @@
          });
 
          $("#MFG_Number").blur(function () {
+             var x = document.getElementById("popUpTimes").value;
              MFGNumber = $("#MFG_Number").val();
+             if (x != MFGNumber) 
+                 document.getElementById("popUpTimes").value = MFGNumber;
+             else
+                 return false;
              VendorNumber = $("#VendorNumber").val();
              Item_id = $("#Item_id").val();
              $.getJSON("../CheckForMFG_Number", { mfgnumber: MFGNumber, vendornumber: VendorNumber,itemid: Item_id },
@@ -183,7 +188,12 @@
          $("#Item_Description").keyup(function () {
              ChangeAPD12()
          });
-
+         $("#Item_Description").focusout(function () {
+             var aAPD1 = $("#APlusDescription1").val();           
+             var GAPD1 = GetGoodAPD1();
+             if (aAPD1 != GAPD1)
+                ChangeAPD12();
+         });
          function ChangeVendorInAPd() {
              var va = "";
 
@@ -193,8 +203,42 @@
              ItemDesc = va.trim() + ItemDesc.substring(emptyStrIndex);
              $("#Item_Description").val(ItemDesc);
              ChangeAPD12();
-         }         
+         }
 
+         function GetGoodAPD1() {
+             var va = "";
+             va = $("#VendorAbbrev").val();
+             ItemDesc = $("#Item_Description").val();
+             if (ItemDesc.substring(0, 4).indexOf(va) == 0) {
+                 if (ItemDesc.trim().length <= 31) {
+                     APD1 = ItemDesc;
+                 }
+                 else {
+                     var index = FindLastIndex(ItemDesc, 31);
+                     APD1 = ItemDesc.substring(0, index);
+                 }
+             }
+             else {
+                 if (va.trim().length == 3) { //Katy says 3 or 4 in length
+                     if (ItemDesc.trim().length <= 27) {
+                         APD1 = va.trim() + " " + ItemDesc;
+                     }
+                     else {
+                         var index = FindLastIndex(ItemDesc, 27);
+                         APD1 = ItemDesc.substring(0, index);
+                     }
+                 } else {
+                     if (ItemDesc.trim().length <= 26) {
+                         APD1 = va.trim() + " " + ItemDesc;
+                     }
+                     else {
+                         var index = FindLastIndex(ItemDesc, 26);
+                         APD1 = ItemDesc.substring(0, index);
+                     }
+                 }
+             }
+             return APD1;
+         }
          function ChangeAPD12() {
              var va = "";
              va = $("#VendorAbbrev").val();
@@ -534,14 +578,15 @@
        <tr>
             <td>
                 <div class="lblblue">
-                    @Html.HiddenFor(model => model.Item_id)              
+                    @Html.HiddenFor(model => model.Item_id) <input type="hidden" id="popUpTimes" value="0">       
                  </div>
                  @Html.LabelFor(model => model.Itm_Num):
             </td>
             <td class="textbox">
                 @Html.DisplayText("Itm_Num")
             </td>
-            <td colspan="2" style="text-align:right;">
+            <td colspan="2" style="text-align:left;">
+                
             </td>
         </tr>
 
@@ -727,6 +772,7 @@
                             else
                             {
                                 @Html.DropDownList("FFLType_Id", (IEnumerable<SelectListItem>)ViewBag.FFLType, "- - - S E L E C T - - -", new { id = "ddlFFLType", style = "width:250px;" })  
+                                @Html.ValidationMessageFor(model => model.FFLType_Id)    
                             }
                         </td>
                         <td>
@@ -827,29 +873,71 @@
                 @Html.EditorFor(model => model.MFG_Number)<br />
                 @Html.ValidationMessageFor(model => model.MFG_Number)
             </td>
-            <td colspan="2">
-
+            <td>
+               
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.EDIUPC):               
+            </td>           
+            <td class="textbox">
+                @Html.EditorFor(model => model.EDIUPC)
+                @Html.ValidationMessageFor(model => model.EDIUPC)
+            </td>
+            <td class="textbox">
+                @*<div style="margin-left: -100px">
+                    <span class="lblred">*</span>Purchasing UOM:
+                    @Html.DropDownList("EDIUM_Id", (IEnumerable<SelectListItem>)ViewBag.UM_Lookup, "- - - S E L E C T - - -", new { id = "ddlEDIUM", style = "width:150px;margin-top: -10px" })  
+                    @Html.ValidationMessageFor(model => model.UM_Id)
+                </div>*@
+            </td>
+            <td class="textbox"> 
+               @* <div style="margin-left: -220px; margin-top: -12px">
+                    <table width="255">
+                        <tr>
+                            <td>
+                                Purchasing UOM Quantity:
+                            </td>
+                            <td>
+                                 @Html.TextBox("EDIUM_quantity", @Model.EDIUM_quantity, new { style = "width:50px" })
+                                 @Html.ValidationMessageFor(model => model.EDIUM_quantity)
+                            </td>
+                        </tr>
+                    </table> 
+                </div>            *@
             </td>
         </tr>
         <tr>
             <td>
-                <span class="lblred">*</span>@Html.LabelFor(model => model.UM_Id):
-            </td>
-            <td class="textbox">
-                @Html.DropDownList("UM_Id", (IEnumerable<SelectListItem>)ViewBag.UM_Lookup, "- - - S E L E C T - - -", new { id = "ddlUM", style = "width:350px;" })  
-                <br />@Html.ValidationMessageFor(model => model.UM_Id)
-            </td>
-            <td>
-                <span class="lblred">*</span>@Html.LabelFor(model => model.EDIUPC):<br /><br />
                 <span class="lblred">*</span>@Html.LabelFor(model => model.UPC):
             </td>
             <td class="textbox">
-                @Html.EditorFor(model => model.EDIUPC)
-                @Html.ValidationMessageFor(model => model.EDIUPC)<br />
                 @Html.EditorFor(model => model.UPC)
                 @Html.ValidationMessageFor(model => model.UPC)
             </td>
-
+            <td class="textbox">
+                <div style="margin-left: -143px">
+                    <span class="lblred">*</span>Selling UOM:
+                     @Html.DropDownList("UM_Id", (IEnumerable<SelectListItem>)ViewBag.UM_Lookup, "- - - S E L E C T - - -", new { id = "ddlUM", style = "width:150px;margin-top: -30px" })  
+                    @Html.ValidationMessageFor(model => model.UM_Id)
+                </div>  
+            </td>
+            <td class="textbox"> 
+                <div style="margin-left: -5px; margin-top: -12px">
+                    <table width="255">
+                        <tr>
+                            <td>
+                                Vendor UOM:
+                            </td>
+                            <td>
+                                 @Html.DropDownList("AltUM_id", (IEnumerable<SelectListItem>)ViewBag.UM_Lookup, "- - - S E L E C T - - -", new { id = "ddlAltUM_id", style = "width:140px;" })
+                            </td>
+                        </tr>
+                    </table> 
+                </div>            
+            </td>
         </tr>
 @*@if (ViewBag.UserType != 6)
 {
@@ -862,21 +950,17 @@
                 <br />@Html.ValidationMessageFor(model => model.VICost)
             </td>
             <td>
-                <span class="lblred">*</span>@Html.LabelFor(model => model.WholeSaleMTP):            
+                       
             </td>
             <td class="textbox">
-                @Html.DropDownList("WholeSaleMTP", (IEnumerable<SelectListItem>)ViewBag.WholeSale_MTP, "- - - S E L E C T - - -", new { id = "ddlWholeSaleMTP" })  
-                <br />@Html.ValidationMessageFor(model => model.WholeSaleMTP)
+                <div style="margin-left: -293px">
+                    <span class="lblred">*</span>@Html.LabelFor(model => model.WholeSaleMTP):
+                    @Html.DropDownList("WholeSaleMTP", (IEnumerable<SelectListItem>)ViewBag.WholeSale_MTP, "- - - S E L E C T - - -")  
+                    <br />@Html.ValidationMessage("WholeSaleMTP")   
+                </div>     
             </td>
         </tr>
-@*}
-else
-{
-            @Html.EditorFor(model => model.VICost, new { @readonly = "readonly" })
-    //            Html.HiddenFor(model => model.VICost)
 
-            @Html.HiddenFor(model => model.WholeSaleMTP)       
-}*@
         <tr>
             <td style="text-align:right;vertical-align:top;"><b>Pricing</b>:</td>
             <td colspan="3">
@@ -893,17 +977,9 @@ else
                                     *@<td class="textbox">
                                         @Html.EditorFor(model => model.MSRP, new { size = 100 })
                                         <input type="text" id="txtMsrp" style="width:30px;" name="txtMsrp" value="@ViewBag.Msrp_Percent"/>%
-<!--                                        <input type="text" id="txtMsrp" style="width:30px;" name="txtMsrp" value="ViewBag.Msrp_Percent" onblur="UpdateMsrp();"/>%<br />-->
+
                                         <br />@Html.ValidationMessageFor(model => model.MSRP)
                                     </td>
-@*}
-else
-{
-                                        <td class="textbox">
-                                        @Html.EditorFor(model => model.MSRP, new { size = 100 })
-                                        <br />@Html.ValidationMessageFor(model => model.MSRP)
-                                    </td>
-}*@
                                 </tr>
 @*@if (ViewBag.UserType != 6)
 {
@@ -996,13 +1072,6 @@ else
                                     </td>
                                 </tr>
 
-@*}
-else
-{
-    @Html.EditorFor(model => model.Level3, new { @readonly = "readonly" })
-    @Html.EditorFor(model => model.JSCLevel5, new { @readonly = "readonly" })
-    @Html.EditorFor(model => model.MinAdvertisePrice, new { @readonly = "readonly" })
-}*@
                             </table>
                         </td>
                     </tr>
@@ -1115,19 +1184,7 @@ else
             <td colspan="2">
             </td>
         </tr>
-@*}
-else
-{
-    @Html.EditorFor(model => model.Qty_Break, new { @readonly = "readonly" })
-    @Html.EditorFor(model => model.Qty_BreakPrice, new { @readonly = "readonly" })
-    @Html.EditorFor(model => model.CatWebCode_Id, new { @readonly = "readonly" })
-    @Html.EditorFor(model => model.Freight_Id, new { @readonly = "readonly" })
-    @Html.EditorFor(model => model.Plan_YN, new { @readonly = "readonly" })
-    @Html.EditorFor(model => model.ABC_Id, new { @readonly = "readonly" })
-    @Html.EditorFor(model => model.STD, new { @readonly = "readonly" })
-    @Html.EditorFor(model => model.MIN, new { @readonly = "readonly" })
-    @Html.EditorFor(model => model.Haz, new { @readonly = "readonly" })
-}*@
+
         <tr>
             <td class="textbox" style="text-align:center;" colspan="4">
                 @Html.LabelFor(model => model.Exclusive): 
@@ -1180,11 +1237,9 @@ else
             <td class="textbox">
                 @ViewBag.CreatedUser
             </td>
-            <td>
-                @Html.LabelFor(model => model.CreatedDate):
-            </td>
-            <td class="textbox">
-                @Html.DisplayFor(model => model.CreatedDate)
+            <td colspan="2" class="textbox">
+                Create Date:@Html.DisplayFor(model => model.CreatedDate)
+                &nbsp;&nbsp;Approve Date:@Html.DisplayText("ApprovedDate")
             </td>
         </tr>
         <tr>
@@ -1196,7 +1251,36 @@ else
                 <br />@Html.ValidationMessageFor(model => model.Company99)   
             </td>
         </tr>
-
+        <tr>
+            <td></td>
+            <td colspan="2">
+                <div style="margin-left:250px">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Replacement Item
+                            </th>
+                            <th>
+                                Replacement Code
+                            </th>
+                        </tr>
+                        @foreach (var item in Model.ReplacementItems)
+                        {
+                            <tr>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.existingItm_Num)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.replacementCode)
+                                </td>
+                    
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </td>
+            <td></td>
+        </tr>        
 
         <tr>
             <td colspan="4" style="text-align:center">
@@ -1215,7 +1299,7 @@ else
     if (typeof CCID === "undefined") {
         CCID = $("#CategoryClass_Id").val();
     }
-    if (CCID == "1" || CCID == "2" || CCID == "3" || CCID == "9") {
+    if (CCID == "1" || CCID == "2" || CCID == "3") { // || CCID == "9") {
         $("#D1").hide();
         $("#D2").hide();
         $("#D3").hide();
@@ -1234,7 +1318,7 @@ else
         //        $("#AD2T").show();
         //        $("#AD2D").show();
     };
-    if (CCID == "1" || CCID == "2" || CCID == "32") {
+    if (CCID == "1" || CCID == "2" || CCID == "28") {
         $("#FFLInfo").show();
         $("#FFLInfoNotNeeded").hide();
     } else {

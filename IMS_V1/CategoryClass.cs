@@ -17,8 +17,8 @@ namespace IMS_V1
         public CategoryClass()
         {
             this.CategoryAttributes = new HashSet<CategoryAttribute>();
-            this.Items = new HashSet<Item>();
             this.ItemDescriptionOrders = new HashSet<ItemDescriptionOrder>();
+            this.Items = new HashSet<Item>();
         }
     
         public int CategoryClass_Id { get; set; }
@@ -26,7 +26,7 @@ namespace IMS_V1
         public string CategoryName { get; set; }
     
         public virtual ICollection<CategoryAttribute> CategoryAttributes { get; set; }
-        public virtual ICollection<Item> Items { get; set; }
         public virtual ICollection<ItemDescriptionOrder> ItemDescriptionOrders { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

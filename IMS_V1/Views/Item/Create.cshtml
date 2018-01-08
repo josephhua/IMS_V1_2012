@@ -38,6 +38,14 @@
          }
      });
      $(document).ready(function () {
+         var categoryclassId = $("#ddlCategory").val();
+         if (categoryclassId == "1" || categoryclassId == "2" || categoryclassId == "28") {
+             $("#FFLInfo").show();
+             $("#FFLInfoNotNeeded").hide();
+         } else {
+             $("#FFLInfo").hide();
+             $("#FFLInfoNotNeeded").show();
+         };
          $("#ddlCategory").change(function () {
              var categoryclassId = $(this).val();
              if (categoryclassId) {
@@ -56,7 +64,7 @@
                          }));
                      });
                  });
-                 if (categoryclassId == "1" || categoryclassId == "2" || categoryclassId == "3" || categoryclassId == "9" ) {
+                 if (categoryclassId == "1" || categoryclassId == "2" || categoryclassId == "3") { // || categoryclassId == "9" ) {
                      $("#D1").hide();
                      $("#D2").hide();
                      $("#D3").hide();
@@ -110,6 +118,7 @@
          $("#Item_Description").keyup(function () {
              UpdateSFDescription("i");
          });
+
          $("#SF_Item_Description").keyup(function () {
              UpdateSFDescription("s");
          });
@@ -121,7 +130,7 @@
                  if (itemDesc.trim().length > 4) {
                      var index = itemDesc.indexOf(" ");
                      if (index > 0) {
-                         itemDesc = vendorAbbrev + itemDesc.substring(index);
+                         itemDesc = vendorAbbrev.trim() + itemDesc.substring(index);
                          $("#Item_Description").val(itemDesc);
                      }
                      else {
@@ -133,7 +142,7 @@
                      itemDesc = $("#Item_Description").val();
                  }
                  var categoryId = $("#ddlCategory").val();
-                 if ($("#ddlCategory").val == "1" || $("#ddlCategory").val == "2" || $("#ddlCategory").var == "3" || $("#ddlCategory").val == "9") {
+                 if ($("#ddlCategory").val == "1" || $("#ddlCategory").val == "2" || $("#ddlCategory").var == "3") { // || $("#ddlCategory").val == "9") {
                      $("#SF_Item_Description").val(itemDesc);
                  } else {
                      $("#SF_Item_Description").val(itemDesc);
@@ -143,7 +152,7 @@
                  if (itemDesc.trim().length > 4) {
                      var index = itemDesc.indexOf(" ");
                      if (index > 0) {
-                         itemDesc = vendorAbbrev + itemDesc.substring(index);
+                         itemDesc = vendorAbbrev.trim() + itemDesc.substring(index);
                          $("#Item_Description").val(itemDesc);
                      }
                      else {
@@ -160,7 +169,7 @@
                  if (sDes.trim().length > 4) {
                      var index = sDes.indexOf(" ");
                      if (index > 0) {
-                         sDes = vendorAbbrev + sDes.substring(index);
+                         sDes = vendorAbbrev.trim() + sDes.substring(index);
                          $("#SF_Item_Description").val(sDes);
                      }
                      else {
@@ -185,7 +194,7 @@
 
                         $("#Item_Description").val(VendorData.Abbrev);
                         var categoryId = $("#ddlCategory").val();
-                        if ($("#ddlCategory").val == "1" || $("#ddlCategory").val == "2" || $("#ddlCategory").var == "3" || $("#ddlCategory").val == "9") {
+                        if ($("#ddlCategory").val == "1" || $("#ddlCategory").val == "2" || $("#ddlCategory").var == "3") { // || $("#ddlCategory").val == "9") {
                             $("#SF_Item_Description").val(VendorData.WebVendorName);
                         } else {
                             $("#SF_Item_Description").val(VendorData.Abbrev);
@@ -199,7 +208,12 @@
          });
 
          $("#MFG_Number").blur(function () {
+             var x = document.getElementById("popUpTimes").value;
              MFGNumber = $("#MFG_Number").val();
+             if (x != MFGNumber)
+                 document.getElementById("popUpTimes").value = MFGNumber;
+             else
+                 return false;
              VendorNumber = $("#VendorNumber").val();
              $.getJSON("../Item/CheckForMFG_NumberCreate", { mfgnumber: MFGNumber, vendornumber: VendorNumber},
              function (CheckForMFG_Number) {
@@ -422,6 +436,7 @@
                          //$("#Level2").val((vic * level2p + vic).toFixed(2));
 
                      }
+
                      if ($("#txtLevel3").val() != "") {
                          Level3 = $("#txtLevel3").val();
                          $.getJSON("../Item/CalculatePercentage", { percent: Level3, vicost: VICost },
@@ -429,8 +444,9 @@
                                            $("#Level3").val(CalculatePercentage.Cost);
                                        });
                      }
+
                      if ($("#txtLevel4").val() != "") {
-                         Level3 = $("#txtLevel4").val();
+                         Level4 = $("#txtLevel4").val();
                          $.getJSON("../Item/CalculatePercentage", { percent: Level4, vicost: VICost },
                                        function (CalculatePercentage) {
                                            $("#Level4").val(CalculatePercentage.Cost);
@@ -502,7 +518,7 @@
        <tr>
             <td>
                 <div class="lblblue">
-                    @Html.HiddenFor(model => model.Item_id)
+                    @Html.HiddenFor(model => model.Item_id)<input type="hidden" id="popUpTimes" value="0"> 
                 </div>
                  @Html.LabelFor(model => model.Itm_Num):
             </td>
@@ -702,27 +718,49 @@
                 @Html.EditorFor(model => model.MFG_Number)<br />
                 @Html.ValidationMessageFor(model => model.MFG_Number)
             </td>
-            <td colspan="2">
-
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <span class="lblred">*</span>@Html.LabelFor(model => model.EDIUPC):
+                
+            </td>
+            
+            <td class="textbox">
+                @Html.EditorFor(model => model.EDIUPC)
+                @Html.ValidationMessageFor(model => model.EDIUPC)
             </td>
         </tr>
         <tr>
             <td>
-                <span class="lblred">*</span>@Html.LabelFor(model => model.UM_Id):
-            </td>
-            <td class="textbox">
-                @Html.DropDownList("UM_Id", (IEnumerable<SelectListItem>)ViewBag.UM_Lookup, "- - - S E L E C T - - -", new { id = "ddlUM", style = "width:350px;" })  
-                <br />@Html.ValidationMessageFor(model => model.UM_Id)
-            </td>
-            <td>
-                <span class="lblred">*</span>@Html.LabelFor(model => model.EDIUPC):<br /><br />
                 <span class="lblred">*</span>@Html.LabelFor(model => model.UPC):
             </td>
             <td class="textbox">
-                @Html.EditorFor(model => model.EDIUPC)<br />
-                @Html.ValidationMessageFor(model => model.EDIUPC)<br />
-                @Html.EditorFor(model => model.UPC)<br />
+                @Html.EditorFor(model => model.UPC)
                 @Html.ValidationMessageFor(model => model.UPC)
+            </td>
+            <td class="textbox">
+                <div style="margin-left: -103px">
+                    <span class="lblred">*</span>Selling UOM:
+                     @Html.DropDownList("UM_Id", (IEnumerable<SelectListItem>)ViewBag.UM_Lookup, "- - - S E L E C T - - -", new { id = "ddlUM", style = "width:150px;margin-top: -30px" })  
+                    @Html.ValidationMessageFor(model => model.UM_Id)
+                </div>  
+            </td>
+            <td class="textbox"> 
+                <div style="margin-left: 42px; margin-top: -12px">
+                    <table width="255">
+                        <tr>
+                            <td>
+                                <span class="lblred">*</span>Vendor UOM:
+                            </td>
+                            <td>
+                                 @Html.DropDownList("AltUM_id", (IEnumerable<SelectListItem>)ViewBag.UM_Lookup, "- - - S E L E C T - - -", new { id = "ddlAltUM_id", style = "width:140px;" })
+                                    @Html.ValidationMessageFor(model => model.AltUM_id)
+                            </td>
+                        </tr>
+                    </table> 
+                </div>            
             </td>
         </tr>
 @*if (ViewBag.UserType != 6)
@@ -735,14 +773,15 @@
                 @Html.EditorFor(model => model.VICost)<br />
                 @Html.ValidationMessageFor(model => model.VICost)
             </td>
-            <td>
-                <span class="lblred">*</span>@Html.LabelFor(model => model.WholeSaleMTP):            
-            </td>
             <td class="textbox">
-                @Html.DropDownList("WholeSaleMTP", (IEnumerable<SelectListItem>)ViewBag.WholeSale_MTP, "- - - S E L E C T - - -")  
-                <br />@Html.ValidationMessage("WholeSaleMTP")
+                <div style="margin-left: -103px">
+                    <span class="lblred">*</span>@Html.LabelFor(model => model.WholeSaleMTP):
+                    @Html.DropDownList("WholeSaleMTP", (IEnumerable<SelectListItem>)ViewBag.WholeSale_MTP, "- - - S E L E C T - - -")  
+                    <br />@Html.ValidationMessage("WholeSaleMTP")   
+                </div>        
             </td>
-
+            <td>                
+            </td>
         </tr>
 @*}*@
         <tr>
@@ -972,15 +1011,15 @@
         <tr>
             <td class="textbox" style="text-align:center;" colspan="4">
                 @Html.LabelFor(model => model.Exclusive): 
-                <input type="checkbox" name="chkExclusive" id="chkExclusive"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="chkExclusive" id="chkExclusive" @ViewBag.Exclusive />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 @Html.LabelFor(model => model.Allocated): 
-                <input type="checkbox" name="chkAllocated" id="chkAllocated"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="chkAllocated" id="chkAllocated" @ViewBag.Allocated />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 @Html.LabelFor(model => model.DropShip): 
-                <input type="checkbox" name="chkDropShip" id="chkDropShip"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="chkDropShip" id="chkDropShip" @ViewBag.DropShip  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 @Html.LabelFor(model => model.PreventFromWeb): 
-                <input type="checkbox" name="chkPreventFromWeb" id="chkPreventFromWeb"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="chkPreventFromWeb" id="chkPreventFromWeb" @ViewBag.PreventFromWeb />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 @Html.LabelFor(model => model.SpecialOrder): 
-                <input type="checkbox" name="chkSpecialOrder" id="chkSpecialOrder"  />
+                <input type="checkbox" name="chkSpecialOrder" id="chkSpecialOrder" @ViewBag.SpecialOrder />
             </td>
         </tr>
 @*using (Html.BeginForm("SaveFastTrack", "Item", FormMethod.Post))
@@ -992,7 +1031,7 @@
             <td colspan="4" style="text-align:center" class="textbox">
                 @Html.LabelFor(model => model.FastTrack):
    <!--             <input type="submit" value="Fast Track" />-->
-                <input type="checkbox" name="chkFastTrack" id="chkFastTrack" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="chkFastTrack" id="chkFastTrack" @ViewBag.FastTrack />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </td>
         </tr>
        }

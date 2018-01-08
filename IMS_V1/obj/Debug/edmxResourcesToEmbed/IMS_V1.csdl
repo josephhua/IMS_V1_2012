@@ -130,6 +130,7 @@
       <Parameter Name="ReadyForApproval" Mode="In" Type="String" />
       <Parameter Name="FastTrack" Mode="In" Type="String" />
       <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="Company99" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="DeleteItemAttributes">
       <Parameter Name="Item_Id" Mode="In" Type="Int32" />
@@ -451,6 +452,7 @@
     <Property Type="String" Name="SF_Item_Description" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="MinAdvertisePriceFlag" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Type="String" Name="Company99" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Restricted" MaxLength="1" FixedLength="true" Unicode="false" />
   </EntityType>
   <EntityType Name="ItemWareHous">
     <Key>
@@ -504,6 +506,7 @@
     <NavigationProperty Name="UserType" Relationship="IMS_V1Model.FK_Users_UserTypes" FromRole="User" ToRole="UserType" />
     <Property Type="String" Name="Buyer_Number" MaxLength="3" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="CreateAPlusImport_MarineShooting" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Type="Binary" Name="EncryptPwd" MaxLength="20" FixedLength="false" />
   </EntityType>
   <EntityType Name="UserType">
     <Key>

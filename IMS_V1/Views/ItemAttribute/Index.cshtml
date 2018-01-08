@@ -20,7 +20,11 @@
       @Html.ValidationSummary(true)
     @if (ViewBag.CategoryClass=="N")
     {
-       <b>Item Description:</b> <input type="text" style="width:450px;" name="txtItemDescription" id="txtItemDescription" value="@ViewBag.ItemDescription"/> 
+       <b>Item Description:</b> <input type="text" style="width:450px;" name="txtItemDescription" id="txtItemDescription" value="@ViewBag.ItemDescription"/>
+        if (ViewBag.ItemDescriptionError != null && ViewBag.ItemDescriptionError.Trim().Length > 0)
+        { 
+            <br /><span style="color:red;">@ViewBag.ItemDescriptionError</span>
+        }
 <!--        if (int.Parse(Session.Contents["UserTypeID"].ToString()) != 6){
             <input type="submit" value="Save" /> <br />
         }else{
@@ -40,6 +44,10 @@
     }else
     {
              <b>Item Description:</b>  @ViewBag.ItemDescription<br />
+        if (ViewBag.ItemDescriptionError != null && ViewBag.ItemDescriptionError.Trim().Length > 0)
+        { 
+            <span style="color:red;">@ViewBag.ItemDescriptionError</span><br />
+        }
         <Desc1>@ViewBag.APlusDesc1</Desc1> <Desc2>@ViewBag.APlusDesc2</Desc2>
         <br />
         <br /> <b>Storefront Item Description:</b> @ViewBag.SFItemDescription
@@ -67,12 +75,12 @@
                    @foreach (var rat in ViewBag.RemainingAttributeTypes)
                     {
 
-                       if (rat.Required)                           
+                       if (rat.REQUIRED)                           
                        {
-                          <b> @rat.AttributeType </b><br /> 
+                          <b> @rat.attributeType </b><br /> 
                        }else
                        {
-                            @rat.AttributeType <br /> 
+                            @rat.attributeType <br /> 
                        }
             
                     }
